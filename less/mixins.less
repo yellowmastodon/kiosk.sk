@@ -1,0 +1,101 @@
+.unselectable {   
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+.animation(@string) {
+	-webkit-animation: @string;
+	animation: @string;
+}
+
+.flex() {
+  display: ~"-webkit-flex";
+  display: ~"-ms-flexbox"; // IE10 uses -ms-flexbox
+  display: ~"-ms-flex"; // IE11
+  display: flex;
+}
+
+.inline_flex() {
+  display: ~"-webkit-inline-flex";
+  display: ~"-ms-inline-flexbox"; // IE10 uses -ms-flexbox
+  display: ~"-ms-inline-flex"; // IE11
+  display: inline-flex;
+}
+
+.flex_flex(@columns: initial) {
+  -webkit-flex: @columns;
+  -ms-flex: @columns;
+  flex: @columns;
+}
+
+.flex_dir(@direction: row) {
+  -webkit-flex-direction: @direction;
+  -ms-flex-direction: @direction;
+  flex-direction: @direction;
+}
+
+.flex_wrap(@wrap: wrap) {
+  -webkit-flex-wrap: @wrap;
+  -ms-flex-wrap: @wrap;
+  flex-wrap: @wrap;
+}
+
+.flex_flow(@flow) {
+  -webkit-flex-flow: @flow;
+  -ms-flex-flow: @flow;
+  flex-flow: @flow;
+}
+
+
+.flex_order(@order: 0) {
+  -webkit-order: @order;
+  -ms-order: @order;
+  order: @order;
+}
+
+.flex_grow(@grow: 0) {
+  -webkit-flex-grow: @grow;
+  -ms-flex-grow: @grow;
+  flex-grow: @grow;
+}
+
+.flex_shrink(@shrink: 1) {
+  -webkit-flex-shrink: @shrink;
+  -ms-flex-shrink: @shrink;
+  flex-shrink: @shrink;
+}
+
+.flex_basis(@width: auto) {
+  -webkit-flex-basis: @width;
+  -ms-flex-basis: @width;
+  flex-basis: @width;
+}
+
+.flex_jc(@justify: flex-start) {
+  -webkit-justify-content: @justify;
+  -ms-justify-content: @justify;
+  justify-content: @justify;
+}
+
+.flex_ac(@align: stretch) {
+  -webkit-align-content: @align;
+  -ms-align-content: @align;
+  align-content: @align;
+}
+
+.flex_ai(@align: stretch) {
+  -webkit-align-items: @align;
+  -ms-align-items: @align;
+  align-items: @align;
+}
+
+.flex_as(@align: auto) {
+  -webkit-align-self: @align;
+  -ms-align-self: @align;
+  align-self: @align;
+}

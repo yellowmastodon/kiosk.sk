@@ -1,0 +1,9 @@
+{
+    "watchFolder": "less",
+    "outputFolder": "./",
+    "mainFile": "../style.less",
+    "sourceMap": false,
+    "minified": true,
+    "autoprefix": true,
+    "lessArgs": "autoprefix=\">= 0.01%\""
+}

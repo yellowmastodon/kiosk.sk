@@ -1,0 +1,68 @@
+.page_post, .page_default {
+
+	.thumbnail_img{
+		margin-left: -@basic_padding;
+		margin-right: -@basic_padding;
+		height: 50vh;
+		background-position: repeat;
+		background-repeat: repeat-x;
+		background-size: auto 100%;
+	}
+	.title_wrap {
+		position: relative;
+		//padding-top: 500px;
+		overflow: visible;
+		margin-top: @h1_size;
+		margin-bottom: @half_h1_size;
+
+		h1 {
+			position: relative;
+			padding-right: 2em;
+			margin-bottom: 0px;
+		}
+	}
+
+	.text_wrap {
+		max-width: @max_text_width;
+		.text > *:last-child{
+			margin-bottom: 0px !important;
+		}
+		a{
+			text-decoration: underline;
+		}
+		&, & .text{
+			//float left images on larger screens used with negative right margin
+			overflow: visible;
+		}
+	}
+
+	.buy_button {
+		margin-top: 40px;
+	}
+}
+
+	.wrap_inner.no_thumbnail_img{
+		padding-top: calc(@triple_padding + 4vw);
+		.title_wrap{
+			margin-top: 0px !important;
+		}
+
+	}
+
+/* .post_detail_bottom_decor {
+	position: relative;
+	height: 150px;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: -50vw;
+		left: -50vw;
+		bottom: 0;
+		width: 100vw;
+		height: 100%;
+		margin: auto;
+		background: url('./images/kiosk_bubble.svg') center bottom / 100% auto;
+	}
+} */

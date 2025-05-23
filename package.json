@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "less": "^4.2.0",
+    "less-watch-compiler": "^1.16.3",
+    "less-plugin-autoprefix": "^2.0.0"
+  },
+    "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yellowmastodon/kiosk.git"
+  }
+}
