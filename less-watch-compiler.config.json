@@ -1,7 +1,7 @@
 {
     "watchFolder": "less",
     "outputFolder": "./",
-    "mainFile": "../style.less",
+    "mainFile": "less/style.less",
     "sourceMap": false,
     "minified": true,
     "autoprefix": true,

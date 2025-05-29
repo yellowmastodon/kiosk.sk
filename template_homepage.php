@@ -70,7 +70,8 @@ global $current_image_sequence;
 					'posts_per_page' => -1,
 					'category_name' => 'inscenacie-2024',
 				)
-			); ?>
+			); 
+			?>
 			<div class="main_title_wrap">
 				<h2 class="main_title">Inscenácie</h2>
 				<?php if (!$the_query->have_posts()) : ?>

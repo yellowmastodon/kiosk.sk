@@ -37,15 +37,15 @@
 
 @font-face {
 	font-family: "Kommuna400";
-	src: url("./fonts/Kommuna400Narrow.woff") format("woff");
+	src: url("../fonts/Kommuna400Narrow.woff") format("woff");
 }
 @font-face {
 	font-family: "Kommuna600";
-	src: url("./fonts/Kommuna600Regular.woff") format("woff");
+	src: url("../fonts/Kommuna600Regular.woff") format("woff");
 }
 @font-face {
 	font-family: "Kommuna800";
-	src: url("./fonts/Kommuna800Wide.woff") format("woff");
+	src: url("../fonts/Kommuna800Wide.woff") format("woff");
 }  
 //font does not include bold
 em, strong{
@@ -283,7 +283,6 @@ em {
 	}
 
 	.lbl_hover {
-		// background-image: url('./images/button_h.svg');
 		background: #fff;
 		color: @color_1;
 	}
@@ -324,7 +323,7 @@ em {
 		width: 180px;
 		height: 92px;
 		margin-top: -46px;
-		background: url('./images/button_h.svg') 0 0 / 100% 100% no-repeat;
+		background: url('../images/button_h.svg') 0 0 / 100% 100% no-repeat;
 
 		&:empty {
 			display: none;
@@ -353,7 +352,7 @@ em {
 				height: 25px;
 				margin: auto;
 				opacity: 0.7;
-				background: url('./images/arr.svg') 0 0 / contain no-repeat;
+				background: url('../images/arr.svg') 0 0 / contain no-repeat;
 				transition: .12s;
 			}
 
@@ -421,7 +420,7 @@ em {
 		width: ~"clamp(50px, calc(50px + 4vw), 130px)" !important;
 		height: ~"clamp(50px, calc(50px + 4vw), 130px)" !important;
 		top: ~"clamp(-65px, calc(-25px - 2vw), -25px)" !important;
-		background-image: url('./images/slider_sprite.svg');
+		background-image: url('../images/slider_sprite.svg');
 		background-repeat: no-repeat;
 		background-size:contain;
 		z-index: 10;
@@ -484,7 +483,7 @@ em {
 		left: calc(~"100% - 2em");
 		margin: auto;
 		padding: 1em;
-		background: url('./images/bubble_pink.svg') 0 0 / 100% 100% no-repeat;
+		background: url('../images/bubble_pink.svg') 0 0 / 100% 100% no-repeat;
 		font-size: 2.5rem;
 	}
 }
