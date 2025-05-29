@@ -1,5 +1,5 @@
 // big_top
-.page_homepage h1{
+.page_homepage h1 {
 	margin-bottom: 0px !important;
 }
 
@@ -8,67 +8,25 @@
 //=============================================================================================
 .big_top {
 	overflow: unset;
-	.big_top_overflow{
+	#animation_control{
+		position: absolute;
+		bottom: 2rem;
+		z-index: 3;
+	}
+	.big_top_overflow {
 		overflow: hidden;
 		position: absolute;
 		left: 0;
 		right: 0;
 		top: 0;
 		bottom: 0;
+
 	}
+
 	height: 100vh;
 	height: calc(var(--vh, 1vh) * 100);
 	//transition: height .5s ease;
 	position: relative;
-	.big_top_bg {
-		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	#animation_control{
-		z-index: 1;
-		position: sticky;
-		top: ~"calc("2*@half_padding + 43px ~"+ 2.4vw)"; //logo height
-		padding: @half_padding @basic_padding;
-		overflow: unset;
-		display: table;
-		button{
-			cursor: pointer;
-			user-select: none;
-			font-size: ~"clamp(20px, calc(20px + 1vw), 32px)";
-			text-align: center;
-			line-height: 0px;
-			width: ~"clamp(30px, calc(30px + 1.5vw), 48px)";
-			height: ~"clamp(30px, calc(30px + 1.5vw), 48px)";
-			padding: 8px;
-			border-radius: 5px;
-			border-width: 3px;
-			border-color: @color_1;
-			border-style: solid;
-			color: @color_1;
-			background: @color_2;
-			//also need class, firefox keeps user states on reload
-			&:disabled, &.disabled{
-				background-color: @light_grey;
-				color: @dark_grey;
-				cursor: not-allowed;
-			}
-		}
-		button:first-child{
-			border-radius: 7px 0 0 7px;
-			border-right: none;
-		}
-		button:last-child{
-			border-radius: 0 7px 7px 0;
-		}
-	}
-
 	.wrap_inner {
 		position: relative;
 		z-index: 2;
@@ -91,57 +49,113 @@
 		z-index: 3;
 
 	}
+
 	.dates {
 		overflow: visible;
 		color: @color_1;
 		display: flex;
 		align-items: center;
-		> span:not(.slash):not(.running_text_sprite){
+
+		>span:not(.slash):not(.running_text_sprite) {
 			margin-left: @half_h1_size;
 			margin-right: @half_h1_size;
 		}
-		span.slash, span.running_text_sprite{
+
+		span.slash,
+		span.running_text_sprite {
 			margin-left: 1.5rem;
 			margin-right: 1.5rem;
 		}
+
 		animation: 12s running_text linear infinite;
 	}
-	.running_text_sprite{
+
+	.running_text_sprite {
 		display: inline-block;
 		width: @h1_size;
 		height: @h1_size;
-		svg{
+
+		svg {
 			overflow: visible;
 			width: 100%;
 			height: 100%;
-			.sprite-stroke{
+
+			.sprite-stroke {
 				color: black;
 			}
 		}
-		}
+	}
 }
 
-#slider-sprite{
+
+.big_top_animation_wrapper {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 0;
+		display: block;
+		width: 100%;
+		aspect-ratio: 3300 / 2560;
+
+		.big_top_bg {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		#metronome_pendulum {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: 2;
+		}
+	}
+@media (max-aspect-ratio: 3300 / 2560){
+	.big_top_animation_wrapper {
+		top: 0;
+		height: 100%;
+		width: auto;
+		left: 50%;
+		transform: translateX(-50%);
+
+	}
+}
+
+#slider-sprite {
 	overflow: visible;
-	.sprite_stroke{
+
+	.sprite_stroke {
 		fill: @color_1;
 		stroke: @color_1;
 		stroke-linecap: round;
 		stroke-linejoin: round;
 		stroke-width: 18px;
 	}
-	.sprite_fore{
+
+	.sprite_fore {
 		fill: @color_3;
 	}
 }
 
 
 @keyframes running_text {
-	0% { transform: translateX(0); }
-	100% { transform: translateX(-33.33333%); }
+	0% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(-33.33333%);
+	}
 }
 
-@keyframes drag_pulse {	
+@keyframes drag_pulse {
 	50% {
 		transform: scale(1.08);
 	}
@@ -186,8 +200,13 @@
 		pointer-events: all;
 		transition: all 0.2s ease-in-out;
 
-		&:first-child { margin-left: 40px; }
-		&:last-child { margin-right: 40px; }
+		&:first-child {
+			margin-left: 40px;
+		}
+
+		&:last-child {
+			margin-right: 40px;
+		}
 
 		@media (min-width: 901px) {
 			&:hover {
@@ -248,7 +267,7 @@
 		pointer-events: none;
 	}
 
-	.mCSB_scrollTools  {
+	.mCSB_scrollTools {
 		z-index: 0;
 
 		&::before {
@@ -265,3 +284,6 @@
 		}
 	}
 }
+
+
+@import 'input_range_style.less';

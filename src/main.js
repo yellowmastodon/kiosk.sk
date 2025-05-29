@@ -5,7 +5,7 @@ var html_top_margin;
 import { vh_mobile_fix } from './modules/vhMobileFix.js';
 import { kiosk_archive_sort, kiosk_program_slick, kiosk_program_mcsutomscrollbar, kiosk_new_articles_mcsutomscrollbar, kiosk_gallery_slick } from './modules/scrollersAndSort.js';
 import { kiosk_schedule_hover_img } from './modules/kioskScheduleHoverImg.js';
-import { bg_animation } from './modules/bgAnimPlanet.js';
+import { bg_animation } from './modules/bgAnimPendulum.js';
 
 body = jQuery('body');
 is_touch_device = body.hasClass('is_touch_device');

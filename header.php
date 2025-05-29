@@ -9,7 +9,7 @@
 
 	<!-- 	preload images for image sequence -->
 	<?php
-	if (is_front_page()) :
+	/** if (is_front_page()) :
 
 		//names of subdirectories containing image sequences
 		$image_sequences = array('bg_earth');
@@ -26,7 +26,7 @@
 		foreach ($current_image_sequence as $image) : ?>
 			<link rel="preload" class="preloaded_bg_image" href="<?php echo $image; ?>" as="image" type="image/gif" />
 	<?php endforeach;
-	endif; ?>
+	endif; */ ?>
 
 
 	<meta name="msapplication-TileColor" content="#ffffff">

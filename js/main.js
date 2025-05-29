@@ -1,1 +1,568 @@
-(()=>{"use strict";var e,r={833:()=>{},957:()=>{function e(r){return e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e(r)}function r(r,o,n){return(o=function(r){var o=function(r,o){if("object"!=e(r)||!r)return r;var n=r[Symbol.toPrimitive];if(void 0!==n){var t=n.call(r,o||"default");if("object"!=e(t))return t;throw new TypeError("@@toPrimitive must return a primitive value.")}return("string"===o?String:Number)(r)}(r,"string");return"symbol"==e(o)?o:o+""}(o))in r?Object.defineProperty(r,o,{value:n,enumerable:!0,configurable:!0,writable:!0}):r[o]=n,r}var o,n,t,s,i;(o=jQuery("body")).hasClass("is_touch_device"),n=parseInt(jQuery("html").css("margin-top")),t=.01*window.innerHeight,document.documentElement.style.setProperty("--vh","".concat(t,"px")),window.addEventListener("resize",(function(){if(!window.is_touch_device){var e=.01*window.innerHeight;document.documentElement.style.setProperty("--vh","".concat(e,"px"))}})),jQuery(window).on("scroll",(function(){jQuery(window).scrollTop()>n?o.addClass("fixed_header"):o.removeClass("fixed_header")})),jQuery(window).trigger("scroll"),jQuery(".overlay").on("click",(function(){o.removeClass("open_menu")})),jQuery(".main_menu_switch").on("click",(function(){o.toggleClass("open_menu")})),function(){var e,r,o,n,t=window.is_touch_device,s=jQuery(".schedules_wrap");s.length&&!t&&(e=s.find(".schedules_list"),o=s.find(".square"),s.find("ol").on("mouseleave",(function(){o.hasClass("show")&&o.removeClass("show")})),s.find("li").on("mouseenter",(function(){""!==(r=jQuery(this).attr("data-img"))?(o.hasClass("show")||o.addClass("show"),o.css({"background-image":"url("+r+")"})):(o.hasClass("show")&&o.removeClass("show"),o.css({"background-image":"none"}))})),n=parseInt(jQuery("html").css("margin-top")),s.on("mousemove",(function(r){o.css({left:r.pageX-e.offset().left,top:r.pageY-n-e.offset().top})})),jQuery("html").trigger("mousemove"))}(),(s=jQuery(".gallery_wrap, .archive_detail_gallery")).length&&s.find(".items").slick({slide:".img_wrap",infinite:!0,variableWidth:!1,autoplay:!1,autoplaySpeed:3e3,slidesToShow:2,slidesToScroll:2,swipe:!1,speed:500,appendArrows:s.find(".arrs_wrap"),prevArrow:'<span class="arrow-prev"></span>',nextArrow:'<span class="arrow-next"></span>',responsive:[{breakpoint:801,settings:{slidesToShow:1,slidesToScroll:1}}]}),function(){var e=jQuery(".schedules_wrap");e.length&&e.find(".schedules_list").slick(r(r(r(r({slide:".schedule_wrap",infinite:!1,variableWidth:!1,autoplay:!1,autoplaySpeed:3e3,swipe:!0,speed:500},"variableWidth",!0),"appendArrows",e.find(".main_title span")),"prevArrow",'<span class="arrow-prev"></span>'),"nextArrow",'<span class="arrow-next"></span>'))}(),jQuery(".articles_list").each((function(){var e=jQuery(this);e.mCustomScrollbar({theme:"dark-rounded",axis:"x",mouseWheel:!1,scrollbarPosition:"outside",contentTouchScroll:!1,documentTouchScroll:!1,advanced:{updateOnContentResize:!0}});var r,o=null,n=null,t=null,s=null;e.on("touchstart",(function(i){o=null,n=null,t=null,s=null,r=-1*e.find(".mCSB_container").offset().left})),e.on("touchmove",(function(i){if(null===n)n=i.originalEvent.touches[0].pageX,s=i.originalEvent.touches[0].pageY;else{if(o=n,n=i.originalEvent.touches[0].pageX,t=s,s=i.originalEvent.touches[0].pageY,Math.abs(t-s)>4)return;r=(r+=1.5*(o-n))<0?0:r,e.mCustomScrollbar("scrollTo",r,{scrollInertia:0})}}))})),(i=jQuery(".archive_sort_form")).length&&i.find(".value").on("click",(function(){i.trigger("submit")})),jQuery(window).load((function(){var e=[];jQuery(".preloaded_bg_image").each((function(){e.push(this.attributes.href.nodeValue)}));for(var r=jQuery("#bg_animation"),o=0,n=200*(e.length-1)+300,t=jQuery("#bg_animation_zoom_out"),s=jQuery("#bg_animation_zoom_in"),i=0;i<e.length-1;i++)a(i);function a(n){setTimeout((function(){o++,jQuery(r).attr("src",e[o])}),200*n+300)}setTimeout((function(){t.prop("disabled",!1),t.removeClass("disabled")}),n),s.click((function(n){jQuery(this).hasClass("disabled")?n.preventDefault():(o<e.length-1&&o++,o==e.length-1&&(jQuery(this).prop("disabled",!0),jQuery(this).addClass("disabled")),1==o&&(t.prop("disabled",!1),t.removeClass("disabled")),jQuery(r).attr("src",e[o]))})),t.click((function(n){jQuery(this).hasClass("disabled")?n.preventDefault():(o>0&&o--,0==o&&(jQuery(this).prop("disabled",!0),jQuery(this).addClass("disabled")),o==e.length-2&&(s.prop("disabled",!1),s.removeClass("disabled")),jQuery(r).attr("src",e[o]))}))}))}},o={};function n(e){var t=o[e];if(void 0!==t)return t.exports;var s=o[e]={exports:{}};return r[e](s,s.exports,n),s.exports}n.m=r,e=[],n.O=(r,o,t,s)=>{if(!o){var i=1/0;for(c=0;c<e.length;c++){for(var[o,t,s]=e[c],a=!0,l=0;l<o.length;l++)(!1&s||i>=s)&&Object.keys(n.O).every((e=>n.O[e](o[l])))?o.splice(l--,1):(a=!1,s<i&&(i=s));if(a){e.splice(c--,1);var u=t();void 0!==u&&(r=u)}}return r}s=s||0;for(var c=e.length;c>0&&e[c-1][2]>s;c--)e[c]=e[c-1];e[c]=[o,t,s]},n.o=(e,r)=>Object.prototype.hasOwnProperty.call(e,r),(()=>{var e={829:0,412:0};n.O.j=r=>0===e[r];var r=(r,o)=>{var t,s,[i,a,l]=o,u=0;if(i.some((r=>0!==e[r]))){for(t in a)n.o(a,t)&&(n.m[t]=a[t]);if(l)var c=l(n)}for(r&&r(o);u<i.length;u++)s=i[u],n.o(e,s)&&e[s]&&e[s][0](),e[s]=0;return n.O(c)},o=self.webpackChunkkiosk_sk=self.webpackChunkkiosk_sk||[];o.forEach(r.bind(null,0)),o.push=r.bind(null,o.push.bind(o))})(),n.O(void 0,[412],(()=>n(957)));var t=n.O(void 0,[412],(()=>n(833)));t=n.O(t)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/main.js":
+/*!*********************!*\
+  !*** ./src/main.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modules_vhMobileFix_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/vhMobileFix.js */ "./src/modules/vhMobileFix.js");
+/* harmony import */ var _modules_scrollersAndSort_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/scrollersAndSort.js */ "./src/modules/scrollersAndSort.js");
+/* harmony import */ var _modules_kioskScheduleHoverImg_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/kioskScheduleHoverImg.js */ "./src/modules/kioskScheduleHoverImg.js");
+/* harmony import */ var _modules_bgAnimPendulum_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/bgAnimPendulum.js */ "./src/modules/bgAnimPendulum.js");
+var body;
+var is_touch_device;
+var html_top_margin;
+
+
+
+
+body = jQuery('body');
+is_touch_device = body.hasClass('is_touch_device');
+html_top_margin = parseInt(jQuery('html').css('margin-top'));
+(0,_modules_vhMobileFix_js__WEBPACK_IMPORTED_MODULE_0__.vh_mobile_fix)();
+kiosk_fixed_header();
+kiosk_main_menu();
+(0,_modules_kioskScheduleHoverImg_js__WEBPACK_IMPORTED_MODULE_2__.kiosk_schedule_hover_img)();
+(0,_modules_scrollersAndSort_js__WEBPACK_IMPORTED_MODULE_1__.kiosk_gallery_slick)();
+// kiosk_program_mcsutomscrollbar();
+(0,_modules_scrollersAndSort_js__WEBPACK_IMPORTED_MODULE_1__.kiosk_program_slick)();
+(0,_modules_scrollersAndSort_js__WEBPACK_IMPORTED_MODULE_1__.kiosk_new_articles_mcsutomscrollbar)();
+(0,_modules_scrollersAndSort_js__WEBPACK_IMPORTED_MODULE_1__.kiosk_archive_sort)();
+(0,_modules_bgAnimPendulum_js__WEBPACK_IMPORTED_MODULE_3__.bg_animation)();
+
+// fixed header
+//==================================================================
+function kiosk_fixed_header() {
+  jQuery(window).on('scroll', function () {
+    if (jQuery(window).scrollTop() > html_top_margin) {
+      body.addClass('fixed_header');
+    } else {
+      body.removeClass('fixed_header');
+    }
+  });
+  jQuery(window).trigger('scroll');
+}
+
+// main menu
+//==================================================================
+function kiosk_main_menu() {
+  jQuery('.overlay').on('click', function () {
+    body.removeClass('open_menu');
+  });
+  jQuery('.main_menu_switch').on('click', function () {
+    body.toggleClass('open_menu');
+  });
+}
+
+/***/ }),
+
+/***/ "./src/modules/bgAnimPendulum.js":
+/*!***************************************!*\
+  !*** ./src/modules/bgAnimPendulum.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   bg_animation: () => (/* binding */ bg_animation),
+/* harmony export */   getSinusoid: () => (/* binding */ getSinusoid)
+/* harmony export */ });
+function bg_animation() {
+  var DEFAULT_SPEED = 1;
+  var speed = DEFAULT_SPEED;
+  var SPEED_SLIDER = document.querySelector('input#metronome_speed');
+  var TICK_AUDIO = document.querySelectorAll('audio.metronome_tick');
+  var current_tick_num = 0;
+  var PENDULUM = document.getElementById('metronome_pendulum_image');
+  var SOUND_BUTTON = document.getElementById('metronome_sound_on');
+  var PENDULUM_BLUR = document.querySelector('#metronome_pendulum_blur feGaussianBlur');
+  var soundOn = false;
+  var audioTickTimeout = null;
+  var now = null;
+  SOUND_BUTTON.addEventListener('click', function () {
+    soundOn = !soundOn;
+    SOUND_BUTTON.setAttribute("aria-pressed", soundOn ? "true" : "false");
+  });
+  SPEED_SLIDER.addEventListener('change', function () {
+    speed = Number(SPEED_SLIDER.value);
+    var blur = (speed - 3) * .6;
+    if (blur > 0) {
+      PENDULUM_BLUR.setAttribute('stdDeviation', "".concat(speed, " 0"));
+    } else {
+      PENDULUM_BLUR.setAttribute('stdDeviation', '0 0');
+    }
+  });
+  var prevRotation = null;
+  var currentRotation = null;
+  // Animation (visual)
+  function animate() {
+    var now = performance.now() * 0.001;
+    currentRotation = getSinusoid(now, speed);
+    if (soundOn) {
+      if (prevRotation !== null && Math.sign(prevRotation) !== Math.sign(currentRotation)) {
+        current_tick_num++;
+        if (current_tick_num >= TICK_AUDIO.length) {
+          current_tick_num = 0;
+        }
+        TICK_AUDIO[current_tick_num].currentTime = 0; // Always restart from beginning
+        TICK_AUDIO[current_tick_num].play();
+      }
+    }
+    prevRotation = currentRotation;
+    PENDULUM.setAttribute('transform', "rotate(".concat(currentRotation * 30, ", 1650, 1312)"));
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+/**
+ * Returns a sinusoidal value between -1 and 1.
+ * @param {number} time - The current time in seconds.
+ * @param {number} speed - The frequency (cycles per second).
+ * @returns {number} Sinusoidal value between -1 and 1.
+ */
+function getSinusoid(time) {
+  var speed = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  return Math.sin(speed * time);
+}
+
+/***/ }),
+
+/***/ "./src/modules/kioskScheduleHoverImg.js":
+/*!**********************************************!*\
+  !*** ./src/modules/kioskScheduleHoverImg.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   kiosk_schedule_hover_img: () => (/* binding */ kiosk_schedule_hover_img)
+/* harmony export */ });
+// schedule hover img
+//==================================================================
+function kiosk_schedule_hover_img() {
+  var is_touch_device = window.is_touch_device;
+  var mod = jQuery('.schedules_wrap');
+  var list;
+  var url;
+  var square;
+  if (!mod.length || is_touch_device) {
+    return;
+  }
+  list = mod.find('.schedules_list');
+  square = mod.find('.square');
+
+  // hide square on mouseleave
+  mod.find('ol').on('mouseleave', function () {
+    if (square.hasClass('show')) {
+      square.removeClass('show');
+    }
+  });
+
+  // show square on hover
+  mod.find('li').on('mouseenter', function () {
+    url = jQuery(this).attr('data-img');
+    if (url !== '') {
+      if (!square.hasClass('show')) {
+        square.addClass('show');
+      }
+      square.css({
+        'background-image': 'url(' + url + ')'
+      });
+    } else {
+      if (square.hasClass('show')) {
+        square.removeClass('show');
+      }
+      square.css({
+        'background-image': 'none'
+      });
+    }
+  });
+
+  // cursor move
+  var delta;
+  delta = parseInt(jQuery('html').css('margin-top'));
+  mod.on('mousemove', function (e) {
+    square.css({
+      left: e.pageX - list.offset().left,
+      top: e.pageY - delta - list.offset().top
+    });
+  });
+  jQuery('html').trigger('mousemove');
+}
+
+/***/ }),
+
+/***/ "./src/modules/scrollersAndSort.js":
+/*!*****************************************!*\
+  !*** ./src/modules/scrollersAndSort.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   kiosk_archive_sort: () => (/* binding */ kiosk_archive_sort),
+/* harmony export */   kiosk_gallery_slick: () => (/* binding */ kiosk_gallery_slick),
+/* harmony export */   kiosk_new_articles_mcsutomscrollbar: () => (/* binding */ kiosk_new_articles_mcsutomscrollbar),
+/* harmony export */   kiosk_program_mcsutomscrollbar: () => (/* binding */ kiosk_program_mcsutomscrollbar),
+/* harmony export */   kiosk_program_slick: () => (/* binding */ kiosk_program_slick)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+// archive sort
+//==================================================================
+function kiosk_archive_sort() {
+  var form = jQuery('.archive_sort_form');
+  if (!form.length) {
+    return;
+  }
+  form.find('.value').on('click', function () {
+    form.trigger('submit');
+  });
+}
+
+// kiosk_program_slick
+//==================================================================
+function kiosk_program_slick() {
+  var mod = jQuery('.schedules_wrap');
+  if (!mod.length) {
+    return;
+  }
+  mod.find('.schedules_list').slick(_defineProperty(_defineProperty(_defineProperty(_defineProperty({
+    slide: '.schedule_wrap',
+    infinite: false,
+    variableWidth: false,
+    autoplay: false,
+    autoplaySpeed: 3000,
+    swipe: true,
+    speed: 500
+  }, "variableWidth", true), "appendArrows", mod.find('.main_title span')), "prevArrow", '<span class="arrow-prev"></span>'), "nextArrow", '<span class="arrow-next"></span>'));
+}
+
+// kiosk_program_mcsutomscrollbar
+//==================================================================
+function kiosk_program_mcsutomscrollbar() {
+  var list = jQuery('.schedules_list');
+  list.mCustomScrollbar({
+    theme: "rounded-dark",
+    axis: 'x',
+    mouseWheel: false,
+    scrollbarPosition: 'outside',
+    contentTouchScroll: false,
+    documentTouchScroll: false,
+    advanced: {
+      updateOnContentResize: true
+    }
+  });
+  var oldX = null;
+  var newX = null;
+  var oldY = null;
+  var newY = null;
+  var contentX;
+  list.on('touchstart', function (e) {
+    oldX = null;
+    newX = null;
+    oldY = null;
+    newY = null;
+    contentX = list.find('.mCSB_container').offset().left * -1;
+  });
+  list.on('touchmove', function (e) {
+    if (newX === null) {
+      newX = e.originalEvent.touches[0].pageX;
+      newY = e.originalEvent.touches[0].pageY;
+    } else {
+      oldX = newX;
+      newX = e.originalEvent.touches[0].pageX;
+      oldY = newY;
+      newY = e.originalEvent.touches[0].pageY;
+      if (Math.abs(oldY - newY) > 4) {
+        return;
+      }
+      contentX += (oldX - newX) * 1.5;
+      contentX = contentX < 0 ? 0 : contentX;
+      list.mCustomScrollbar('scrollTo', contentX, {
+        scrollInertia: 0
+      });
+    }
+  });
+}
+
+// kiosk_new_articles_mcsutomscrollbar
+//==================================================================
+function kiosk_new_articles_mcsutomscrollbar() {
+  var lists = jQuery('.articles_list');
+  lists.each(function () {
+    var list = jQuery(this);
+    list.mCustomScrollbar({
+      theme: "dark-rounded",
+      axis: 'x',
+      mouseWheel: false,
+      scrollbarPosition: 'outside',
+      contentTouchScroll: false,
+      documentTouchScroll: false,
+      advanced: {
+        updateOnContentResize: true
+      }
+    });
+    var oldX = null;
+    var newX = null;
+    var oldY = null;
+    var newY = null;
+    var contentX;
+    list.on('touchstart', function (e) {
+      oldX = null;
+      newX = null;
+      oldY = null;
+      newY = null;
+      contentX = list.find('.mCSB_container').offset().left * -1;
+    });
+    list.on('touchmove', function (e) {
+      if (newX === null) {
+        newX = e.originalEvent.touches[0].pageX;
+        newY = e.originalEvent.touches[0].pageY;
+      } else {
+        oldX = newX;
+        newX = e.originalEvent.touches[0].pageX;
+        oldY = newY;
+        newY = e.originalEvent.touches[0].pageY;
+        if (Math.abs(oldY - newY) > 4) {
+          return;
+        }
+        contentX += (oldX - newX) * 1.5;
+        contentX = contentX < 0 ? 0 : contentX;
+        list.mCustomScrollbar('scrollTo', contentX, {
+          scrollInertia: 0
+        });
+      }
+    });
+  });
+}
+
+// post gallery slick
+//==================================================================
+function kiosk_gallery_slick() {
+  var mod = jQuery('.gallery_wrap, .archive_detail_gallery');
+  if (!mod.length) {
+    return;
+  }
+  mod.find('.items').slick({
+    slide: '.img_wrap',
+    infinite: true,
+    variableWidth: false,
+    autoplay: false,
+    autoplaySpeed: 3000,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    swipe: false,
+    speed: 500,
+    appendArrows: mod.find('.arrs_wrap'),
+    prevArrow: '<span class="arrow-prev"></span>',
+    nextArrow: '<span class="arrow-next"></span>',
+    responsive: [{
+      breakpoint: 801,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/modules/vhMobileFix.js":
+/*!************************************!*\
+  !*** ./src/modules/vhMobileFix.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   vh_mobile_fix: () => (/* binding */ vh_mobile_fix)
+/* harmony export */ });
+function vh_mobile_fix() {
+  var vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', "".concat(vh, "px"));
+  window.addEventListener('resize', function () {
+    if (!window.is_touch_device) {
+      var _vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', "".concat(_vh, "px"));
+    }
+  });
+}
+
+/***/ }),
+
+/***/ "./style.less":
+/*!********************!*\
+  !*** ./style.less ***!
+  \********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"/js/main": 0,
+/******/ 			"style.min": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunkkiosk_sk"] = self["webpackChunkkiosk_sk"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	__webpack_require__.O(undefined, ["style.min"], () => (__webpack_require__("./src/main.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["style.min"], () => (__webpack_require__("./style.less")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;

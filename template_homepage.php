@@ -14,9 +14,15 @@ global $current_image_sequence;
 
 <section class="big_top wrap">
 	<div class="big_top_overflow">
-		<img id="bg_animation" class="big_top_bg" src="<?php echo $current_image_sequence[0]; ?>"></img>
+		<div class="big_top_animation_wrapper">
+			<?php
+			$audio_src =get_template_directory_uri() . '/audio/metronome_tick.mp3';
+			for ($i = 0; $i < 10; $i++):?>
+				<audio autobuffer class="metronome_tick" preload="auto" src="<?php echo get_template_directory_uri() . '/audio/metronome_tick.mp3';?>"></audio>
+			<?php endfor;?>
+			<img id="bg_animation" class="big_top_bg" src="<?php echo get_template_directory_uri() . '/images/metronome_bkg.jpg' ?>"></img>
 
-		<div class="dates_wrap  h1_size">
+			<!-- <div class="dates_wrap  h1_size">
 			<div class="dates">
 				<?php for ($i = 0; $i < 3; $i++) : ?>
 					<?php if ($event_date) : ?><span class="event_name kommuna_narrow"><?= $event_name ?></span><?php endif; ?>
@@ -29,10 +35,25 @@ global $current_image_sequence;
 						</svg></span>
 				<?php endfor; ?>
 			</div>
+		</div> -->
+			<svg id="metronome_pendulum" viewBox="0 0 3300 2560" preserveAspectRatio="xMinYMin slice">
+				<defs><filter id="metronome_pendulum_blur">
+      					<feGaussianBlur in="SourceGraphic" stdDeviation="0 0" />
+    			</filter>
+				<clipPath id="metronome_pendulum_clip">
+					<rect width="3300" height="1258" fill="black" />
+				</clipPath>
+				</defs>
+				<g clip-path="url(#metronome_pendulum_clip)">
+					<image transform="rotate(30, 1650, 1312)" id="metronome_pendulum_image" x="1600" y="500" href="<?php echo get_template_directory_uri() . '/images/metronome_fore.png'; ?>" filter="url(#metronome_pendulum_blur)">
+					</image>
+				</g>
+			</svg>
 		</div>
 	</div>
 	<div id="animation_control">
-		<button id="bg_animation_zoom_in" class="disabled" aria-label="Priblíženie animácie" disabled>+</button><button id="bg_animation_zoom_out" class="disabled" aria-label="Oddialenie animácie" disabled>-</button>
+		<button class="button" id="metronome_sound_on" aria-label="Zapnúť zvuk" aria-pressed="false"><span class="lbl">AUDIO</span></button>
+		<input id="metronome_speed" class="slider"  type="range" min=".5" max="12" value="3" step=".5">
 	</div>
 </section>
 
@@ -59,109 +80,110 @@ global $current_image_sequence;
 </section> -->
 
 <!-- homepage -->
-<?php if (is_front_page()) : 
-	
-	if (get_field('show_performance_section')):?>
-	<section class="articles wrap half_margin_bottom">
-		<div class="wrap_inner">
-			<?php $the_query = new WP_Query(
-				array(
-					'post_type' => 'post',
-					'posts_per_page' => -1,
-					'category_name' => 'inscenacie-2024',
-				)
-			); 
-			?>
-			<div class="main_title_wrap">
-				<h2 class="main_title">Inscenácie</h2>
-				<?php if (!$the_query->have_posts()) : ?>
-					<p>Coming soon...</p>
-				<?php endif; ?>
-			</div>
-			<div class="articles_list">
-				<?php
-				while ($the_query->have_posts()) : $the_query->the_post();
+<?php if (is_front_page()) :
+
+	if (get_field('show_performance_section')): ?>
+		<section class="articles wrap half_margin_bottom">
+			<div class="wrap_inner">
+				<?php $the_query = new WP_Query(
+					array(
+						'post_type' => 'post',
+						'posts_per_page' => -1,
+						'category_name' => 'inscenacie-2023',
+					)
+				);
+
 				?>
-					<div class="article_wrap">
-						<figure class="img_wrap">
-							<a class="img_link" href="<?= get_the_permalink() ?>">
-								<?= get_the_post_thumbnail($post->ID, 'thumb-image-twocol'); ?>
-							</a>
-						</figure>
-						<div class="text_wrap">
-							<h3 class="title"><a href="<?= get_the_permalink() ?>"><?php the_title(); ?></a></h3>
-							<p class="text"><?= get_the_excerpt(); ?></p>
-
-							<?php
-							$global_read_more = get_field('global_read_more', 'option');
-							?>
-
-							<?php if ($global_read_more) : ?>
-								<a class="button" href="<?= get_the_permalink() ?>">
-									<span class="lbl_normal lbl"><?= $global_read_more ?></span>
-									<span class="lbl_hover_wrap">
-										<span class="lbl_hover lbl"><?= $global_read_more ?></span>
-									</span>
+				<div class="main_title_wrap">
+					<h2 class="main_title">Inscenácie</h2>
+					<?php if (!$the_query->have_posts()) : ?>
+						<p>Coming soon...</p>
+					<?php endif; ?>
+				</div>
+				<div class="articles_list">
+					<?php
+					while ($the_query->have_posts()) : $the_query->the_post();
+					?>
+						<div class="article_wrap">
+							<figure class="img_wrap">
+								<a class="img_link" href="<?= get_the_permalink() ?>">
+									<?= get_the_post_thumbnail($post->ID, 'thumb-image-twocol'); ?>
 								</a>
-							<?php endif; ?>
+							</figure>
+							<div class="text_wrap">
+								<h3 class="title"><a href="<?= get_the_permalink() ?>"><?php the_title(); ?></a></h3>
+								<p class="text"><?= get_the_excerpt(); ?></p>
+
+								<?php
+								$global_read_more = get_field('global_read_more', 'option');
+								?>
+
+								<?php if ($global_read_more) : ?>
+									<a class="button" href="<?= get_the_permalink() ?>">
+										<span class="lbl_normal lbl"><?= $global_read_more ?></span>
+										<span class="lbl_hover_wrap">
+											<span class="lbl_hover lbl"><?= $global_read_more ?></span>
+										</span>
+									</a>
+								<?php endif; ?>
+							</div>
 						</div>
-					</div>
-				<?php
-				endwhile;
-				wp_reset_postdata();
-				?>
+					<?php
+					endwhile;
+					wp_reset_postdata();
+					?>
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 	<?php endif;
-	if (get_field('show_news_section')):?>
-	<section class="articles wrap no_margin_bottom">
-		<div class="wrap_inner">
+	if (get_field('show_news_section')): ?>
+		<section class="articles wrap no_margin_bottom">
+			<div class="wrap_inner">
 				<div class="main_title_wrap">
 					<h2 class="main_title">News</h2>
 				</div>
-			<div class="articles_list">
-				<?php
-				$the_query = new WP_Query(array(
-					'post_type' => 'post',
-					'posts_per_page' => 15,
-					'category_name' => 'news',
-				));
-				while ($the_query->have_posts()) : $the_query->the_post();
-				?>
-					<div class="article_wrap">
-						<figure class="img_wrap">
-							<a class="img_link" href="<?= get_the_permalink() ?>">
-								<?= get_the_post_thumbnail($post->ID, 'thumb-image-twocol'); ?>
-							</a>
-						</figure>
-						<div class="text_wrap">
-							<h3 class="title"><a href="<?= get_the_permalink() ?>"><?php the_title(); ?></a></h3>
-							<p class="text"><?= get_the_excerpt(); ?></p>
-
-							<?php
-							$global_read_more = get_field('global_read_more', 'option');
-							?>
-
-							<?php if ($global_read_more) : ?>
-								<a class="button" href="<?= get_the_permalink() ?>">
-									<span class="lbl_normal lbl"><?= $global_read_more ?></span>
-									<span class="lbl_hover_wrap">
-										<span class="lbl_hover lbl"><?= $global_read_more ?></span>
-									</span>
+				<div class="articles_list">
+					<?php
+					$the_query = new WP_Query(array(
+						'post_type' => 'post',
+						'posts_per_page' => 15,
+						'category_name' => 'news',
+					));
+					while ($the_query->have_posts()) : $the_query->the_post();
+					?>
+						<div class="article_wrap">
+							<figure class="img_wrap">
+								<a class="img_link" href="<?= get_the_permalink() ?>">
+									<?= get_the_post_thumbnail($post->ID, 'thumb-image-twocol'); ?>
 								</a>
-							<?php endif; ?>
+							</figure>
+							<div class="text_wrap">
+								<h3 class="title"><a href="<?= get_the_permalink() ?>"><?php the_title(); ?></a></h3>
+								<p class="text"><?= get_the_excerpt(); ?></p>
+
+								<?php
+								$global_read_more = get_field('global_read_more', 'option');
+								?>
+
+								<?php if ($global_read_more) : ?>
+									<a class="button" href="<?= get_the_permalink() ?>">
+										<span class="lbl_normal lbl"><?= $global_read_more ?></span>
+										<span class="lbl_hover_wrap">
+											<span class="lbl_hover lbl"><?= $global_read_more ?></span>
+										</span>
+									</a>
+								<?php endif; ?>
+							</div>
 						</div>
-					</div>
-				<?php
-				endwhile;
-				wp_reset_postdata();
-				?>
+					<?php
+					endwhile;
+					wp_reset_postdata();
+					?>
+				</div>
 			</div>
-		</div>
-	</section>
-<?php 
-endif;
+		</section>
+<?php
+	endif;
 endif; ?>
 
 <?php
