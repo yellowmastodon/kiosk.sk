@@ -15,11 +15,8 @@ global $current_image_sequence;
 <section class="big_top wrap">
 	<div class="big_top_overflow">
 		<div class="big_top_animation_wrapper">
-			<?php
-			$audio_src =get_template_directory_uri() . '/audio/metronome_tick.mp3';
-			for ($i = 0; $i < 10; $i++):?>
-				<audio autobuffer class="metronome_tick" preload="auto" src="<?php echo get_template_directory_uri() . '/audio/metronome_tick.mp3';?>"></audio>
-			<?php endfor;?>
+
+			<audio autobuffer class="metronome_tick" preload="auto" src="<?php echo get_template_directory_uri() . '/audio/metronome_tick.mp3';?>"></audio>
 			<img id="bg_animation" class="big_top_bg" src="<?php echo get_template_directory_uri() . '/images/metronome_bkg.jpg' ?>"></img>
 
 			<!-- <div class="dates_wrap  h1_size">
@@ -53,7 +50,7 @@ global $current_image_sequence;
 	</div>
 	<div id="animation_control">
 		<button class="button" id="metronome_sound_on" aria-label="Zapnúť zvuk" aria-pressed="false"><span class="lbl">AUDIO</span></button>
-		<input id="metronome_speed" class="slider"  type="range" min=".5" max="12" value="3" step=".5">
+		<input id="metronome_speed" class="slider"  type="range" min=".5" max="15" value="3" step=".5">
 	</div>
 </section>
 

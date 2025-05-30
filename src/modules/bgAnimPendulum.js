@@ -1,8 +1,10 @@
 export function bg_animation() {
-    const DEFAULT_SPEED = 1;
-    let speed = DEFAULT_SPEED;
+
+
     const SPEED_SLIDER = document.querySelector('input#metronome_speed');
-    const TICK_AUDIO = document.querySelectorAll('audio.metronome_tick');
+    let speed = 1;
+    speed = Number(SPEED_SLIDER.value);
+    const TICK_AUDIO = document.querySelector('audio.metronome_tick');
     let current_tick_num = 0;
     const PENDULUM = document.getElementById('metronome_pendulum_image');
     const SOUND_BUTTON = document.getElementById('metronome_sound_on');
@@ -34,12 +36,8 @@ export function bg_animation() {
         currentRotation = getSinusoid(now, speed);
         if (soundOn){
             if (prevRotation !== null && Math.sign(prevRotation) !== Math.sign(currentRotation)) {
-                current_tick_num++;
-                if (current_tick_num >= TICK_AUDIO.length){
-                    current_tick_num = 0;
-                }
-                TICK_AUDIO[current_tick_num].currentTime = 0; // Always restart from beginning
-                TICK_AUDIO[current_tick_num].play();
+                TICK_AUDIO.currentTime = 0; // Always restart from beginning
+                TICK_AUDIO.play();
             }
         }
         prevRotation = currentRotation;
