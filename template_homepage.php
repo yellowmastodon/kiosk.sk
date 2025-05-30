@@ -16,7 +16,7 @@ global $current_image_sequence;
 	<div class="big_top_overflow">
 		<div class="big_top_animation_wrapper">
 
-			<audio autobuffer class="metronome_tick" preload="auto" src="<?php echo get_template_directory_uri() . '/audio/metronome_tick.mp3';?>"></audio>
+			<audio class="metronome_tick" preload="auto" src="<?php echo get_template_directory_uri() . '/audio/metronome_tick.mp3';?>"></audio>
 			<img id="bg_animation" class="big_top_bg" src="<?php echo get_template_directory_uri() . '/images/metronome_bkg.jpg' ?>"></img>
 
 			<!-- <div class="dates_wrap  h1_size">

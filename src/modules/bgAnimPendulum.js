@@ -1,6 +1,5 @@
 export function bg_animation() {
 
-
     const SPEED_SLIDER = document.querySelector('input#metronome_speed');
     let speed = 1;
     speed = Number(SPEED_SLIDER.value);
@@ -13,6 +12,20 @@ export function bg_animation() {
     let audioTickTimeout = null;
     let now = null;
 
+    const TICK_URL = TICK_AUDIO.src;
+    let AudioContext = window.AudioContext || window.webkitAudioContext;
+    const context = new AudioContext(); // Make it crossbrowser
+    var tickBuffer = void 0;
+    window.fetch(TICK_URL)
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => context.decodeAudioData(arrayBuffer,
+            audioBuffer => {
+                tickBuffer = audioBuffer;
+            },
+            error =>
+                console.error(error)
+        ));
+
     SOUND_BUTTON.addEventListener('click', () => {
         soundOn = !soundOn;
         SOUND_BUTTON.setAttribute("aria-pressed", soundOn ? "true" : "false");
@@ -21,7 +34,7 @@ export function bg_animation() {
     SPEED_SLIDER.addEventListener('change', () => {
         speed = Number(SPEED_SLIDER.value);
         let blur = (speed - 3) * .6;
-        if (blur > 0){
+        if (blur > 0) {
             PENDULUM_BLUR.setAttribute('stdDeviation', `${speed} 0`);
         } else {
             PENDULUM_BLUR.setAttribute('stdDeviation', '0 0');
@@ -34,10 +47,9 @@ export function bg_animation() {
     function animate() {
         let now = performance.now() * 0.001;
         currentRotation = getSinusoid(now, speed);
-        if (soundOn){
+        if (soundOn) {
             if (prevRotation !== null && Math.sign(prevRotation) !== Math.sign(currentRotation)) {
-                TICK_AUDIO.currentTime = 0; // Always restart from beginning
-                TICK_AUDIO.play();
+                playTick(tickBuffer);
             }
         }
         prevRotation = currentRotation;
@@ -45,6 +57,12 @@ export function bg_animation() {
         requestAnimationFrame(animate);
     }
     animate();
+    function playTick(audioBuffer) {
+        var source = context.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(context.destination);
+        source.start();
+    };
 }
 
 /**
