@@ -85,7 +85,11 @@ function bg_animation() {
   var now = null;
   var TICK_URL = TICK_AUDIO.src;
   var AudioContext = window.AudioContext || window.webkitAudioContext;
-  var context = new AudioContext(); // Make it crossbrowser
+  var context = new AudioContext({
+    sampleRate: 48000,
+    // Set latencyHint to 'interactive' for better timing precision
+    latencyHint: 'interactive'
+  }); // Make it crossbrowser
   var tickBuffer = void 0;
   window.fetch(TICK_URL).then(function (response) {
     return response.arrayBuffer();

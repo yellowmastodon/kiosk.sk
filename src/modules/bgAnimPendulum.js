@@ -14,7 +14,11 @@ export function bg_animation() {
 
     const TICK_URL = TICK_AUDIO.src;
     let AudioContext = window.AudioContext || window.webkitAudioContext;
-    const context = new AudioContext(); // Make it crossbrowser
+    const context = new AudioContext({
+        sampleRate: 48000,
+      // Set latencyHint to 'interactive' for better timing precision
+      latencyHint: 'interactive'
+    }); // Make it crossbrowser
     var tickBuffer = void 0;
     window.fetch(TICK_URL)
         .then(response => response.arrayBuffer())
@@ -74,4 +78,3 @@ export function bg_animation() {
 export function getSinusoid(time, speed = 1) {
     return Math.sin(speed * time);
 }
-
