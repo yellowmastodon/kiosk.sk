@@ -100,10 +100,9 @@ export function kiosk_program_mcsutomscrollbar() {
 //==================================================================
 export function kiosk_new_articles_mcsutomscrollbar() {
 	var lists = jQuery('.articles_list');
-
+	console.log(lists);
 	lists.each(function () {
 		var list = jQuery(this);
-
 		list.mCustomScrollbar({
 			theme: "dark-rounded",
 			axis: 'x',

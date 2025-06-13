@@ -1,14 +1,12 @@
 <?php
 	$schedule_day = get_field('schedule_day');
-?>	
-<?php if ($schedule_day): ?>	
+if ($schedule_day): ?>	
 	<section class="schedules_wrap wrap no_margin_bottom">
 		<div class="wrap_inner no_thumbnail_img">
 			<h1 class="main_title"><span class="main_title_inner">Program</span></h1>
 			<?php $show_schedule = get_field('show_schedule');
 			if ($show_schedule !== 'show'):?>
-
-			<p>Coming soon...</p>
+				<p>Coming soon...</p>
 			<?php else: ?>
 				<div class="schedules_list_outer">
 					<div class="schedules_list">
@@ -98,4 +96,4 @@
 		</div>
 	</section>
 		
-<?php endif; ?>
+<?php endif;

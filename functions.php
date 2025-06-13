@@ -12,6 +12,7 @@ wp_enqueue_script('mcustomscrollbar',get_template_directory_uri() . '/js/mcustom
  * Thumbsizes
  */
 add_image_size( 'thumb-image', 600, 450, true);
+add_image_size( 'thumb-image-mid', 750, 675, true);
 add_image_size( 'thumb-image-twocol', 900, 675, true);
 add_image_size( 'thumb-image-onecol', 1280, 960, true);
 add_image_size( 'blog-image', 1280, 9999);
@@ -199,17 +200,8 @@ function kioskdetect_touch_device() {
 , $_SERVER["HTTP_USER_AGENT"]);
 }
 
-function auto_nbsp($text){
-	$text = preg_replace('/\s(\S{1,2})\s(\S)/', ' $1&nbsp;$2', $text);
-	return $text;
-};
-
-
-add_filter('wp_nav_menu_objects', 'menu_auto_nbsp', 10, 2);
-
-function menu_auto_nbsp($items){
-	foreach ($items as $key => $item){
-		$items[$key]->title = auto_nbsp($item->title);
-	}
-	return $items;
-};
+/**
+ * include additional files
+ */
+$template_directory = get_template_directory();
+require_once $template_directory . '/includes/render_functions.php';

@@ -1,17 +1,45 @@
 // schedules_wrap
 //=============================================================================================
+:root {
+	--kiosk-distort-1: url('data:image/svg+xml,\
+    <svg xmlns="http://www.w3.org/2000/svg">\
+      <filter id="waves" x="-20%" y="-20%" width="140%" height="140%" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">\
+        <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="200" seed="1" stitchTiles="noStitch" result="turbulence" />\
+        <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10" xChannelSelector="R" yChannelSelector="G" result="displacementMap" />\
+	\<feGaussianBlur stdDeviation="0.1" /></filter>\
+    </svg>#waves');
+	--kiosk-distort-2: url('data:image/svg+xml,\
+    <svg xmlns="http://www.w3.org/2000/svg">\
+      <filter id="waves" x="-20%" y="-20%" width="140%" height="140%" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">\
+        <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="200" seed="2" stitchTiles="noStitch" result="turbulence" />\
+        <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10" xChannelSelector="R" yChannelSelector="G" result="displacementMap" />\
+	\<feGaussianBlur stdDeviation="0.1" /></filter>\
+    </svg>#waves');
+	--kiosk-distort-3: url('data:image/svg+xml,\
+    <svg xmlns="http://www.w3.org/2000/svg">\
+      <filter id="waves" x="-20%" y="-20%" width="140%" height="140%" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">\
+        <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="200" seed="3" stitchTiles="noStitch" result="turbulence" />\
+        <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10" xChannelSelector="R" yChannelSelector="G" result="displacementMap" />\
+	\<feGaussianBlur stdDeviation="0.1" /></filter>\
+    </svg>#waves');
+
+}
+
+
 .schedules_wrap {
 	.schedules_list_outer {
 		position: relative;
 		overflow: visible;
 	}
-	h1{
+
+	h1 {
 		font-size: @h2_size !important;
 	}
 
 	.schedules_list {
 		position: relative;
 		.flex();
+
 		&.mCustomScrollbar {
 			.flex_dir(column);
 		}
@@ -54,8 +82,10 @@
 			width: 100%;
 			height: 1px;
 			margin: auto;
-			background: url('../images/wave.svg') 0 0 / 37px 100%;
+			background: url('../images/wave.svg') 0 0 / 60px 100%;
 			transition: .15s;
+			overflow: visible;
+
 		}
 
 		&::after {
@@ -64,10 +94,38 @@
 			left: 0;
 			bottom: 0;
 			width: 100%;
-			height: 1px;
+			height: 3px;
 			margin: auto;
-			background: #020202;
+			background: @color_1;
 			transition: 0.05s .1s;
+			overflow: visible;
+		}
+
+		&:nth-of-type(3n) {
+
+			&::before,
+			&::after {
+				.distorted1;
+
+			}
+		}
+
+		&:nth-of-type(3n+1) {
+
+			&::before,
+			&::after {
+				.distorted2;
+
+			}
+		}
+
+		&:nth-of-type(3n+2) {
+
+			&::before,
+			&::after {
+				.distorted3;
+
+			}
 		}
 
 		p {
@@ -130,7 +188,7 @@
 			bottom: 0;
 			width: 400px;
 			margin: auto;
-			background: linear-gradient(to left, #fff, rgba(255,255,255,0));
+			background: linear-gradient(to left, #fff, rgba(255, 255, 255, 0));
 			pointer-events: none;
 		}
 	}
@@ -177,7 +235,7 @@
 			right: 70px;
 			transform: scale(~"-1,1");
 		}
-		
+
 		&.arrow-next {
 			right: 0;
 		}
@@ -222,28 +280,36 @@
 
 
 @keyframes running_imgs {
-	0% { transform: translateX(0); }
-	100% { transform: translateX(-50%); }
+	0% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(-50%);
+	}
 }
 
 //hide running text in footer on schedule page
-.page_schedule .main_footer_wrap .running_text{
+.page_schedule .main_footer_wrap .running_text {
 	display: none;
 }
 
 
 //fix for large whitespace in schedule, when currently invisible day is a lot longer than those currently visible
-@value:  1;
+@value: 1;
+
 //maximum 6 days
- each(range(4), {
+each(range(4), {
 	@nth_sibling: @value + 2;
 	@minus_nth_sibling: @value - 2;
-	.schedules_list .slick-slide.slick-active:nth-of-type(@{value}) ~ .slick-slide:nth-of-type(@{nth_sibling}){
-	display: none !important;
-	}
-	//only helps with 2 or more rows, and does not affect previous days, as there is no previous sibling selector
-  }); 
 
-.schedules_list .slick-slide.slick-active:nth-of-type(1) ~ .slick-slide:nth-of-type(3){
+	.schedules_list .slick-slide.slick-active:nth-of-type(@{value}) ~ .slick-slide:nth-of-type(@{nth_sibling}) {
+		display: none !important;
+	}
+
+	//only helps with 2 or more rows, and does not affect previous days, as there is no previous sibling selector
+});
+
+.schedules_list .slick-slide.slick-active:nth-of-type(1)~.slick-slide:nth-of-type(3) {
 	display: none !important;
 }

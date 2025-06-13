@@ -1,0 +1,13 @@
+ul:not(.list-none){
+    list-style-type: '– ';
+    li::marker{
+        font-family: @heading_font_stack;
+    }
+}
+
+ul, ol{
+    &.list-none{
+        list-style: none;
+    }
+}
+

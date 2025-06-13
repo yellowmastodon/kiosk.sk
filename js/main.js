@@ -24,8 +24,6 @@ body = jQuery('body');
 is_touch_device = body.hasClass('is_touch_device');
 html_top_margin = parseInt(jQuery('html').css('margin-top'));
 (0,_modules_vhMobileFix_js__WEBPACK_IMPORTED_MODULE_0__.vh_mobile_fix)();
-kiosk_fixed_header();
-kiosk_main_menu();
 (0,_modules_kioskScheduleHoverImg_js__WEBPACK_IMPORTED_MODULE_2__.kiosk_schedule_hover_img)();
 (0,_modules_scrollersAndSort_js__WEBPACK_IMPORTED_MODULE_1__.kiosk_gallery_slick)();
 // kiosk_program_mcsutomscrollbar();
@@ -34,29 +32,23 @@ kiosk_main_menu();
 (0,_modules_scrollersAndSort_js__WEBPACK_IMPORTED_MODULE_1__.kiosk_archive_sort)();
 (0,_modules_bgAnimPendulum_js__WEBPACK_IMPORTED_MODULE_3__.bg_animation)();
 
-// fixed header
-//==================================================================
-function kiosk_fixed_header() {
-  jQuery(window).on('scroll', function () {
-    if (jQuery(window).scrollTop() > html_top_margin) {
-      body.addClass('fixed_header');
-    } else {
-      body.removeClass('fixed_header');
-    }
-  });
-  jQuery(window).trigger('scroll');
-}
-
 // main menu
 //==================================================================
-function kiosk_main_menu() {
-  jQuery('.overlay').on('click', function () {
-    body.removeClass('open_menu');
-  });
-  jQuery('.main_menu_switch').on('click', function () {
-    body.toggleClass('open_menu');
-  });
-}
+
+var toggleBtn = document.getElementById('main_menu_switch');
+var offcanvas = document.getElementById('main_menu_wrap');
+toggleBtn.addEventListener('click', function () {
+  var isOpen = offcanvas.getAttribute('aria-hidden') === 'true';
+  offcanvas.setAttribute('aria-hidden', String(!isOpen));
+  toggleBtn.setAttribute('aria-expanded', String(isOpen));
+  offcanvas.focus();
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && offcanvas.getAttribute('aria-hidden') === 'false') {
+    offcanvas.setAttribute('aria-hidden', 'true');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+  }
+});
 
 /***/ }),
 
@@ -72,14 +64,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getSinusoid: () => (/* binding */ getSinusoid)
 /* harmony export */ });
 function bg_animation() {
-  var SPEED_SLIDER = document.querySelector('input#metronome_speed');
-  var speed = 1;
-  speed = Number(SPEED_SLIDER.value);
+  if (!document.body.classList.contains('page_homepage')) {
+    return;
+  }
+  var SPEED_SLIDER = document.querySelector('input.metronome-speed-slider');
   var TICK_AUDIO = document.querySelector('audio.metronome_tick');
   var current_tick_num = 0;
   var PENDULUM = document.getElementById('metronome_pendulum_image');
   var SOUND_BUTTON = document.getElementById('metronome_sound_on');
   var PENDULUM_BLUR = document.querySelector('#metronome_pendulum_blur feGaussianBlur');
+  var METRONOME_SPEED_NUMBER = document.getElementById('metronome-speed-no');
+  var bpm = 40;
+  if (SPEED_SLIDER) {
+    bpm = Number(SPEED_SLIDER.value);
+    METRONOME_SPEED_NUMBER.innerHTML = SPEED_SLIDER.value;
+  }
+  var freq = bpm / 60;
+  setBlur(freq);
   var soundOn = false;
   var audioTickTimeout = null;
   var now = null;
@@ -105,20 +106,38 @@ function bg_animation() {
     SOUND_BUTTON.setAttribute("aria-pressed", soundOn ? "true" : "false");
   });
   SPEED_SLIDER.addEventListener('change', function () {
-    speed = Number(SPEED_SLIDER.value);
-    var blur = (speed - 3) * .6;
-    if (blur > 0) {
-      PENDULUM_BLUR.setAttribute('stdDeviation', "".concat(speed, " 0"));
-    } else {
-      PENDULUM_BLUR.setAttribute('stdDeviation', '0 0');
-    }
+    changeSpeed(false);
   });
+  SPEED_SLIDER.addEventListener('input', function () {
+    changeSpeed();
+  });
+  /**
+   * 
+   * @param {boolean} only_number //if only display the value, but not change. 
+   */
+  function changeSpeed() {
+    var only_number = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+    if (!only_number) {
+      bpm = Number(SPEED_SLIDER.value);
+      freq = bpm / 120; //every second note, since we have 2 two ticks per sinusoid
+      setBlur(freq);
+    }
+    METRONOME_SPEED_NUMBER.innerHTML = SPEED_SLIDER.value;
+  }
+  function setBlur(freq) {
+    var newBlurValue = (freq - .6) * 6; //arbitrary values, how it seemed visually ok
+    if (newBlurValue > 0) {
+      PENDULUM_BLUR.setAttribute('stdDeviation', "".concat(newBlurValue, " 0"));
+      return;
+    }
+    PENDULUM_BLUR.setAttribute('stdDeviation', '0 0');
+  }
   var prevRotation = null;
   var currentRotation = null;
   // Animation (visual)
   function animate() {
     var now = performance.now() * 0.001;
-    currentRotation = getSinusoid(now, speed);
+    currentRotation = getSinusoid(now, freq);
     if (soundOn) {
       if (prevRotation !== null && Math.sign(prevRotation) !== Math.sign(currentRotation)) {
         playTick(tickBuffer);
@@ -141,12 +160,12 @@ function bg_animation() {
 /**
  * Returns a sinusoidal value between -1 and 1.
  * @param {number} time - The current time in seconds.
- * @param {number} speed - The frequency (cycles per second).
+ * @param {number} freq - The frequency in Hz (beats per second).
  * @returns {number} Sinusoidal value between -1 and 1.
  */
 function getSinusoid(time) {
-  var speed = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  return Math.sin(speed * time);
+  var freq = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  return Math.sin(freq * time * 2 * Math.PI);
 }
 
 /***/ }),
@@ -316,6 +335,7 @@ function kiosk_program_mcsutomscrollbar() {
 //==================================================================
 function kiosk_new_articles_mcsutomscrollbar() {
   var lists = jQuery('.articles_list');
+  console.log(lists);
   lists.each(function () {
     var list = jQuery(this);
     list.mCustomScrollbar({

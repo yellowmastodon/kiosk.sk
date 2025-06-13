@@ -1,13 +1,24 @@
 export function bg_animation() {
-
-    const SPEED_SLIDER = document.querySelector('input#metronome_speed');
-    let speed = 1;
-    speed = Number(SPEED_SLIDER.value);
+    if (!document.body.classList.contains('page_homepage')){
+        return;
+    }
+    const SPEED_SLIDER = document.querySelector('input.metronome-speed-slider');
     const TICK_AUDIO = document.querySelector('audio.metronome_tick');
     let current_tick_num = 0;
     const PENDULUM = document.getElementById('metronome_pendulum_image');
     const SOUND_BUTTON = document.getElementById('metronome_sound_on');
     const PENDULUM_BLUR = document.querySelector('#metronome_pendulum_blur feGaussianBlur');
+    const METRONOME_SPEED_NUMBER = document.getElementById('metronome-speed-no');
+    let bpm = 40;
+    if (SPEED_SLIDER){
+        bpm = Number(SPEED_SLIDER.value);
+        METRONOME_SPEED_NUMBER.innerHTML = SPEED_SLIDER.value;
+
+    }
+    let freq = bpm / 60;
+    setBlur(freq);
+
+
     let soundOn = false;
     let audioTickTimeout = null;
     let now = null;
@@ -36,21 +47,38 @@ export function bg_animation() {
     });
 
     SPEED_SLIDER.addEventListener('change', () => {
-        speed = Number(SPEED_SLIDER.value);
-        let blur = (speed - 3) * .6;
-        if (blur > 0) {
-            PENDULUM_BLUR.setAttribute('stdDeviation', `${speed} 0`);
-        } else {
-            PENDULUM_BLUR.setAttribute('stdDeviation', '0 0');
-
-        }
+        changeSpeed(false);
     });
+     SPEED_SLIDER.addEventListener('input', () => {
+        changeSpeed();
+    });
+    /**
+     * 
+     * @param {boolean} only_number //if only display the value, but not change. 
+     */
+    function changeSpeed(only_number = true){
+        if (!only_number){
+            bpm = Number(SPEED_SLIDER.value);
+            freq = bpm / 120; //every second note, since we have 2 two ticks per sinusoid
+            setBlur(freq);
+        }
+        METRONOME_SPEED_NUMBER.innerHTML = SPEED_SLIDER.value;
+    }
+    function setBlur (freq){
+        let newBlurValue = (freq - .6) * 6; //arbitrary values, how it seemed visually ok
+        if (newBlurValue > 0) {
+            PENDULUM_BLUR.setAttribute('stdDeviation', `${newBlurValue} 0`);
+            return;
+        } 
+        PENDULUM_BLUR.setAttribute('stdDeviation', '0 0');
+
+    }
     let prevRotation = null;
     let currentRotation = null;
     // Animation (visual)
     function animate() {
         let now = performance.now() * 0.001;
-        currentRotation = getSinusoid(now, speed);
+        currentRotation = getSinusoid(now, freq );
         if (soundOn) {
             if (prevRotation !== null && Math.sign(prevRotation) !== Math.sign(currentRotation)) {
                 playTick(tickBuffer);
@@ -72,9 +100,9 @@ export function bg_animation() {
 /**
  * Returns a sinusoidal value between -1 and 1.
  * @param {number} time - The current time in seconds.
- * @param {number} speed - The frequency (cycles per second).
+ * @param {number} freq - The frequency in Hz (beats per second).
  * @returns {number} Sinusoidal value between -1 and 1.
  */
-export function getSinusoid(time, speed = 1) {
-    return Math.sin(speed * time);
+export function getSinusoid(time, freq = 1) {
+    return Math.sin(freq * time * 2 * Math.PI);
 }

@@ -13,7 +13,7 @@
 			</header>
 
 			<div class="text_wrap">
-				<div class="text"><?= get_the_content(); ?></div>
+				<div class="text"><?php the_content()?></div>
 
 				<?php
 					$show_button_buy_tickets = get_field('show_button_buy_tickets');
@@ -69,4 +69,4 @@
 	?>
 	</article>
 
-<?php get_footer() ?>
+<?php get_footer(); ?>

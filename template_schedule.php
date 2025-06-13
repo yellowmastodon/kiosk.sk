@@ -6,6 +6,7 @@
 	$page_id = get_the_ID();
 ?>
 
-<?php include (dirname(__FILE__) . '/inc/schedule.php'); ?>
+<?php
+get_template_part('template-parts/schedule'); ?>
 
-<?php get_footer() ?>
+<?php get_footer(); ?>

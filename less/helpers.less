@@ -1,0 +1,55 @@
+/*
+* FONTS
+*/
+.stefan-bubble{
+	font-family: @heading_font_stack_alt;
+}
+.stefan-bubble-tight{
+	font-family: @heading_font_stack_alt2;
+}
+.stefan-simple{
+	font-family: @heading_font_stack;
+}
+.end-swoosh{
+  font-feature-settings: "aalt" 6;
+}
+.end-swoosh-2{
+  font-feature-settings: "aalt" 7;
+}
+.scribble{
+  font-feature-settings: "aalt" 1;
+}
+/*
+* Hover custom
+*/
+.bright-red-hover(){
+	&:hover, &:focus-visible{
+		color: @color_4;
+		outline: none;
+	}
+	&:active{
+		color: @color_5;
+
+	}
+}
+.bright-red-hover{
+    .bright-red-hover();
+}
+/*
+ * SCREENREADERS
+*/
+.sr-only, .sr-only-focusable:not(:focus):not(:focus-within) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.inline-svg{
+    height: 1em;
+    width: auto;
+}

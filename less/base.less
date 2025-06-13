@@ -1,17 +1,16 @@
 // variables
 //=============================================================================================
-@color_1: #000;
+@color_1: #0000FF;
 @color_2: #fff;
-@color_3: #8FFF45;
+@color_3: #FFFF00;
 @color_4: #FF4F12;
-@color_5: #C9AFED;
+@color_5: #DB3700;
 @color_6: #882E00;
 @color_7: #364F12;
 @color_8: #535353;
 @color_9: #162452;
 @light_grey: #bebebe;
 @dark_grey: @color_8;
-
  
 @base_color: @color_1;
 
@@ -25,33 +24,33 @@
 
 @max_text_width: 800px;
 
-@basic_padding: 40px;
+@basic_padding: 2rem;
+:root{
+	--wrap-padding: 2rem;
+	--double-wrap-padding: 4rem;
+}
+
+@media screen and (max-width: 700px){
+	:root{
+	--wrap-padding: 1.3rem;
+	--double-wrap-padding: 2.6rem;
+}
+}
+
+@spacer: @basic_padding * .5;
+
 @double_padding: @basic_padding * 2;
 @triple_padding: @basic_padding * 3;
-@half_padding: 20px;
-@h1_size: calc(~"41px + 2.2vw");
-@h2_size: calc(26px + 1.9vw);
-@half_h1_size: calc(~"20px + 1.1vw");
-@quarter_h1_size: calc(~"14px + .75vw");
+@half_padding: 1rem;
+@fs_small: .8rem;
 
+@import 'font_faces.less';
 
-@font-face {
-	font-family: "Kommuna400";
-	src: url("../fonts/Kommuna400Narrow.woff") format("woff");
-}
-@font-face {
-	font-family: "Kommuna600";
-	src: url("../fonts/Kommuna600Regular.woff") format("woff");
-}
-@font-face {
-	font-family: "Kommuna800";
-	src: url("../fonts/Kommuna800Wide.woff") format("woff");
-}  
-//font does not include bold
-em, strong{
-	font-weight: 400 !important;
-	font-family: "Kommuna800";
-}
+@base_font_stack: "Satoshi-Variable", 'Helvetica', 'Arial', 'sans-serif';
+@heading_font_stack: "ABCStefanSimple", 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+@heading_font_stack_alt: "ABCStefanBubble", 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+@heading_font_stack_alt2: "ABCStefanBubbleTight", 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+
 
 body {
 	--bg_color: #fff;
@@ -63,46 +62,23 @@ body {
 	scrollbar-width: thin;
 }
 
-#wpadminbar {
-	position: absolute !important;
-	transform: translateY(-100%);
-}
 button{
-	cursor: pointer;
-}
-body {
-	position: relative;
-	min-width: 320px;
-	margin: 0;
-	background: var(--bg_color);
-	font-size: 2.6rem;
-	line-height: 1.2;
-	font-family: "Kommuna600", sans-serif;
-	color: @color_1;
-}
-h1{
-	font-family:"Kommuna800";
-}
-.kommuna_wide{
-	font-family:"Kommuna800";
-}
-.kommuna_narrow{
-	font-family:"Kommuna400"
-}
-.kommuna_normal{
-	font-family: "Kommuna600";
+	color: inherit;
 }
 
-div, section, aside, nav {
-	overflow: hidden;
+svg.inline-icon{
+	width: auto;
+	height: 1em;
+	vertical-align: middle;
 }
 
-p {
-	margin: 0 0 1.2em;
+a:focus{
+	outline: none;
 }
-
-em, strong {
-	font-weight: bold;
+a:focus-visible{
+	border-radius: .25rem;
+	outline-offset: 2px;
+	outline: solid 3px @color_4;
 }
 
 .wrap {
@@ -125,46 +101,10 @@ em, strong {
 .wrap_inner {
 	position: relative;
 	width: @content_w;
-	max-width: calc(~"100% - @{double_padding}");
+	max-width: calc(~"100% - var(--double-wrap-padding)");
 	margin-left: auto;
 	margin-right: auto;
 	overflow: visible;
-}
-
-h1,h2,h3,h4,h5,h6 {
-	margin-bottom: 40px;
-	font-weight: 400;
-	text-transform: uppercase;
-}
-
-
-.h1_size,
-h1 {
-	font-size: 8rem;
-}
-
-h2 {
-	font-size: @h2_size;
-}
-
-.h3_size,
-h3 {
-	font-size: 4rem;
-}
-
-h4 {
-	font-size: 2.5rem;
-}
-
-h5 {
-	font-size: 2.5rem;
-	font-weight: 400;
-}
-
-h6 {
-	font-size: 2.5rem;
-	font-weight: 400;
-	font-style: italic;
 }
 
 ul, ol {
@@ -188,7 +128,6 @@ img {
 		margin: 20px 0 20px 20px;
 		width: 400px;
 		max-width: 100%;
-
 	}
 
 	&.alignleft {
@@ -232,63 +171,6 @@ em {
 	transition: all 0.3s;
 }
 
-.button {
-	position: relative;
-	.inline_flex();
-	background: @color_1;
-	border: 1px solid @color_1;
-	// background: url('./images/button.svg') 0 0 / 100% 100% no-repeat;
-	font-weight: 400;
-	text-align: center;
-	text-transform: uppercase;
-
-	@media (min-width: 901px) {
-		&:hover,
-		&:active {
-			text-decoration: none;
-	
-			.lbl_hover_wrap {
-				width: 100%;
-			}
-		}
-	}
-
-	&.type_big .lbl {
-		height: 4.2em;
-	}
-
-	.lbl {
-		.flex();
-		.flex_ai(center);
-		.flex_shrink(0);
-		height: 3em;
-		padding: 0 1em;
-/* 		background-repeat: no-repeat;
-		background-position: 0 0;
-		background-size: 100% 100%; */
-		color: #fff;
-	}
-
-/* 	.lbl_normal {
-		 background-image: url('./images/button.svg');
-	}
- */
-	.lbl_hover_wrap {
-		position: absolute;
-		top: 0;
-		left: 0;
-		.flex();
-		width: 0;
-		height: 100%;
-		overflow: hidden;
-		transition: .25s;
-	}
-
-	.lbl_hover {
-		background: #fff;
-		color: @color_1;
-	}
-}
 
 
 
