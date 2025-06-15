@@ -205,3 +205,5 @@ function kioskdetect_touch_device() {
  */
 $template_directory = get_template_directory();
 require_once $template_directory . '/includes/render_functions.php';
+require_once $template_directory . '/includes/custom_taxonomies.php';
+

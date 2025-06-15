@@ -108,7 +108,6 @@ global $current_image_sequence;
 <?php if (is_front_page()) :
 	if (get_field('show_performance_section')): ?>
 		<section class="articles wrap half_margin_bottom">
-			<div class="wrap_inner">
 				<?php $the_query = new WP_Query(
 					array(
 						'post_type' => 'post',
@@ -118,10 +117,11 @@ global $current_image_sequence;
 				);
 
 				?>
-				<h2 class="main_title">Inscenácie</h2>
+				<h2 class="main_title wrap_inner">Inscenácie</h2>
 
 				<?php if ($the_query->have_posts()) : ?>
-					<div class="articles_list">
+					<div class="custom-scrollbar-wrapper">
+						<div class="articles_list wrap_inner custom-scrollbar-content">
 						<?php
 						while ($the_query->have_posts()) : $the_query->the_post();
 							get_template_part('template-parts/single-homepage-article');
@@ -131,6 +131,7 @@ global $current_image_sequence;
 					<?php else: ?>
 						<p>Coming soon...</p>
 					<?php endif; ?>
+					</div>
 					</div>
 		</section>
 	<?php endif;

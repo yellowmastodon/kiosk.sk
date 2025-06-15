@@ -1,5 +1,5 @@
 export function bg_animation() {
-    if (!document.body.classList.contains('page_homepage')){
+    if (!document.body.classList.contains('page_homepage')) {
         return;
     }
     const SPEED_SLIDER = document.querySelector('input.metronome-speed-slider');
@@ -10,7 +10,7 @@ export function bg_animation() {
     const PENDULUM_BLUR = document.querySelector('#metronome_pendulum_blur feGaussianBlur');
     const METRONOME_SPEED_NUMBER = document.getElementById('metronome-speed-no');
     let bpm = 40;
-    if (SPEED_SLIDER){
+    if (SPEED_SLIDER) {
         bpm = Number(SPEED_SLIDER.value);
         METRONOME_SPEED_NUMBER.innerHTML = SPEED_SLIDER.value;
 
@@ -24,24 +24,28 @@ export function bg_animation() {
     let now = null;
 
     const TICK_URL = TICK_AUDIO.src;
-    let AudioContext = window.AudioContext || window.webkitAudioContext;
-    const context = new AudioContext({
-        sampleRate: 48000,
-      // Set latencyHint to 'interactive' for better timing precision
-      latencyHint: 'interactive'
-    }); // Make it crossbrowser
+    let context = null;
     var tickBuffer = void 0;
-    window.fetch(TICK_URL)
-        .then(response => response.arrayBuffer())
-        .then(arrayBuffer => context.decodeAudioData(arrayBuffer,
-            audioBuffer => {
-                tickBuffer = audioBuffer;
-            },
-            error =>
-                console.error(error)
-        ));
+
 
     SOUND_BUTTON.addEventListener('click', () => {
+        if (context === null) {
+            AudioContext = window.AudioContext || window.webkitAudioContext; // Make it crossbrowser
+            context = new AudioContext({
+                sampleRate: 48000,
+                // Set latencyHint to 'interactive' for better timing precision
+                latencyHint: 'interactive'
+            });
+            window.fetch(TICK_URL)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => context.decodeAudioData(arrayBuffer,
+                    audioBuffer => {
+                        tickBuffer = audioBuffer;
+                    },
+                    error =>
+                        console.error(error)
+                ));
+        }
         soundOn = !soundOn;
         SOUND_BUTTON.setAttribute("aria-pressed", soundOn ? "true" : "false");
     });
@@ -49,27 +53,27 @@ export function bg_animation() {
     SPEED_SLIDER.addEventListener('change', () => {
         changeSpeed(false);
     });
-     SPEED_SLIDER.addEventListener('input', () => {
+    SPEED_SLIDER.addEventListener('input', () => {
         changeSpeed();
     });
     /**
      * 
      * @param {boolean} only_number //if only display the value, but not change. 
      */
-    function changeSpeed(only_number = true){
-        if (!only_number){
+    function changeSpeed(only_number = true) {
+        if (!only_number) {
             bpm = Number(SPEED_SLIDER.value);
             freq = bpm / 120; //every second note, since we have 2 two ticks per sinusoid
             setBlur(freq);
         }
         METRONOME_SPEED_NUMBER.innerHTML = SPEED_SLIDER.value;
     }
-    function setBlur (freq){
+    function setBlur(freq) {
         let newBlurValue = (freq - .6) * 6; //arbitrary values, how it seemed visually ok
         if (newBlurValue > 0) {
             PENDULUM_BLUR.setAttribute('stdDeviation', `${newBlurValue} 0`);
             return;
-        } 
+        }
         PENDULUM_BLUR.setAttribute('stdDeviation', '0 0');
 
     }
@@ -78,7 +82,7 @@ export function bg_animation() {
     // Animation (visual)
     function animate() {
         let now = performance.now() * 0.001;
-        currentRotation = getSinusoid(now, freq );
+        currentRotation = getSinusoid(now, freq);
         if (soundOn) {
             if (prevRotation !== null && Math.sign(prevRotation) !== Math.sign(currentRotation)) {
                 playTick(tickBuffer);

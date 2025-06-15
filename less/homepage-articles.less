@@ -1,0 +1,94 @@
+@import "~overlayscrollbars/styles/overlayscrollbars.css";
+
+
+
+.articles {
+    overflow: hidden;
+    .os-scrollbar{
+        top: 0;
+        padding-left: var(--wrap-padding);
+    }
+	.articles_list {
+        padding-top: @spacer; //separate overflox x and y not working reliably, so this allows rotated emelents to be visible
+        .flex();
+		overflow-x: visible;
+		overflow-y: visible;
+        flex-wrap: nowrap;
+
+	}
+    .custom-scrollbar-wrapper.dragging{
+        &, & *{
+        cursor: grabbing;
+        user-select: none;
+        }
+
+    }
+
+.article_wrap {
+    overflow: visible;
+    .flex_shrink(0);
+    display: inline-block;
+    width: 26vw;
+    margin: 0 (@spacer * .5);
+    pointer-events: all;
+    transition: all 0.2s ease-in-out;
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    @media (min-width: 901px) {
+        &:hover {
+            article{
+            transform: rotate(3deg);
+
+            }
+        }
+    }
+
+    .img_wrap {
+        position: relative;
+        margin-bottom: @spacer;
+        padding-bottom: 74.8%;
+        background: @img_bg;
+        overflow: hidden;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            -webkit-object-fit: cover;
+            object-fit: cover;
+            margin: auto;
+        }
+    }
+
+    .title {
+        overflow: hidden;
+
+        a {
+            text-decoration: none;
+        }
+    }
+
+    .text {
+        font-size: .8rem;
+        margin-bottom: @spacer;
+        overflow: hidden;
+    }
+}
+}
+
+@media screen and (max-width: 1650px) {
+	.article_wrap {
+		width: 30vw;
+	}
+}

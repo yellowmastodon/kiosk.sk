@@ -14,7 +14,6 @@
  
 @base_color: @color_1;
 
-@content_w: 1840px;
 
 @link_color: @color_1;
 
@@ -100,8 +99,11 @@ a:focus-visible{
 
 .wrap_inner {
 	position: relative;
-	width: @content_w;
-	max-width: calc(~"100% - var(--double-wrap-padding)");
+	width:100%;
+	max-width: 100%;
+	padding-left: var(--wrap-padding);
+	padding-right: var(--wrap-padding);
+
 	margin-left: auto;
 	margin-right: auto;
 	overflow: visible;
