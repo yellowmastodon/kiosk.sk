@@ -1,4 +1,5 @@
 <?php get_header() ?>
+<main id="main">
 	<article>
 	<section class="post_detail wrap no_margin_bottom">
 	<?php //if no thumbnail image do not render and add class to header for additional padding
@@ -68,5 +69,5 @@
 		endif;
 	?>
 	</article>
-
+	</main>
 <?php get_footer(); ?>

@@ -31,6 +31,40 @@
 		max-height: 100vh;
 		max-height: 100svh;
 	}
+
+	.dates-wrap {
+		z-index: 3;
+		position: absolute;
+		bottom: 1.2rem;
+		margin: auto;
+		width: 100%;
+		color: #FFFF00;
+		font-size: 1.6rem;
+		text-align: center;
+		line-height: 1.2;
+
+		.event_name,
+		.event_date_place {
+			display: inline-block;
+			width: 100%;
+		}
+
+		.event_name {
+			max-width: 22rem;
+		}
+
+		.event_date_place {
+			max-width: 30rem;
+			display: block;
+			margin: auto;
+		}
+
+		.event_place {
+			display: inline-block;
+			transform: rotate(-5deg)
+		}
+	}
+
 }
 
 
@@ -105,6 +139,7 @@
 		position: relative;
 		bottom: -.25rem;
 		flex-grow: 1;
+
 		input[type="range"] {
 			margin-bottom: 0;
 		}
@@ -117,8 +152,15 @@
 		@import 'input_range_style.less';
 	}
 }
+.rotate-minus-5{
+	display: inline-block;
+	transform: rotate(-5deg);
+}
+.rotate-5{
+	display: inline-block;
+	transform: rotate(5deg);
 
-
+}
 @media (max-aspect-ratio: 3300 / 2560) {
 	.big_top_animation_wrapper {
 		top: 0;
@@ -134,17 +176,21 @@
 		width: auto;
 		bottom: calc(50%);
 		transform: translateY(50%);
-		#metronome_sound_on{
+
+		#metronome_sound_on {
 			margin-right: 0;
 			margin-bottom: .75rem;
 		}
+
 		.metronome-speed-wrapper {
 			width: auto;
 			left: -.3rem;
-			.metronome-speed-slider-wrapper{
+
+			.metronome-speed-slider-wrapper {
 				height: 10rem;
 				display: block;
 				width: 1rem;
+
 				&::before {
 					transform: rotate(90deg);
 					width: 10rem;
@@ -152,38 +198,44 @@
 					left: -3.8rem;
 					top: calc(50% - .25rem);
 				}
+
 				order: 2;
 
 			}
+
 			input[type="range"] {
 				width: 10rem;
 				transform-origin: left;
 				transform: rotate(270deg) translateX(-9.5rem) translateY(1rem);
 				height: unset;
 				position: relative;
-				    &::-moz-range-thumb {
-						width: 1.3rem;
-						height: 1.3rem;
-					}
-					&::-webkit-slider-thumb{
-						width: 1.3rem;
-						height: 1.3rem;
-					}
-					&::-ms-thumb {
-						width: 1.3rem;
-						height: 1.3rem;
-					}
+
+				&::-moz-range-thumb {
+					width: 1.3rem;
+					height: 1.3rem;
+				}
+
+				&::-webkit-slider-thumb {
+					width: 1.3rem;
+					height: 1.3rem;
+				}
+
+				&::-ms-thumb {
+					width: 1.3rem;
+					height: 1.3rem;
+				}
 
 			}
-			.metronome-speed-string{
+
+			.metronome-speed-string {
 				order: 1;
 				margin-bottom: .75rem;
 
-				.bpm{
+				.bpm {
 					display: block;
 				}
 			}
-		
+
 		}
 	}
 
@@ -211,11 +263,10 @@
 //=============================================================================================
 .program_button {
 	text-align: center;
-
-	.wrap_inner {
-		padding: 50px 0;
-		border-top: 2px solid @color_1;
-		border-bottom: 2px solid @color_1;
+	.btn{
+		&::after{
+			content: " 🡥"
+		}
 	}
 }
 

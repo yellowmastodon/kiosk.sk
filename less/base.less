@@ -54,7 +54,9 @@
 body {
 	--bg_color: #fff;
 }
-
+#main{
+	margin-bottom: var(--double-wrap-padding);
+}
 // base
 //=============================================================================================
 * {
@@ -89,7 +91,7 @@ a:focus-visible{
 	}
 
 	&:not(.no_margin_bottom) {
-		margin-bottom: @double_padding;
+		margin-bottom: @basic_padding * 1.5;
 	}
 
 	&.half_margin_bottom {
@@ -136,6 +138,24 @@ img {
 		float: left;
 		margin: 0 20px 20px;
 	}
+}
+
+hr{
+		border-width: 3px;
+		&:nth-of-type(3n) {
+			border-width: 3px;
+				.distorted1;
+		}
+
+		&:nth-of-type(3n+1) {
+
+				.distorted2;
+		}
+
+		&:nth-of-type(3n+2) {
+				.distorted3;
+		}
+
 }
 
 @media (min-width: 1280px){
@@ -270,98 +290,11 @@ em {
 
 // mcsutomscrollbar
 //=============================================================================================
-.mCSB_container {
-	.flex();
-}
 
-.mCustomScrollbar {
-	-ms-touch-action: initial;
-	touch-action: initial;
-}
-
-.mCSB_scrollTools.mCSB_scrollTools_horizontal {
-	position: relative;
-	order: -1;
-	top: 0;
-	bottom: auto;
-	height: auto;
-	padding-bottom: 60px;
-	opacity: 1;
-	overflow: visible;
-
-	.mCSB_draggerContainer {
-		position: relative;
-		height: 1px;
-		margin: 29px 0;
-		overflow: visible;
-	}
-
-	.mCSB_draggerRail {
-		height: 4px;
-		margin: 0;
-		background: @color_1;
-	}
-	.mCSB_dragger{
-		position: relative;
-		width: ~"clamp(50px, calc(50px + 4vw), 130px)" !important;
-		height: ~"clamp(50px, calc(50px + 4vw), 130px)" !important;
-		top: ~"clamp(-65px, calc(-25px - 2vw), -25px)" !important;
-		background-image: url('../images/slider_sprite.svg');
-		background-repeat: no-repeat;
-		background-size:contain;
-		z-index: 10;
-		.mCSB_dragger_bar {
-			display: none;
-		}
-		animation: 2s mcsb_pulse ease-in-out infinite;
-		
-		&:hover {
-			animation-play-state: paused;
-		}
-
-
-	}
-/* 
-	.mCSB_dragger {
-		top: -25px;
-		width: 66px;
-		height: 54px;
-		overflow: visible;
-		border: 1px solid @border_color;
-		border-radius: 100%;
-		background: #fff;
-		animation: 1.2s mcsb_pulse linear infinite;
-
-		&:hover {
-			animation-play-state: paused;
-		}
-
-	 		.mCSB_dragger_bar {
-			position: absolute;
-			z-index: 2;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			width: 18px;
-			height: 14px;
-			margin: auto;
-			background: @color_1;
-			border-radius: 100%;
-		} 
-	}*/
-}
-
-@keyframes mcsb_pulse {
-	50% {
-		transform: rotate(-14deg) scale(1.08);
-	}
-}
  
 // comming soon
 .page_id422 .title_wrap span {
 	position: relative;
-
 	&::before {
 		content: "Pripravujeme";
 		position: absolute;

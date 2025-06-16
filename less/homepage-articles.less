@@ -5,17 +5,44 @@
 .articles {
     overflow: hidden;
     .os-scrollbar{
+        height: 2.5rem;
         top: 0;
         padding-left: var(--wrap-padding);
+        --os-track-bg: url('../images/scrollbar_track.svg') 0 1rem / auto .6rem repeat-x;
+        --os-track-bg-active: url('../images/scrollbar_track.svg') 0 1rem / auto .6rem repeat-x;
+        --os-track-bg-hover: url('../images/scrollbar_track.svg') 0 1rem / auto .6rem repeat-x;
+        --os-handle-bg: transparent;
+        --os-handle-bg-hover: transparent;
+        --os-handle-bg-active: transparent; 
+        --os-handle-min-size: 0px;
+    .os-scrollbar-handle{
+        width: 3rem;
+        .bright-red-hover();
+        cursor: pointer;
+        svg{
+            height: 2.5rem;
+            width: 2.72rem;
+        }
+    }
+    }
+
+    .os-scrollbar-track{
+        height: 3rem;
     }
 	.articles_list {
-        padding-top: @spacer; //separate overflox x and y not working reliably, so this allows rotated emelents to be visible
+        padding-top: 2.5rem + @spacer * 1.5; //separate overflow x and y not working reliably, so this allows rotated emelents to be visible
         .flex();
 		overflow-x: visible;
 		overflow-y: visible;
         flex-wrap: nowrap;
-
 	}
+    //smalled padding if scrollbar not present (if only one article)
+    .main_title + .articles_list{
+        padding-top: @spacer * 0.5;
+    }
+    .main_title{
+        font-size: 1.6rem;
+    }
     .custom-scrollbar-wrapper.dragging{
         &, & *{
         cursor: grabbing;
@@ -24,29 +51,36 @@
 
     }
 
+//single article
 .article_wrap {
+    text-decoration: none;
     overflow: visible;
     .flex_shrink(0);
     display: inline-block;
     width: 26vw;
     margin: 0 (@spacer * .5);
     pointer-events: all;
-    transition: all 0.2s ease-in-out;
-
     &:first-child {
         margin-left: 0;
     }
 
     &:last-child {
-        margin-right: 0;
+        margin-right: var(--wrap-padding);
     }
+    &, article{
+        transition: all 0.2s ease-in-out;
 
+    }
     @media (min-width: 901px) {
-        &:hover {
+        &:hover, &:focus-visible {
             article{
-            transform: rotate(3deg);
 
+            transform: rotate(3deg);
             }
+            .bright-red-hover();
+        }
+        &:focus{
+            outline: none;
         }
     }
 
@@ -73,16 +107,23 @@
 
     .title {
         overflow: hidden;
-
-        a {
-            text-decoration: none;
-        }
     }
 
-    .text {
+    .text, .publish_date {
         font-size: .8rem;
         margin-bottom: @spacer;
-        overflow: hidden;
+        //margin-top: @spacer * -.25;
+    }
+    .publish_date{
+        letter-spacing: -.08em;
+        margin-bottom: @spacer * .3;
+        .inline-icon{
+            height: .8em;
+            margin-right: .5em;
+        }
+    }
+    .publish_date + .title{
+        margin-top: 0;
     }
 }
 }

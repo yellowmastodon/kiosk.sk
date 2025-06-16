@@ -1,5 +1,46 @@
-.btn-reset{
-   	background: transparent;
-	border: none; 
-    padding: 0;
+.btn-reset {
+	background: transparent;
+	border: none;
+	padding: 0;
+}
+
+.btn {
+	background: transparent;
+	border: none;
+	padding: .5rem .75rem;
+	color: @color_3;
+	font-family: @heading-font;
+	text-decoration: none !important;
+	display: inline-block;
+	position: relative;
+	line-height: 1;
+
+	&::before {
+		z-index: -1;
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background-color: @color_1;
+		border-radius: .4em .3em .5em .25em;
+		.distorted1();
+	}
+
+	&:hover,
+	&:focus-visible {
+		color: @color_3;
+
+		&::before {
+			background-color: @color_4;
+		}
+	}
+
+	&:active {
+		&::before {
+			background-color: @color_5;
+
+		}
+	}
 }

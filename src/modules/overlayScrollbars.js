@@ -1,4 +1,4 @@
-import 'overlayscrollbars/overlayscrollbars.css';
+//import 'overlayscrollbars/overlayscrollbars.css';
 import {
   OverlayScrollbars,
   ScrollbarsHidingPlugin,
@@ -21,7 +21,7 @@ export function initializeCustomScrollbars(scrollingElement) {
     {
       scrollbars: {
         dragScroll: true,
-        clickScroll: true
+        clickScroll: 'instant'
       },
       overflow: {
         x: 'scroll',
@@ -29,13 +29,18 @@ export function initializeCustomScrollbars(scrollingElement) {
       },
     },
   );
+  const osRoot = osInstance.elements().host;
+  const handles = osRoot.querySelectorAll('.os-scrollbar-handle');
 
+  handles.forEach(handle => {
+    handle.innerHTML = '<svg><use xlink:href="#scroll-eyes"></use></svg>';
+  });
   enableDragToScroll(scrollingElement);
 
 }
 
 function enableDragToScroll(element) {
-  
+
   let isDown = false;
   let startX;
   let scrollLeft;

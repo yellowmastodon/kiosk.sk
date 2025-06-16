@@ -13,7 +13,8 @@
 
 @body_color: @color_1;
 @black: @color_1;
-@highlight-bg: @color_3;
+@highlight-bg: transparent;
+@highlight-color: @color_5;
 @base-font-size: 1rem;
 @body-line-height: 1.5;
 @body_font: @base_font_stack;
@@ -99,11 +100,12 @@ body {
 // 1. Reset Firefox's gray color
 
 hr {
-  margin: (@basic_padding / 2) 0;
+  margin: @spacer 0;
   color: @body_color; // 1
   border: 0;
   border-top: 2px solid @hr-bg-color;
   opacity:1;
+  
 }
 
 // Typography
@@ -265,7 +267,7 @@ small {
 
 mark {
   padding: @basic_padding * .2;
-  color: inherit;
+  color: @highlight-color;
   background-color: @highlight-bg;
 }
 

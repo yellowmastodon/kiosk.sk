@@ -1,4 +1,4 @@
-.running_text {
+/* .running_text {
 	.flex();
 	white-space: nowrap;
 	font-weight: 400;
@@ -15,7 +15,7 @@
 			.flex_shrink(0);
 		}
 	}
-}
+} */
 
 
 
@@ -30,12 +30,12 @@
 		&.top {
 			.flex();
 			.flex_jc(space-between);
-			padding: 37px 0;
+			padding-top: var(--wrap-padding);
 		}
 
 		&.bottom {
-			padding-bottom: 37px;
 			text-align: right;
+			padding-bottom: var(--wrap-padding);
 		}
 	}
 

@@ -12,7 +12,7 @@ global $current_image_sequence;
 
 ?>
 
-
+<main id="main">
 <section class="big_top wrap distorted">
 	<div class="big_top_overflow">
 		<div class="big_top_animation_wrapper">
@@ -57,6 +57,7 @@ global $current_image_sequence;
 																											if ($event_date && $event_place) echo '</span>'; ?>
 			</p>
 		</div>
+
 	</div>
 	<div id="animation_control">
 		<button class="h2 bright-red-hover btn-reset" id="metronome_sound_on" aria-label="Zapnúť zvuk" aria-pressed="false">
@@ -78,50 +79,54 @@ global $current_image_sequence;
 		</button>
 		<div class="metronome-speed-wrapper stefan-simple">
 			<span class="metronome-speed-slider-wrapper"><input class="slider metronome-speed-slider" type="range" min="25" max="240" value="40" step="1"></span><span class="metronome-speed-string"><span id="metronome_speed_no"></span>
-						<span id="metronome-speed-no">40</span><span class="bpm">&thinsp;BPM</span></span></div>
+				<span id="metronome-speed-no">40</span><span class="bpm">&thinsp;BPM</span></span>
+		</div>
 	</div>
+
 </section>
 
-<!-- <section class="program_button wrap">
+<?php
+$schedule_title = get_field('schedule_title');
+$schedule_button = get_field('schedule_button');
+
+if ($schedule_button !== ""):
+?>
+<section class="program_button wrap">
 	<div class="wrap_inner">
 		<?php
-		$schedule_title = get_field('schedule_title');
-		$schedule_button = get_field('schedule_button');
+
 		?>
 		<?php if ($schedule_title) : ?>
 			<h2 class="main_title"><?= $schedule_title ?></h2>
 		<?php endif; ?>
 		<?php if ($schedule_button) : ?>
-			<div class="button_wrap">
-				<a class="button" href="<?= $schedule_button['url'] ?>">
-					<span class="lbl_normal lbl"><?= $schedule_button['title'] ?></span>
-					<span class="lbl_hover_wrap">
-						<span class="lbl_hover lbl"><?= $schedule_button['title'] ?></span>
-					</span>
+				<a class="btn" href="<?= $schedule_button['url'] ?>">
+					<?= $schedule_button['title'] ?>
 				</a>
-			</div>
 		<?php endif; ?>
 	</div>
-</section> -->
+</section>
+<?php endif;
 
-<!-- homepage -->
+//performances
+?>
+
 <?php if (is_front_page()) :
 	if (get_field('show_performance_section')): ?>
-		<section class="articles wrap half_margin_bottom">
-				<?php $the_query = new WP_Query(
-					array(
-						'post_type' => 'post',
-						'posts_per_page' => -1,
-						'category_name' => 'inscenacie-2023',
-					)
-				);
+		<section class="articles">
+			<?php $the_query = new WP_Query(
+				array(
+					'post_type' => 'post',
+					'posts_per_page' => -1,
+					'category_name' => 'inscenacie-2023',
+				)
+			);
 
-				?>
-				<h2 class="main_title wrap_inner">Inscenácie</h2>
-
-				<?php if ($the_query->have_posts()) : ?>
-					<div class="custom-scrollbar-wrapper">
-						<div class="articles_list wrap_inner custom-scrollbar-content">
+			?>
+			<h2 class="main_title wrap_inner"><span class="rotate-minus-5">Inscenácie</span></h2>
+			<?php if ($the_query->have_posts()) : ?>
+				<div class="custom-scrollbar-wrapper" tabindex="-1">
+					<div class="articles_list wrap_inner custom-scrollbar-content">
 						<?php
 						while ($the_query->have_posts()) : $the_query->the_post();
 							get_template_part('template-parts/single-homepage-article');
@@ -132,36 +137,35 @@ global $current_image_sequence;
 						<p>Coming soon...</p>
 					<?php endif; ?>
 					</div>
-					</div>
+				</div>
 		</section>
 	<?php endif;
-	if (get_field('show_news_section')): ?>
-		<section class="articles wrap no_margin_bottom">
-			<div class="wrap_inner">
-				<h2 class="main_title">News</h2>
-				<div class="articles_list">
+
+	//news
+	if (get_field('show_news_section')):
+		$the_query = new WP_Query(array(
+			'post_type' => 'post',
+			'posts_per_page' => 15,
+			'category_name' => 'news',
+		));	?>
+		<section class="articles">
+				<h2 class="main_title wrap_inner"><span class="rotate-5">News</span></h2>
+				<?php if ($the_query->post_count > 1) echo '<div class="custom-srollbar-wrapper">';?>
+				<div class="articles_list wrap_inner  custom-scrollbar-content">
 					<?php
-					$the_query = new WP_Query(array(
-						'post_type' => 'post',
-						'posts_per_page' => 15,
-						'category_name' => 'news',
-					));
+
 					while ($the_query->have_posts()) : $the_query->the_post();
-						get_template_part('template-parts/single-homepage-article');
+						get_template_part('template-parts/single-homepage-article', null, ["show_publish_date" => true]);
 					endwhile;
 					wp_reset_postdata();
 					?>
 				</div>
-			</div>
+				<?php if ($the_query->post_count > 1) echo '</div>';?>
 		</section>
 <?php
 	endif;
 endif; ?>
 
-<?php
-/*$homepage_schedule_title = get_field('schedule_title');
-	$schedule_title = $homepage_schedule_title != '' ? $homepage_schedule_title : 'Program';
-	include (dirname(__FILE__) . '/inc/schedule.php');*/
-?>
+</main>
 
 <?php get_footer() ?>
