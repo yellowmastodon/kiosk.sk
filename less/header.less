@@ -66,4 +66,31 @@
 		.bright-red-hover();
 		text-decoration: none;
 	}
+	.main-menu{
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		&::before{
+			content: ""; //space-between fix, so that it begins from top
+			height: @h2_size * 1.5;
+		}
+	}
+}
+.socials-menu{
+		list-style: none;
+		margin-bottom: 0;
+		padding: 0;
+		height: @h2_size;
+		display: block;
+		li{
+			display: inline-block;
+			&:not(:last-child){
+				margin-right: @spacer * 0.75;
+			}
+			margin-bottom: 0;
+		}
+		a{
+			text-decoration: none;
+		}
 }

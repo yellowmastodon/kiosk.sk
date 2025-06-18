@@ -14,8 +14,11 @@ global $current_image_sequence;
 
 <main id="main">
 <section class="big_top wrap distorted">
-	<div class="big_top_overflow">
-		<div class="big_top_animation_wrapper">
+	<?php 
+		$dancing_letter_classes= ['letters-pos-1', 'letters-pos-2', 'letters-pos-3'];?>
+	<div class="big_top_overflow" data-letter-pos-classes="<?=htmlspecialchars(json_encode($dancing_letter_classes))?>">
+		<?php get_template_part('template-parts/kiosk-dancing-letters');
+?>		<div class="big_top_animation_wrapper ">
 
 			<audio class="metronome_tick" preload="auto" src="<?php echo get_template_directory_uri() . '/audio/metronome_tick.mp3'; ?>"></audio>
 			<img id="bg_animation" class="big_top_bg" <?php
@@ -50,7 +53,7 @@ global $current_image_sequence;
 		</div>
 		<div class="dates-wrap">
 			<p class="dates stefan-simple">
-				<?php if ($event_date) : ?><span class="event_name end"><?= $event_name ?></span> <?php endif;
+				<?php if ($event_date) : ?><span class="event_name"><?= $event_name ?></span> <?php endif;
 																								if ($event_date && $event_place) echo '<span class="event_date_place">';
 																								if ($event_date) : ?><span class="event_date"><?= $event_date ?></span> <?php endif; ?>
 				<?php if ($event_place) : ?><span class="event_place end-swoosh-2"><?= $event_place ?></span><?php endif;

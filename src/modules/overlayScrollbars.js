@@ -8,16 +8,7 @@ import {
 
 export function initializeCustomScrollbars(scrollingElement) {
   OverlayScrollbars.plugin(ClickScrollPlugin);
-  const osInstance = OverlayScrollbars(
-    {
-      target: scrollingElement,
-      elements: {
-        viewport: scrollingElement,
-        scrollbars: {
-          slot: scrollingElement,
-        }
-      }
-    },
+  const osInstance = OverlayScrollbars(scrollingElement,
     {
       scrollbars: {
         dragScroll: true,
@@ -31,11 +22,11 @@ export function initializeCustomScrollbars(scrollingElement) {
   );
   const osRoot = osInstance.elements().host;
   const handles = osRoot.querySelectorAll('.os-scrollbar-handle');
-
+  const dragScrollElement = osRoot.querySelector('*[data-overlayscrollbars-viewport]');
   handles.forEach(handle => {
     handle.innerHTML = '<svg><use xlink:href="#scroll-eyes"></use></svg>';
   });
-  enableDragToScroll(scrollingElement);
+  enableDragToScroll(dragScrollElement);
 
 }
 
@@ -50,7 +41,10 @@ function enableDragToScroll(element) {
     e.preventDefault();
   });
   
-  element.addEventListener('mousedown', (e) => {
+  element.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== "mouse"){
+      return;
+    }
     //prevent drag scrolling to override custom scrollbar
     if (e.target.classList.contains('os-scrollbar-handle')  || e.target.classList.contains('os-scrollbar-track')){
       return;

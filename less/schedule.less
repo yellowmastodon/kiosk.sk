@@ -61,7 +61,13 @@
 	li {
 		position: relative;
 		.flex();
-		padding: 0.8em 0 0.8em;
+		&:not(:last-child){
+			padding: 0.8em 0 0.8em;
+
+		}
+		&:last-child{
+			margin-bottom: 0;
+		}
 
 		&.has_link:hover {
 			&::before {
@@ -74,7 +80,7 @@
 			}
 		}
 
-		&::before {
+		&:not(:last-child)::before {
 			content: "";
 			position: absolute;
 			left: 0;
@@ -85,10 +91,9 @@
 			background: url('../images/wave.svg') 0 0 / 60px 100%;
 			transition: .15s;
 			overflow: visible;
-
 		}
 
-		&::after {
+		&:not(:last-child)::after {
 			content: "";
 			position: absolute;
 			left: 0;
@@ -129,17 +134,14 @@
 		}
 
 		.link {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
+			display: flex;
+			text-decoration: none;
 		}
 	}
 
 	.time {
 		.flex_shrink(0);
-		width: 5.8em;
+		width: 5rem;
 		font-weight: 400;
 	}
 

@@ -25,11 +25,8 @@ if (get_post_type(get_the_ID()) == 'archive_detail') {
 <body <?php body_class() ?> <?php if (isset($archive_background_color)) {
 								echo 'style="--bg_color:' . $archive_background_color . '"';
 							} ?>>
-
-
 	<?php //svg sprites
 	get_template_part('template-parts/svg-sprites');
-
 
 	?>
 	<header class="main_header">
@@ -59,8 +56,8 @@ if (get_post_type(get_the_ID()) == 'archive_detail') {
 				<span class="sr-only">Zobraziť hlavné menu</span>
 			</button>
 		</div>
-		<div role="dialog" id="main_menu_wrap" class="offcanvas" aria-modal="true" aria-label="Hlavné menu" tabindex="-1" aria-hidden="true">
-			<nav>
+		<div role="dialog" id="main_menu_wrap" class="offcanvas" aria-modal="true" aria-label="Bočné menu - dialóg" tabindex="-1" aria-hidden="true">
+			<nav class="main-menu" aria-label="Hlavné menu">
 				<?php
 				wp_nav_menu(
 					array(
@@ -68,12 +65,13 @@ if (get_post_type(get_the_ID()) == 'archive_detail') {
 						'menu'	=> 'header_menu',
 						'container'   => '',
 						'depth'	=> 1,
-						'items_wrap'  => '  <ul class="main_menu list-none stefan-simple" role="list">%3$s</ul>',
+						'items_wrap'  => '<ul class="main_menu list-none stefan-simple" role="list">%3$s</ul>',
 						'fallback_cb' => false,
 					)
 				);
 
+
+				get_template_part('template-parts/socials-menu');
 				?>
 		</div>
-		</d alog>
 	</header>

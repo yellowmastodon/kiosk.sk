@@ -9,10 +9,11 @@
 // Normalize is licensed MIT. https://github.com/necolas/normalize.css
 
 
-@rfs: clamp(16px, calc(1rem + ((1vw - 4px) * 0.8)), 35px); //root font size
+@rfs: clamp(18px, calc(1rem + ((1vw - 4px) * 0.8)), 35px); //root font size
 
 @body_color: @color_1;
 @black: @color_1;
+@highlight-padding: 0;
 @highlight-bg: transparent;
 @highlight-color: @color_5;
 @base-font-size: 1rem;
@@ -123,7 +124,7 @@ h1, h2, h3, h4, h5, h6 {
   color: inherit;
   line-height: @heading-line-height;
   &:not(:first-child){
-			margin-top: @basic_padding * .75;
+			margin-top: @spacer * 2;
   }
   &:not(:last-child){
 			margin-bottom: @spacer;
@@ -155,7 +156,7 @@ h3 + h1, h3 + h2, h3 + h3, h3 + h4, h3 + h5, h3 + h6,
 h4 + h1, h4 + h2, h4 + h3, h4 + h4, h4 + h5, h4 + h6,
 h5 + h1, h5 + h2, h5 + h3, h5 + h4, h5 + h5, h5 + h6,
 h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
-  margin-top: @basic_padding / 2; // or whatever spacing you want
+  margin-top: @spacer; // or whatever spacing you want
 }
 
 // Reset margins on paragraphs
@@ -165,7 +166,7 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 
 p {
   margin-top: 0;
-  margin-bottom: @basic_padding / 2;
+  margin-bottom: @spacer;
 }
 
 p:last-child{
@@ -188,7 +189,7 @@ abbr[title] {
 // Address
 
 address {
-  margin-bottom: @basic_padding / 2;
+  margin-bottom: @basic_padding * .5;
   font-style: normal;
   line-height: inherit;
 }
@@ -266,7 +267,7 @@ small {
 // Mark
 
 mark {
-  padding: @basic_padding * .2;
+  padding: @highlight-padding;
   color: @highlight-color;
   background-color: @highlight-bg;
 }

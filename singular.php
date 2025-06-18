@@ -1,4 +1,6 @@
-<?php get_header() ?>
+<?php get_header();
+$secondary_title = get_field('secondary_title');
+?>
 <main id="main">
 	<article>
 	<section class="post_detail wrap no_margin_bottom">
@@ -9,8 +11,15 @@
 			<div class="thumbnail_img" style="background-image: url(<?php echo $thumbnail_img ?>)"></div>
 			<?php endif;?>
 
-			<header class="title_wrap">
+			<header class="title_wrap stefan-simple">
+				<?php if (is_single() && has_category('news')){
+					$publish_date = get_the_date('d. m. Y.');
+            		echo '<p class="publish_date"><svg class="inline-icon" viewBox="0 0 18.62 17.04"><use xlink:href="#icon-calendar"></use></svg>' . get_the_date('j. n. Y') . '</p>';
+				}?>
 				<h1><?php echo auto_nbsp( get_the_title()); ?></h1>
+				<?php if ($secondary_title && $secondary_title !==""){
+						echo '<p class="secondary-title h2">' . $secondary_title . '</p>';
+				}?>
 			</header>
 
 			<div class="text_wrap">

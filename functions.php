@@ -4,9 +4,9 @@
  * Scripts
  */
 wp_enqueue_script('jquery');
-wp_enqueue_script('jqueryDraggable',get_template_directory_uri() . '/js/jqueryDraggable.min.js');
+//wp_enqueue_script('jqueryDraggable',get_template_directory_uri() . '/js/jqueryDraggable.min.js');
 wp_enqueue_script('slick',get_template_directory_uri() . '/js/slick.min.js');
-wp_enqueue_script('mcustomscrollbar',get_template_directory_uri() . '/js/mcustomScrollbar.min.js');
+//wp_enqueue_script('mcustomscrollbar',get_template_directory_uri() . '/js/mcustomScrollbar.min.js');
 
 /**
  * Thumbsizes
@@ -41,7 +41,7 @@ function remove_block_css() {
     wp_dequeue_style( 'wp-block-library' ); // Wordpress core
     wp_dequeue_style( 'wp-block-library-theme' ); // Wordpress core
 }
-
+add_editor_style('style.min.css'); // or your main stylesheet path
 /**
  * enable SVG
  */

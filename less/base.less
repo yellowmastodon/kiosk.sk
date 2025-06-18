@@ -21,22 +21,48 @@
 
 @img_bg: @color_2;
 
-@max_text_width: 800px;
 
 @basic_padding: 2rem;
+
+/**
+CSS VARIABLES
+*/
 :root{
-	--wrap-padding: 2rem;
-	--double-wrap-padding: 4rem;
+	--kiosk-wrap-padding: 2rem;
+	--kiosk-double-wrap-padding: 4rem;
+	--kiosk-max-text-width: 850px;
+	--kiosk-max-text-width-wide: 1000px;
 }
+
 
 @media screen and (max-width: 700px){
 	:root{
-	--wrap-padding: 1.3rem;
-	--double-wrap-padding: 2.6rem;
-}
+		--kiosk-wrap-padding: 1.3rem;
+		--kiosk-double-wrap-padding: 2.6rem;
+	}
 }
 
-@spacer: @basic_padding * .5;
+@media screen and (min-width: 2100px){
+	:root{
+		--kiosk-max-text-width: 930px;
+		--kiosk-max-text-width-wide: 1120px;
+	}
+}
+
+@media screen and (max-width: 1650px){
+		:root{
+			--kiosk-max-text-width: 700px;
+			--kiosk-max-text-width-wide: 900px;
+		}
+}
+@media screen and (max-width: 1250px){
+		:root{
+			--kiosk-max-text-width: 600px;
+			--kiosk-max-text-width-wide: 800px;
+		}
+}
+
+@spacer: @basic_padding * .75;
 
 @double_padding: @basic_padding * 2;
 @triple_padding: @basic_padding * 3;
@@ -47,15 +73,21 @@
 
 @base_font_stack: "Satoshi-Variable", 'Helvetica', 'Arial', 'sans-serif';
 @heading_font_stack: "ABCStefanSimple", 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
-@heading_font_stack_alt: "ABCStefanBubble", 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
-@heading_font_stack_alt2: "ABCStefanBubbleTight", 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
 
 
 body {
 	--bg_color: #fff;
 }
+
+//we use the same stylesheet directly in tinymce
+body#tinymce{
+	max-width: 900px;
+	margin-right: auto;
+	padding: @spacer !important;
+}
+
 #main{
-	margin-bottom: var(--double-wrap-padding);
+	margin-bottom: @spacer * 3;
 }
 // base
 //=============================================================================================
@@ -103,8 +135,8 @@ a:focus-visible{
 	position: relative;
 	width:100%;
 	max-width: 100%;
-	padding-left: var(--wrap-padding);
-	padding-right: var(--wrap-padding);
+	padding-left: var(--kiosk-wrap-padding);
+	padding-right: var(--kiosk-wrap-padding);
 
 	margin-left: auto;
 	margin-right: auto;
@@ -193,6 +225,11 @@ em {
 	transition: all 0.3s;
 }
 
+h1, h2, h3, h4, h5, h6{
+	strong, b{
+		font-weight: normal !important;
+	}
+}
 
 
 

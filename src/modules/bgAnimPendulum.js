@@ -4,7 +4,34 @@ export function bg_animation() {
     }
     const SPEED_SLIDER = document.querySelector('input.metronome-speed-slider');
     const TICK_AUDIO = document.querySelector('audio.metronome_tick');
-    let current_tick_num = 0;
+    
+    /** initialize letters */
+    const LETTERS = document.querySelectorAll('.kiosk-dancing-letter');
+    const BIG_TOP = document.querySelector('.big_top_overflow');
+    const BIG_TOP_CLASSES = JSON.parse(BIG_TOP.getAttribute('data-letter-pos-classes'));
+    const LETTER_ROTATION_MULT = 20;
+    const PENDULUM_ROTATION_MULT = 30;
+    //add random class from list from attribute
+    BIG_TOP.classList.add(BIG_TOP_CLASSES[Math.floor(Math.random() * BIG_TOP_CLASSES.length)]);
+    LETTERS.forEach((letter, key)=>{
+        letter.style.display = "";
+        //initialize dance
+        letter.addEventListener('mouseenter', (event)=>{
+            console.log('mouseenter');
+            LETTERS[key].kioskShouldDance = true;
+            let initialTransform = letter.getAttribute('transform');
+            if (!initialTransform){
+                LETTERS[key].kioskInitialRotation = currentRotation ? -1 * currentRotation * LETTER_ROTATION_MULT : 0;
+            } else {
+                let letterCurrentRotation = currentRotation ? -1 * currentRotation * LETTER_ROTATION_MULT : 0;
+                LETTERS[key].kioskInitialRotation = letterCurrentRotation + parseFloat(initialTransform.match(/rotate\(([-\d.]+)/)[1]);
+            }
+        })
+        letter.addEventListener('mouseleave', ()=>{
+            LETTERS[key].kioskShouldDance = false;
+        });
+    });
+
     const PENDULUM = document.getElementById('metronome_pendulum_image');
     const SOUND_BUTTON = document.getElementById('metronome_sound_on');
     const PENDULUM_BLUR = document.querySelector('#metronome_pendulum_blur feGaussianBlur');
@@ -13,15 +40,12 @@ export function bg_animation() {
     if (SPEED_SLIDER) {
         bpm = Number(SPEED_SLIDER.value);
         METRONOME_SPEED_NUMBER.innerHTML = SPEED_SLIDER.value;
-
     }
-    let freq = bpm / 60;
+    let freq = bpm / 120;
     setBlur(freq);
 
-
     let soundOn = false;
-    let audioTickTimeout = null;
-    let now = null;
+
 
     const TICK_URL = TICK_AUDIO.src;
     let context = null;
@@ -89,8 +113,17 @@ export function bg_animation() {
             }
         }
         prevRotation = currentRotation;
-        PENDULUM.setAttribute('transform', `rotate(${currentRotation * 30}, 1650, 1312)`);
+        PENDULUM.setAttribute('transform', `rotate(${currentRotation * PENDULUM_ROTATION_MULT}, 1650, 1312)`);
+
+        animateLetters();
         requestAnimationFrame(animate);
+    }
+    function animateLetters() {
+        LETTERS.forEach((letter)=>{
+            if (letter.kioskShouldDance){
+                letter.setAttribute('transform', `rotate(${letter.kioskInitialRotation + (currentRotation * LETTER_ROTATION_MULT)})`);
+            }
+        })
     }
     animate();
     function playTick(audioBuffer) {
@@ -110,3 +143,4 @@ export function bg_animation() {
 export function getSinusoid(time, freq = 1) {
     return Math.sin(freq * time * 2 * Math.PI);
 }
+

@@ -20,7 +20,7 @@ if ($schedule_day): ?>
 						<?php if ($schedule_title): ?>
 							<h3 class="schedule_title"><?= $schedule_title ?></h3>
 						<?php endif; ?>
-						<ol>
+						<ol role="list">
 
 							<?php while (have_rows('schedule_item')): the_row();
 								$schedule_time = get_sub_field('schedule_time');
@@ -30,6 +30,9 @@ if ($schedule_day): ?>
 							?>
 
 							<li class="<?php if ($schedule_link): ?>has_link<?php endif; ?>" data-img="<?php if ($schedule_img) { echo $schedule_img['sizes']['medium']; } ?>">
+								<?php if ($schedule_link):?>
+									<a class="link" href="<?= $schedule_link['url'] ?>"<?= $schedule_link['target'] ? 'target="' . $schedule_link['target'] .'"' : '' ?>>
+								<?php endif; ?>
 								<?php if ($schedule_time): ?>
 									<span class="time"><?= $schedule_time ?></span>
 								<?php endif; ?>
@@ -38,8 +41,8 @@ if ($schedule_day): ?>
 									<span class="info"><?= $schedule_info ?></span>
 								<?php endif; ?>					
 								
-								<?php if ($schedule_link): ?>
-									<a class="link" href="<?= $schedule_link['url'] ?>"<?= $schedule_link['target'] ? 'target="' . $schedule_link['target'] .'"' : '' ?>></a>
+								<?php if ($schedule_link):?>
+									</a>
 								<?php endif; ?>
 							</li>	
 
@@ -72,26 +75,6 @@ if ($schedule_day): ?>
 						<span class="lbl_hover lbl"><?= $global_button_buy_ticket['title'] ?></span>
 					</span>
 				</a>
-			<?php endif; ?>
-		</div>
-	</section>
-
-	<?php
-		$global_running_imgs = get_field('global_running_imgs', 'option');
-	?>
-	<section class="running_imgs wrap margin_top">
-		<div class="wrap_inner">
-			<?php if( $global_running_imgs ): ?>
-				<div class="imgs_inner">
-					<?php foreach( $global_running_imgs as $image ): ?>
-						<figure class="img_wrap">
-							<img src="<?php echo esc_url($image['sizes']['large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" loading="lazy" />
-						</figure>
-						<figure class="img_wrap clone">
-							<img src="<?php echo esc_url($image['sizes']['large']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" loading="lazy"/>
-						</figure>
-					<?php endforeach; ?>
-				</div>
 			<?php endif; ?>
 		</div>
 	</section>

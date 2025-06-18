@@ -1,16 +1,14 @@
-var body;
-var is_touch_device;
-var html_top_margin;
-
 import { vh_mobile_fix } from './modules/vhMobileFix.js';
 import { kiosk_archive_sort, kiosk_program_slick, kiosk_new_articles_mcsutomscrollbar, kiosk_gallery_slick } from './modules/scrollersAndSort.js';
 import { kiosk_schedule_hover_img } from './modules/kioskScheduleHoverImg.js';
 import { bg_animation } from './modules/bgAnimPendulum.js';
 import { initializeCustomScrollbars } from './modules/overlayScrollbars.js';
+//not working
+//import FocusTrap from './modules/focus-trap.js';
 
-body = jQuery('body');
-is_touch_device = body.hasClass('is_touch_device');
-html_top_margin = parseInt(jQuery('html').css('margin-top'));
+const body = document.body;
+const is_touch_device = body.classList.contains('is_touch_device');
+
 vh_mobile_fix();
 kiosk_schedule_hover_img();
 kiosk_gallery_slick();
@@ -32,12 +30,14 @@ custom_scroll_elements.forEach( (element)=>{
 
 const toggleBtn = document.getElementById('main_menu_switch');
 const offcanvas = document.getElementById('main_menu_wrap');
+//const trap = new FocusTrap({ trapElement: offcanvas, autofocus: false });
 
 toggleBtn.addEventListener('click', () => {
   const isOpen = offcanvas.getAttribute('aria-hidden') === 'true';
   offcanvas.setAttribute('aria-hidden', String(!isOpen));
   toggleBtn.setAttribute('aria-expanded', String(isOpen));
   offcanvas.focus();
+
 });
 
 
