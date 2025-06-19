@@ -4,7 +4,7 @@ import { kiosk_schedule_hover_img } from './modules/kioskScheduleHoverImg.js';
 import { bg_animation } from './modules/bgAnimPendulum.js';
 import { initializeCustomScrollbars } from './modules/overlayScrollbars.js';
 //not working
-//import FocusTrap from './modules/focus-trap.js';
+import { initOffcanvas } from './modules/offcanvas.js';
 
 const body = document.body;
 const is_touch_device = body.classList.contains('is_touch_device');
@@ -30,20 +30,9 @@ custom_scroll_elements.forEach( (element)=>{
 
 const toggleBtn = document.getElementById('main_menu_switch');
 const offcanvas = document.getElementById('main_menu_wrap');
+if (toggleBtn && offcanvas){
+  initOffcanvas(offcanvas, toggleBtn);
+}
 //const trap = new FocusTrap({ trapElement: offcanvas, autofocus: false });
 
-toggleBtn.addEventListener('click', () => {
-  const isOpen = offcanvas.getAttribute('aria-hidden') === 'true';
-  offcanvas.setAttribute('aria-hidden', String(!isOpen));
-  toggleBtn.setAttribute('aria-expanded', String(isOpen));
-  offcanvas.focus();
 
-});
-
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && offcanvas.getAttribute('aria-hidden') === 'false') {
-	offcanvas.setAttribute('aria-hidden', 'true');
-  	toggleBtn.setAttribute('aria-expanded', 'false');
-  }
-});

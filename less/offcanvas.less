@@ -7,16 +7,43 @@
   height: 100%;
   transform: translateX(100%);
   visibility: hidden;
-  transition: transform .3s ease, visibility .3s ease;
-  z-index: 1000;
+  transition: transform .3s ease;
+  z-index: 1010;
   border: none !important;
+  &, & .offcanvas-content{
+    &:focus{
+      outline: none;
+    }
+  }
+
+}
+body.has-offcanvas{
+  .offcanvas-backdrop{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    content: "";
+    background: white;
+    opacity: 0;
+    z-index: 1000;
+    visibility: hidden;
+    transition: opacity .15s ease, visibility .15s ease;
+  }
+  &.offcanvas-open .offcanvas-backdrop{
+    visibility: visible;
+    opacity: .5;
+  }
+}
+.offcanvas.open {
+  transform: translateX(0);
 }
 
-.offcanvas[aria-hidden="false"] {
-  transform: translateX(0);
-  visibility: visible;
+.offcanvas-content{
+  overflow-y: scroll;
+  padding: @spacer * 2;
 }
 
 .offcanvas-toggle{
-    z-index: 1010;
+    z-index: 1020;
 }

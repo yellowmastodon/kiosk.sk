@@ -176,16 +176,16 @@ hr{
 		border-width: 3px;
 		&:nth-of-type(3n) {
 			border-width: 3px;
-				.distorted1;
+				.distorted1();
 		}
 
 		&:nth-of-type(3n+1) {
 
-				.distorted2;
+				.distorted2();
 		}
 
 		&:nth-of-type(3n+2) {
-				.distorted3;
+				.distorted3();
 		}
 
 }
@@ -231,7 +231,14 @@ h1, h2, h3, h4, h5, h6{
 	}
 }
 
+//smaller h1 on mobile
 
+@media screen and (max-width: 600px){
+	h1, .h1{
+		font-size: 1.9rem;
+		letter-spacing: -.01em;
+	}
+}
 
 // gallery
 //=============================================================================================
@@ -325,8 +332,11 @@ h1, h2, h3, h4, h5, h6{
 	}
 }
 
-// mcsutomscrollbar
-//=============================================================================================
+.highlight{
+	padding: @highlight-padding;
+	color: @highlight-color;
+	background-color: @highlight-bg;
+}
 
  
 // comming soon
