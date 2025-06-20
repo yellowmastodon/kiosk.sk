@@ -5,7 +5,6 @@
         <filter id="distort" x="-20" y="-20" width="140" height="140" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
         <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="5" seed="2" stitchTiles="noStitch" result="turbulence" />
         <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="3" xChannelSelector="R" yChannelSelector="G" result="displacementMap" />
-        <feGaussianBlur stdDeviation="0.05" />
 	</filter>
     </defs>
     

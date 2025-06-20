@@ -48,10 +48,8 @@
         margin-bottom: 0;
     }
 
-    .custom-scrollbar-wrapper.dragging {
-
-        &,
-        & * {
+    .custom-scrollbar-wrapper {
+        .dragging * {
             cursor: grabbing;
             user-select: none;
         }
@@ -72,9 +70,6 @@
             margin-left: 0;
         }
 
-        &:last-child {
-            margin-right: var(--kiosk-wrap-padding);
-        }
 
         &,
         article {

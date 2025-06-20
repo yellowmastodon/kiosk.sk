@@ -38,6 +38,7 @@
 		bottom: 1.2rem;
 		margin: auto;
 		width: 100%;
+		pointer-events: none; //obstructing letters 
 		color: #FFFF00;
 		font-size: 1.6rem;
 		text-align: center;
@@ -47,6 +48,8 @@
 		.event_date_place {
 			display: inline-block;
 			width: 100%;
+			pointer-events: all;
+
 		}
 
 		.event_name {
@@ -282,28 +285,32 @@
 .letters-pos-1 {
 	--kiosk-k-first-top: 4%;
 	--kiosk-k-first-left: 7%;
-	--kiosk-i-top: 30%;
+	--kiosk-i-top: unset;
 	--kiosk-i-left: 27%;
-	--kiosk-o-top: 60%;
+	--kiosk-i-bottom: 30%;
+	--kiosk-o-top: unset;
 	--kiosk-o-left: 4%;
 	--kiosk-o-right: unset;
+	--kiosk-o-bottom: 20%;
 	--kiosk-s-top: 15%;
 	--kiosk-s-right: 15%;
-	--kiosk-k-last-top: 60%;
+	--kiosk-k-last-bottom: 30%;
 	--kiosk-k-last-right: 3%;
 }
 
 .letters-pos-2 {
 	--kiosk-k-first-top: 3%;
 	--kiosk-k-first-left: 15%;
-	--kiosk-i-top: 35%;
+	--kiosk-i-top: 33%;
 	--kiosk-i-left: 5%;
-	--kiosk-o-top: 60%;
+	--kiosk-i-bottom: unset;
+	--kiosk-o-top: unset;
 	--kiosk-o-left: 15%;
 	--kiosk-o-right: unset;
+	--kiosk-o-bottom: 17%;
 	--kiosk-s-top: 45%;
 	--kiosk-s-right: 20%;
-	--kiosk-k-last-top: 65%;
+	--kiosk-k-last-bottom: 5%;
 	--kiosk-k-last-right: 3%;
 }
 
@@ -312,13 +319,15 @@
 	--kiosk-k-first-left: 12%;
 	--kiosk-i-top: 50%;
 	--kiosk-i-left: 7%;
+	--kiosk-i-bottom: unset;
 	--kiosk-o-top: 5%;
 	--kiosk-o-left: unset;
 	--kiosk-o-right: 22%;
+	--kiosk-o-bottom: unset;
 	--kiosk-s-top: 27%;
 	--kiosk-s-right: 5%;
-	--kiosk-k-last-top: 65%;
-	--kiosk-k-last-right: 6%;
+	--kiosk-k-last-bottom: 5%;
+	--kiosk-k-last-right: 10%;
 }
 
 .kiosk-dancing-letter {
@@ -356,12 +365,15 @@
 	&.i {
 		left: var(--kiosk-i-left);
 		top: var(--kiosk-i-top);
+		bottom: var(--kiosk-i-bottom);
+
 	}
 
 	&.o {
 		left: var(--kiosk-o-left);
 		top: var(--kiosk-o-top);
 		right: var(--kiosk-o-right);
+		bottom:  var(--kiosk-o-bottom);
 	}
 
 	&.s {
@@ -371,7 +383,7 @@
 
 	&.k-last {
 		right: var(--kiosk-k-last-right);
-		top: var(--kiosk-k-last-top);
+		bottom: var(--kiosk-k-last-bottom);
 	}
 }
 
