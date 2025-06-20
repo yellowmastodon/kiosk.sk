@@ -21,7 +21,7 @@ global $current_image_sequence;
 			?> <div class="big_top_animation_wrapper ">
 
 				<audio class="metronome_tick" preload="auto" src="<?php echo get_template_directory_uri() . '/audio/metronome_tick.mp3'; ?>"></audio>
-				<img id="bg_animation" class="big_top_bg" <?php
+				<img alt="" id="bg_animation" class="big_top_bg" <?php
 															$template_dir = get_template_directory_uri();
 															echo ' src="' . $template_dir  . '/images/metronome_bkg.jpg' . '"';
 															echo ' srcset="' . $template_dir . '/images/metronome_bkg_2560.jpg 2560w,'
@@ -33,7 +33,7 @@ global $current_image_sequence;
 															//sizes quite arbitrary, no way to know, and also the smallest picture should be ok enought
 															echo ' sizes="(max-width: 576px) 850px, (max-width: 1000px) 1395px, (max-width: 1280px) 1650px, 100vw"';
 
-															?>></img>
+															?>>
 
 
 				<svg id="metronome_pendulum" viewBox="0 0 3300 2560" preserveAspectRatio="xMinYMin slice">
@@ -66,7 +66,7 @@ global $current_image_sequence;
 			<button class="h2 bright-red-hover btn-reset" id="metronome_sound_on" aria-label="Zapnúť zvuk" aria-pressed="false">
 				<svg class="inline-icon" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 -2 47 35.3">
 					<g>
-						<path d="M1.7,15.9c.6,3.1,1.2,3,1.9,6.2.5,2.8,1.6,4.9,4.5,4.9,2.5-.2,2.5-.7,4.9-1,.6,0,1.2,0,1.7.5,3.1,2.6,3.3,2.3,6.4,4.9,1.6,1.4,3.3.6,3.1-1.6-.3-3.3.2-3.3-.2-6.6s-.6-3.3-1-6.5,0-3.3-.4-6.6-.6-3.3-.9-6.5c-.1-2.1-2.9-3.1-4.3-1.5-2.8,4.3-2.9,4.2-5.6,8.6-.3.4-.4,1.3-.9,1.4-3.6.8-3.7.2-7.4.9-1.3.3-2.2,1.8-2,3Z" fill="#ffff00" stroke="currentColor" stroke-width="3px" stroke-linecap="round" stroke-mitter-limit="10">
+						<path d="M1.7,15.9c.6,3.1,1.2,3,1.9,6.2.5,2.8,1.6,4.9,4.5,4.9,2.5-.2,2.5-.7,4.9-1,.6,0,1.2,0,1.7.5,3.1,2.6,3.3,2.3,6.4,4.9,1.6,1.4,3.3.6,3.1-1.6-.3-3.3.2-3.3-.2-6.6s-.6-3.3-1-6.5,0-3.3-.4-6.6-.6-3.3-.9-6.5c-.1-2.1-2.9-3.1-4.3-1.5-2.8,4.3-2.9,4.2-5.6,8.6-.3.4-.4,1.3-.9,1.4-3.6.8-3.7.2-7.4.9-1.3.3-2.2,1.8-2,3Z" fill="#ffff00" stroke="currentColor" stroke-width="3px" stroke-linecap="round" stroke-mitter-limit="10" />
 
 					</g>
 					<g class="off" fill="none" stroke="currentColor" stroke-width="3px" stroke-linecap="round">

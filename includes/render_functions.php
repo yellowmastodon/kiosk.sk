@@ -62,6 +62,12 @@ function kiosk_mce_before_init_insert_formats($init_array)
 			'classes' => 'highlight',
 			'wrapper' => false,
 		),
+		array(
+			'title' => 'small',
+			'inline' => 'span',
+			'classes' => 'small',
+			'wrapper' => false,
+		),
 	);
 
 

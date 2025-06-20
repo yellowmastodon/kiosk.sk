@@ -5,8 +5,9 @@ export function initOffcanvas(offcanvas, toggleBtn) {
     let trap = focusTrap.createFocusTrap([offcanvasContent, toggleBtn.closest('.offcanvas-toggle-wrap')], {
         escapeDeactivates: false,
         allowOutsideClick: true,
-        clickOutsideDeactivates: false
-
+        clickOutsideDeactivates: false,
+        initialFocus: false,
+        returnFocusOnDeactivate: false
     });
     document.body.classList.add('has-offcanvas');
     let backdrop = document.createElement('div');
@@ -59,6 +60,7 @@ export function initOffcanvas(offcanvas, toggleBtn) {
         document.body.classList.remove('offcanvas-open');
         offcanvas.setAttribute('aria-hidden', 'true');
         toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.blur();
 
         // Remove any previous handler
         if (transitionHandler) {
@@ -71,7 +73,7 @@ export function initOffcanvas(offcanvas, toggleBtn) {
             offcanvas.style.visibility = 'hidden';
 
             // e.g., deactivate focus trap
-            trap.deactivate();
+            trap.deactivate()
 
             // Cleanup
             offcanvas.removeEventListener('transitionend', handler);

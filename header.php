@@ -4,7 +4,7 @@
 <head>
 	<meta charset="<?php bloginfo('charset') ?>">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=1.0">
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/style.min.css?' . filemtime(get_template_directory() . '/style.min.css') ?>" type="text/css" media="screen" />
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="theme-color" content="#ffffff">
@@ -31,16 +31,21 @@ if (get_post_type(get_the_ID()) == 'archive_detail') {
 	?>
 	<header class="main_header">
 			<?php
-			$logo_wrapper = is_front_page() ? 'h1' : 'p'; ?>
-			<<?= $logo_wrapper ?> class="main_logo">
-				<a class="bright-red-hover" href="<?= get_home_url() ?>">
-					<svg>
-						<use xlink:href="#main-logo"></use>
-					</svg>
-					<span class="sr-only"><?= get_bloginfo('name') ?></span>
-				</a>
-			</<?= $logo_wrapper ?>>
-
+			$logo_wrapper = is_front_page() ? 'h1' : 'p';
+			if (is_front_page()):?>
+				<h1 class="main_logo"><svg>
+							<use xlink:href="#main-logo"></use>
+						</svg><span class="sr-only"><?=get_bloginfo('name')?></span></h1>
+			<?php else: ?>
+				<p class="main_logo">
+					<a class="bright-red-hover" href="<?= get_home_url() ?>">
+						<svg>
+							<use xlink:href="#main-logo"></use>
+						</svg>
+						<span class="sr-only"><?= get_bloginfo('name') ?></span>
+					</a>
+				</p>
+			<?php endif;?>
 			<div class="offcanvas-toggle-wrap">
 			<button class="bright-red-hover btn-reset offcanvas-toggle" id="main_menu_switch" aria-controls="main_menu_wrap" aria-expanded="false">
 				<svg id="menu-hamburger" viewBox="0 0 110 110">
@@ -72,5 +77,6 @@ if (get_post_type(get_the_ID()) == 'archive_detail') {
 
 				get_template_part('template-parts/socials-menu');
 				?>
+			</nav>
 		</div>
 	</header>

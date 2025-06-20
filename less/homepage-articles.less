@@ -8,9 +8,9 @@
         height: 2.5rem;
         top: 1.5rem;
         padding-left: var(--kiosk-wrap-padding);
-        --os-track-bg: url('../images/scrollbar_track.svg') 0 1rem / auto .6rem repeat-x;
-        --os-track-bg-active: url('../images/scrollbar_track.svg') 0 1rem / auto .6rem repeat-x;
-        --os-track-bg-hover: url('../images/scrollbar_track.svg') 0 1rem / auto .6rem repeat-x;
+        --os-track-bg: url('../images/scrollbar_track.svg') 0 1rem / 33.5rem .6rem repeat-x;
+        --os-track-bg-active: url('../images/scrollbar_track.svg') 0 1rem /  33.5rem .6rem repeat-x;
+        --os-track-bg-hover: url('../images/scrollbar_track.svg') 0 1rem /  33.5rem .6rem repeat-x;
         --os-handle-bg: transparent;
         --os-handle-bg-hover: transparent;
         --os-handle-bg-active: transparent;
@@ -58,19 +58,23 @@
 
     //single article
     .article_wrap {
+        --kiosk-article-wrap-width: 26vw;
         text-decoration: none;
         overflow: visible;
         .flex_shrink(0);
         display: inline-block;
-        width: 26vw;
+        width: var(--kiosk-article-wrap-width);
         margin: 0 (@spacer * .5);
         pointer-events: all;
 
         &:first-child {
             margin-left: 0;
         }
-
-
+        //custom scrollbar needs this fuckery to have padding after last element
+        &:last-child{
+            width: calc(var(--kiosk-article-wrap-width) + var(--kiosk-wrap-padding));
+            padding-right: var(--kiosk-wrap-padding)
+        }
         &,
         article {
             transition: all 0.2s ease-in-out;
@@ -150,7 +154,7 @@
 
 @media screen and (max-width: 1200px) {
     .articles .article_wrap {
-        width: 40vw;
+        --kiosk-article-wrap-width: 40vw;
     }
 }
 
@@ -172,6 +176,6 @@
 
 @media screen and (max-width: 700px) {
     .articles .article_wrap {
-        width: 70vw;
+        --kiosk-article-wrap-width: 70vw;
     }
 }
