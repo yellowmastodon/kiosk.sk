@@ -3,9 +3,9 @@
 /**
  * Scripts
  */
-wp_enqueue_script('jquery');
+//wp_enqueue_script('jquery');
 //wp_enqueue_script('jqueryDraggable',get_template_directory_uri() . '/js/jqueryDraggable.min.js');
-wp_enqueue_script('slick',get_template_directory_uri() . '/js/slick.min.js');
+//wp_enqueue_script('slick',get_template_directory_uri() . '/js/slick.min.js');
 //wp_enqueue_script('mcustomscrollbar',get_template_directory_uri() . '/js/mcustomScrollbar.min.js');
 
 /**

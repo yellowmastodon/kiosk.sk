@@ -4,7 +4,7 @@
 //=======================================================================
 .main_logo {
 	position: fixed;
-	left: var(--kiosk-wrap-padding);
+	left: calc(var(--kiosk-wrap-padding) - .3rem);
 	top: @spacer * .75;
 	z-index: 900;
 	line-height: 0;
@@ -19,11 +19,11 @@
 #main_menu_switch{
 	padding: 0;
 	position: fixed;
-	right: var(--kiosk-wrap-padding);
-	top: @spacer * .6;
+	right: calc(var(--kiosk-wrap-padding) - .3rem);
+	top: @spacer * .7;
 	svg{
-		width: 3rem;
-		height: 3rem;
+		width: 2.5rem;
+		height: 2.5rem;
 	}
 }
 

@@ -6,6 +6,7 @@
 
 .btn {
 	background: transparent;
+	position: relative;
 	border: none;
 	padding: .5rem .75rem;
 	color: @color_3;
@@ -14,34 +15,30 @@
 	display: inline-block;
 	position: relative;
 	line-height: 1;
-
-	&::before {
-		z-index: -1;
-		content: "";
+	svg{
+		fill: @color_1;
 		position: absolute;
-		left: 0;
-		right: 0;
 		top: 0;
-		bottom: 0;
-		background-color: @color_1;
-		border-radius: .4em .3em .5em .25em;
-		.distorted1();
+		left: 0;
+		z-index: -1;
+		height: 100%;
+		width: 100%;
+		overflow: visible;
 	}
-
 	&:hover,
 	&:focus-visible {
 		color: @color_3;
-
-		&::before {
-			background-color: @color_4;
+		svg{
+			fill: @color_4;
 		}
+
 	}
 	&:focus{
 		outline: none;
 	}
 	&:active {
-		&::before {
-			background-color: @color_5;
+		svg {
+			fill: @color_5;
 
 		}
 	}

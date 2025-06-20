@@ -18,6 +18,8 @@
 * Hover custom
 */
 .bright-red-hover(){
+  &:not([disabled]){
+
 	&:hover, &:focus-visible{
 		color: @color_4;
 		outline: none;
@@ -26,6 +28,7 @@
 		color: @color_5;
 
 	}
+  }
 }
 .bright-red-hover{
     .bright-red-hover();

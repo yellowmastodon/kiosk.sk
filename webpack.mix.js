@@ -9,14 +9,13 @@ mix.less('style.less', 'style.min.css',
     {
         lessOptions: {
             strictMath: false,
-            plugins: [
-                // Autoprefixer plugin for Less
-                new (require('less-plugin-autoprefix'))({ browsers: ['>= 0.01%'] })
-            ],
         },
     })
     .options({
         processCssUrls: false,
+        autoprefixer: {
+            browserlist: ['>0.5%', "last 4 versions", "IE 10"]
+        }
     });
 
 mix.browserSync({

@@ -1,31 +1,41 @@
 // schedules_wrap
 //=============================================================================================
 
+@import '@splidejs/splide/css/core';
 
 .schedules_wrap {
-	.schedules_list_outer {
-		position: relative;
-		overflow: visible;
-	}
+	.main_title_wrap {
+		display: flex;
 
-	h1 {
-		font-size: @h2_size !important;
-	}
+		.splide__arrows {
+			.splide__arrow[disabled] {
+				opacity: .3;
+			}
 
-	.schedules_list {
-		position: relative;
-		.flex();
-
-		&.mCustomScrollbar {
-			.flex_dir(column);
+			margin-left: @spacer;
+			position: relative;
+			top: -.1em;
 		}
 	}
 
+	.schedules_list_outer {
+		overflow: visible !important;
+		margin-left: -.75 * @spacer;
+
+	}
+
+	.schedules_list {
+		overflow: visible;
+	}
+
 	.schedule_wrap {
-		position: relative;
-		.flex_shrink(0);
-		width: 1080px;
-		margin: 0 40px;
+		overflow: visible;
+		width: 100%;
+
+	}
+
+	.splide__slide {
+		margin: 0 @spacer * .75;
 	}
 
 	ol {
@@ -36,73 +46,12 @@
 
 	li {
 		position: relative;
-		.flex();
-		&:not(:last-child){
-			padding: 0.8em 0 0.8em;
+		margin-bottom: 0;
+		padding-top: 1em;
 
-		}
-		&:last-child{
-			margin-bottom: 0;
-		}
+		&:not(:last-child) {
+			padding-bottom: 1em;
 
-		&.has_link:hover {
-			&::before {
-				height: 0.4em;
-			}
-
-			&::after {
-				opacity: 0;
-				transition: .05s;
-			}
-		}
-
-		&:not(:last-child)::before {
-			content: "";
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			width: 100%;
-			height: 1px;
-			margin: auto;
-			background: url('../images/wave.svg') 0 0 / 60px 100%;
-			transition: .15s;
-			overflow: visible;
-		}
-
-		&:not(:last-child)::after {
-			content: "";
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			width: 100%;
-			height: 3px;
-			margin: auto;
-			background: @color_1;
-			transition: 0.05s .1s;
-			overflow: visible;
-		}
-
-		&:nth-of-type(3n) {
-			&::before,
-			&::after {
-				.distorted1();
-			}
-		}
-
-		&:nth-of-type(3n+1) {
-			&::before,
-			&::after {
-				.distorted2;
-			}
-		}
-
-		&:nth-of-type(3n+2) {
-
-			&::before,
-			&::after {
-				.distorted3;
-
-			}
 		}
 
 		p {
@@ -112,7 +61,84 @@
 		.link {
 			display: flex;
 			text-decoration: none;
+
+			
 		}
+		a.link {
+
+				&:hover,
+				&:focus-visible {
+					color: @color_5;
+					outline: none;
+					&::before {
+						height: .5em !important;
+						bottom: -.25em !important;
+					}
+
+					&::after {
+						opacity: 0;
+						transition: .05s !important;
+					}
+				}
+			}
+
+		&:not(:last-child) .link::before {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 1px;
+			margin: auto;
+			background: url('../images/wave.svg') 0 0 / 5em 100%;
+			transition: .15s;
+			overflow: visible;
+		}
+
+		&:not(:last-child) .link::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: .13rem;
+			margin: auto;
+			background: url('../images/straight_line.svg') 0 0 / 5em 100%;
+			background-repeat: repeat-x;
+			transition: 0.05s .1s;
+			overflow: visible;
+		}
+
+		&:nth-child(3n+1) {
+			.link {
+
+				&::before,
+				&::after {
+					transform: rotate(.5deg);
+				}
+			}
+		}
+
+		&:nth-child(3n+2) {
+			.link {
+
+				&::before,
+				&::after {
+					transform: rotate(.2deg);
+				}
+			}
+		}
+
+		&:nth-child(3n+3) {
+			.link {
+
+				&::before,
+				&::after {
+					transform: rotate(-.4deg);
+				}
+			}
+		}
+
 	}
 
 	.time {
@@ -126,15 +152,16 @@
 	}
 
 	.square {
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
+		z-index: 5;
 		width: 240px;
 		height: 200px;
 		background-color: #fafafa;
 		background-position: center center;
 		background-size: cover;
-		transform: translate3d(10px, -80%, 0) rotate(-20deg);
+		transform: translate3d(10px, -120%, 0) rotate(-20deg);
 		transition: ~"opacity .15s, width .15, height .15";
 		pointer-events: none;
 
@@ -145,129 +172,66 @@
 		}
 	}
 
-	.mCustomScrollBox {
-		width: calc(~"100% + 80px");
-		max-width: calc(~"100% + 80px");
-		margin: 0 -40px;
+
+
+
+
+}
+
+.schedules_list_outer::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	margin-right: ~"calc(-1 * var(--kiosk-wrap-padding))";
+	top: 0;
+	bottom: 0;
+	width: var(--kiosk-double-wrap-padding);
+	background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+	z-index: 2;
+	pointer-events: none;
+}
+
+@media screen and (min-width: 800px) {
+	.schedules_wrap {
+		.splide__slide:last-child {
+			.schedule_wrap {
+				max-width: 60% !important;
+			}
+		}
+
+
 	}
 
-	// slick
-	.slick-list {
-		&::before {
-			content: "";
-			position: absolute;
-			z-index: 3;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			width: 400px;
-			margin: auto;
-			background: linear-gradient(to left, #fff, rgba(255, 255, 255, 0));
-			pointer-events: none;
+	.schedules_list_outer::after {
+
+		width: 40%;
+		background: linear-gradient(to left, rgba(255, 255, 255, 1) var(--kiosk-wrap-padding), rgba(255, 255, 255, 0));
+
+	}
+
+	.schedules_wrap {
+		.splide__slide:not(:last-child) {
+			max-width: 60% !important;
 		}
 	}
 
-	.main_title .main_title_inner {
-		position: relative;
-		padding-right: 140px;
-		.unselectable;
-	}
+}
 
-	.slick-arrow {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		width: 60px;
-		height: 60px;
-		margin: auto;
-		opacity: 0.8;
-		transition: .15s;
-		cursor: pointer;
-		.unselectable;
+@media screen and (max-width: 600px) {
+	.schedules_wrap li {
 
-		&:hover {
-			opacity: 1;
+		&,
+		& .link {
+			flex-wrap: wrap;
+
 		}
 
-		&::before {
-			content: "";
-			position: absolute;
-			top: 0;
-			left: -20px;
-			right: 0;
-			bottom: 0;
-			width: 34px;
-			height: 34px;
-			margin: auto;
-			border-style: solid;
-			border-width: 3px 3px 0 0;
-			border-color: @color_1 @color_1 transparent transparent;
-			transform: rotate(45deg);
-		}
-
-		&.arrow-prev {
-			right: 70px;
-			transform: scale(~"-1,1");
-		}
-
-		&.arrow-next {
-			right: 0;
-		}
-
-		&.slick-disabled {
-			opacity: 0.2;
-			pointer-events: none;
+		.time {
+			width: 100%;
+			color: @color_5;
 		}
 	}
 }
-
-// running imgs
-//=============================================================================================
-.running_imgs {
-
-	.wrap_inner {
-		.flex();
-		width: 100%;
-		max-width: 2200px;
-		overflow: hidden;
-	}
-
-	.imgs_inner {
-		.flex();
-		.flex_shrink(0);
-		margin: 0 -10px;
-		animation: running_imgs 24s linear infinite;
-		overflow: visible;
-	}
-
-	.img_wrap {
-		.flex_shrink(0);
-		margin: 0 10px;
-		font-size: 0;
-		line-height: 0;
-
-		&.clone {
-			order: 2;
-		}
-	}
-}
-
-
-@keyframes running_imgs {
-	0% {
-		transform: translateX(0);
-	}
-
-	100% {
-		transform: translateX(-50%);
-	}
-}
-
-//hide running text in footer on schedule page
-.page_schedule .main_footer_wrap .running_text {
-	display: none;
-}
-
 
 //fix for large whitespace in schedule, when currently invisible day is a lot longer than those currently visible
 @value: 1;
@@ -283,7 +247,3 @@ each(range(4), {
 
 	//only helps with 2 or more rows, and does not affect previous days, as there is no previous sibling selector
 });
-
-.schedules_list .slick-slide.slick-active:nth-of-type(1)~.slick-slide:nth-of-type(3) {
-	display: none !important;
-}

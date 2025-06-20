@@ -1,59 +1,58 @@
-
-// schedule hover img
-//==================================================================
 export function kiosk_schedule_hover_img() {
-	let is_touch_device = window.is_touch_device;
-	var mod = jQuery('.schedules_wrap');
-	var list;
-	var url;
-	var square;
+	const is_touch_device = window.is_touch_device;
+	const mod = document.querySelector('.schedules_wrap');
+	if (!mod || is_touch_device) return;
 
-	if (!mod.length || is_touch_device) { return; }
+	const list = mod.querySelector('.schedules_list');
+	const square = mod.querySelector('.square');
+	const ol = mod.querySelectorAll('ol');
+	const lis = document.querySelectorAll('.schedules_list ol li');
 
-	list = mod.find('.schedules_list');
-	square = mod.find('.square');
-
-	// hide square on mouseleave
-	mod.find('ol').on('mouseleave', function () {
-		if (square.hasClass('show')) {
-			square.removeClass('show');
-		}
-	});
-
-	// show square on hover
-	mod.find('li').on('mouseenter', function () {
-		url = jQuery(this).attr('data-img');
-
-		if (url !== '') {
-			if (!square.hasClass('show')) {
-				square.addClass('show');
-			}
-
-			square.css({
-				'background-image': 'url(' + url + ')',
+	// Hide square on mouseleave
+	if (ol) {
+		ol.forEach((el) => {
+			el.addEventListener('mouseleave', () => {
+				square.classList.remove('show');
 			});
-		}
-		else {
-			if (square.hasClass('show')) {
-				square.removeClass('show');
+		})
+
+	}
+
+	// Show square on hover
+	lis.forEach(li => {
+		li.addEventListener('mouseenter', function () {
+			const url = this.getAttribute('data-img');
+			if (url) {
+				square.classList.add('show');
+				square.style.backgroundImage = `url(${url})`;
+			} else {
+				square.classList.remove('show');
+				square.style.backgroundImage = 'none';
 			}
-
-			square.css({
-				'background-image': 'none',
-			});
-		}
-	});
-
-	// cursor move
-	var delta;
-	delta = parseInt(jQuery('html').css('margin-top'));
-
-	mod.on('mousemove', function (e) {
-		square.css({
-			left: e.pageX - list.offset().left,
-			top: e.pageY - delta - list.offset().top,
 		});
 	});
 
-	jQuery('html').trigger('mousemove');
+	// Get html margin-top as integer
+	const html = document.documentElement;
+	const htmlMarginTop = parseInt(getComputedStyle(html).marginTop, 10) || 0;
+
+	// Cursor move
+	mod.addEventListener('mousemove', function (e) {
+		console.log(e);
+		requestAnimationFrame(()=>{
+				const left = e.clientX;
+		const top = e.clientY;
+		square.style.left = `${left}px`;
+		square.style.top = `${top}px`;
+		})
+	
+	});
+
+	// Trigger initial mousemove event (optional, as in original)
+	const event = new MouseEvent('mousemove', {
+		view: window,
+		bubbles: true,
+		cancelable: true
+	});
+	html.dispatchEvent(event);
 }
