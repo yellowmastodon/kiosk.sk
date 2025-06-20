@@ -32,6 +32,7 @@ export function initOffcanvas(offcanvas, toggleBtn) {
         offcanvas.classList.add('open'); 
         document.body.style.overflow = 'hidden';
         document.body.classList.add('offcanvas-open');
+        backdrop.classList.add('offcanvas-open');
         // triggers transition
 
         // Remove any previous handler
@@ -57,13 +58,14 @@ export function initOffcanvas(offcanvas, toggleBtn) {
     function closeOffcanvas() {
         offcanvas.classList.remove('open'); // triggers transition
         document.body.style.overflow = '';
-        document.body.classList.remove('offcanvas-open');
         offcanvas.setAttribute('aria-hidden', 'true');
         toggleBtn.setAttribute('aria-expanded', 'false');
         toggleBtn.blur();
+        backdrop.classList.remove('offcanvas-open');
 
         // Remove any previous handler
         if (transitionHandler) {
+
             offcanvas.removeEventListener('transitionend', transitionHandler);
             transitionHandler = null;
         }
@@ -71,8 +73,7 @@ export function initOffcanvas(offcanvas, toggleBtn) {
         transitionHandler = function handler(e) {
             if (e.target !== offcanvas) return;
             offcanvas.style.visibility = 'hidden';
-
-            // e.g., deactivate focus trap
+            document.body.classList.remove('offcanvas-open');
             trap.deactivate()
 
             // Cleanup

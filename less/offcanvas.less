@@ -28,11 +28,14 @@ body.has-offcanvas{
     opacity: 0;
     z-index: 1000;
     visibility: hidden;
-    transition: opacity .15s ease, visibility .15s ease;
+    transition: opacity .2s ease;
   }
-  &.offcanvas-open .offcanvas-backdrop{
+  .offcanvas-backdrop.offcanvas-open{
     visibility: visible;
     opacity: .5;
+  }
+  &.offcanvas-open .offcanvas-backdrop{
+    transition: opacity .2s ease, visibility .2s;
   }
 }
 .offcanvas.open {
