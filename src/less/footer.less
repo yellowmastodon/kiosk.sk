@@ -1,0 +1,144 @@
+.main_footer {
+	border-radius: @border_radius @border_radius 0 0;
+	position: relative;
+	background: @color_3;
+	overflow: visible;
+	color: @color_2;
+
+	.wrap_inner {
+		overflow: visible;
+		padding-bottom: var(--kiosk-wrap-padding);
+		padding-top: var(--kiosk-wrap-padding);
+	}
+
+	.footer_contact {
+		overflow: visible;
+
+	}
+
+	// contact
+	.title {
+		font-weight: 400;
+		margin-bottom: 0;
+	}
+
+	.contact_wrap {
+		align-items: end;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		overflow: visible;
+		margin-right: calc(-1 * var(--kiosk-wrap-padding));
+		& > * {
+			margin-right: var(--kiosk-wrap-padding);
+		}
+		.designer{
+			flex-grow: 0;
+			margin-left: auto;
+			display: flex;
+			p{
+				margin-bottom: 0;
+			}
+			align-items: end;
+			svg{
+				display: inline-block;
+				width: 3rem;
+				vertical-align: bottom;
+				position: relative;
+				top: .6rem;
+				right: -.6rem;
+			}
+		}
+	}
+
+	.contact-1,
+	.contact-2 {
+		&>*:not(:last-child) {
+			margin-bottom: @spacer;
+		}
+	}
+
+	.subtitle {
+		text-align: left;
+		overflow: visible;
+
+		&.sec1 {
+			margin-top: @spacer;
+
+			span {
+				transform: rotate(-6deg);
+			}
+		}
+
+		&.sec1,
+		&.sec2 {
+			margin-bottom: @spacer * 1.2;
+			span {
+				display: inline-block;
+			}
+		}
+
+		&.sec2 {
+			margin-top: @spacer * 1.5;
+
+			span {
+				transform: rotate(-12deg);
+			}
+		}
+	}
+	.socials-menu{
+		font-size: 4rem;
+		position: absolute;
+		top: var(--kiosk-wrap-padding);
+		right: 0;
+		text-align: right;
+
+	}
+}
+
+@media screen and (max-width: 1100px){
+	.main_footer{
+
+		.contact-1{
+			flex-shrink: 1;
+		}
+		.contact-2{
+			flex-shrink: 1;
+		}
+		.designer{
+			margin-top: @spacer;
+		}
+	}
+}
+
+@media screen and (max-width: 620px){
+	.main_footer{
+		.contact_wrap{
+
+		.contact-1, .contact-2{
+			flex-shrink: 1;
+
+		}
+	
+		.designer{
+			text-align: left;
+			margin-left: 0;
+		}
+		.socials-menu{
+			width: 100%;
+			text-align: left;
+			position: unset;
+			margin-top: @spacer * 2;
+			display: block;
+		}
+		}
+			.footer_contact {
+		.title{
+			font-size: 2rem;
+		}
+	}
+	}
+
+
+
+}

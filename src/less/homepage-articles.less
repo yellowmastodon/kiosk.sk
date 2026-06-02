@@ -1,0 +1,207 @@
+@import "~overlayscrollbars/styles/overlayscrollbars.css";
+
+.articles {
+    overflow: hidden;
+    margin-bottom: var(--kiosk-wrap-padding);
+
+    .os-scrollbar {
+        height: 2.5rem;
+        top: 1.5rem;
+        padding-left: var(--kiosk-wrap-padding);
+        --os-track-bg: url('./images/scrollbar_track.svg') 0 1rem / 33.5rem .6rem repeat-x;
+        --os-track-bg-active: url('./images/scrollbar_track.svg') 0 1rem /  33.5rem .6rem repeat-x;
+        --os-track-bg-hover: url('./images/scrollbar_track.svg') 0 1rem /  33.5rem .6rem repeat-x;
+        --os-handle-bg: transparent;
+        --os-handle-bg-hover: transparent;
+        --os-handle-bg-active: transparent;
+        --os-handle-min-size: 0px;
+
+        .os-scrollbar-handle {
+            width: 3rem;
+            .bright-red-hover();
+            cursor: pointer;
+
+            svg {
+                height: 2.5rem;
+                width: 2.72rem;
+            }
+        }
+    }
+
+    .os-scrollbar-track {
+        height: 3rem;
+    }
+
+    .articles_list {
+        padding-top: @spacer * 1.5; //separate overflow x and y not working reliably, so this allows rotated emelents to be visible
+        .flex();
+        overflow-x: visible;
+        overflow-y: visible;
+        flex-wrap: nowrap;
+    }
+    .custom-scrollbar-wrapper *[data-overlayscrollbars-viewport] .articles_list{
+        padding-top: 2.5rem + @spacer * 2.5;
+    } 
+
+
+  
+
+    .custom-scrollbar-wrapper {
+        .dragging * {
+            cursor: grabbing;
+            user-select: none;
+        }
+
+    }
+
+    //single article
+    .article_wrap {
+        --kiosk-article-wrap-width: 26vw;
+        text-decoration: none;
+        overflow: visible;
+        .flex_shrink(0);
+        display: inline-block;
+        width: var(--kiosk-article-wrap-width);
+        margin: 0 (@spacer * .5);
+        pointer-events: all;
+
+        &:first-child {
+            margin-left: 0;
+        }
+        //custom scrollbar needs this fuckery to have padding after last element
+        &:last-child{
+            width: calc(var(--kiosk-article-wrap-width) + var(--kiosk-wrap-padding));
+            padding-right: var(--kiosk-wrap-padding)
+        }
+        &,
+        article {
+            transition: all 0.2s ease-in-out;
+
+        }
+
+        @media (min-width: 901px) {
+
+            &:hover,
+            &:focus-visible {
+                article {
+
+                    transform: rotate(3deg);
+                }
+
+                .bright-red-hover();
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .img_wrap {
+            position: relative;
+            margin-bottom: @spacer * .75;
+            padding-bottom: 74.8%;
+            overflow: hidden;
+            border-radius: @border_radius;
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 100%;
+                width: 100%;
+                -webkit-object-fit: cover;
+                object-fit: cover;
+                margin: auto;
+            }
+        }
+
+        .title {
+            overflow: hidden;
+            margin-bottom: @spacer * .5;
+            font-size: 4rem;
+            line-height: 1;
+        }
+        .publish_date, .text{
+            font-size: 1rem;
+        }
+        .text,
+        .publish_date+.title {
+            margin-top: 0;
+        }
+        .text > *:not(:last-child){
+            margin-bottom: @spacer * .5;
+        }
+        &:nth-child(3n + 1){
+            .img_wrap.placeholder{
+                background-color: #00FFFF;
+            }
+        }
+        &:nth-child(3n + 2){
+            .img_wrap.placeholder{
+                background-color: #F7EC13;
+            }
+        }
+        &:nth-child(3n + 3){
+            .img_wrap.placeholder{
+                background-color: #FF4F12;
+            }
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 1200px) {
+    .articles .article_wrap {
+        --kiosk-article-wrap-width: 40vw;
+    }
+}
+
+.publish_date {
+    margin-bottom: 0;
+    //margin-top: @spacer * -.25;
+}
+
+.publish_date {
+    margin-bottom: @spacer * .3;
+
+    .inline-icon {
+        height: .8em;
+        margin-right: .4em;
+        margin-top: -.15em;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .articles .article_wrap {
+        --kiosk-article-wrap-width: 70vw;
+    }
+}
+
+  @main_title_fs: 7.5vw;
+    .articles .main_title {
+        font-size: @main_title_fs;
+        margin-bottom: 0;
+        display: flex;
+        padding-right: 0 ;
+
+        &::after{
+            content: "";
+            height: @main_title_fs;
+            margin-left: .2em;
+            background-image: url(./images/hr-arrows.svg);
+            background-repeat: repeat-x;
+            background-position: left calc(50% + .08em);
+            background-size: auto 1em;
+            width: 100%;
+        }
+
+    }
+
+    .articles:nth-child(2n) .main_title{
+        &::after{
+            background-position: 8.6em calc(50% + .08em);
+        }
+    }

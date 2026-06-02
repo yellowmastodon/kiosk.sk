@@ -1,4 +1,5 @@
-<?php if( function_exists('acf_add_local_field_group') ):
+<?php
+if( function_exists('acf_add_local_field_group') ):
 
 acf_add_local_field_group(array(
 	'key' => 'group_64e3c3a7bf383',
@@ -126,6 +127,63 @@ acf_add_local_field_group(array(
 	'title' => 'detail',
 	'fields' => array(
 		array(
+			'key' => 'field_6859123e34a88',
+			'label' => 'English title',
+			'name' => 'english_title',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		),
+		array(
+			'key' => 'field_6859125538f00',
+			'label' => 'English secondary title',
+			'name' => 'english_secondary_title',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		),
+		array(
+			'key' => 'field_68590cb6feb7a',
+			'label' => 'English',
+			'name' => 'english',
+			'type' => 'wysiwyg',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => 'kiosk-english',
+				'id' => '',
+			),
+			'default_value' => '',
+			'tabs' => 'all',
+			'toolbar' => 'full',
+			'media_upload' => 1,
+			'delay' => 0,
+		),
+		array(
 			'key' => 'field_62c21cfd7d92a',
 			'label' => 'Show button "Buy tickets"',
 			'name' => 'show_button_buy_tickets',
@@ -176,6 +234,13 @@ acf_add_local_field_group(array(
 				'param' => 'post_type',
 				'operator' => '==',
 				'value' => 'post',
+			),
+		),
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'page',
 			),
 		),
 	),
@@ -998,4 +1063,40 @@ acf_add_local_field_group(array(
 	'description' => '',
 ));
 
+
+
+function kiosk_acf_admin_footer() {
+	?>
+	<script>
+		( function( $) {
+			acf.add_filter( 'wysiwyg_tinymce_settings', function( mceInit, id ) {
+				// grab the classes defined within the field admin and put them in an array
+
+				var classes = $( '#' + id ).closest( '.acf-field-wysiwyg' ).attr( 'class' );
+
+				if ( classes === undefined ) {
+					return mceInit;
+				}
+
+				var classArr = classes.split( ' ' ),
+					newClasses = '';
+
+				// step through the applied classes and only use those that start with the 'hwid-' prefix
+				for ( var i=0; i<classArr.length; i++ ) {
+					if ( classArr[i].indexOf( 'kiosk-' ) === 0 ) {
+						newClasses += ' ' + classArr[i];
+					}
+				}
+				// apply the prefixed classes to the body_class property, which will then
+				// put those classes on the rendered iframe's body tag
+				mceInit.body_class += newClasses;
+				console.log(mceInit.body_class);
+				return mceInit;
+			});
+		})( jQuery );
+	</script>
+<?php
+}
+
+add_action('acf/input/admin_footer', 'kiosk_acf_admin_footer');
 endif;

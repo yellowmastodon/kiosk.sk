@@ -11,7 +11,7 @@ if ($schedule_day): ?>
 				<div class="splide schedules_splide">
 					<div class="main_title_wrap h1">
 						<h1 class="main_title">Program</h1>
-						<div class="splide__arrows stefan-simple">
+						<div class="splide__arrows">
 							<button class="splide__arrow splide__arrow--prev btn-reset bright-red-hover">
 								<span class="sr-only">Predošlý deň</span><span aria-hidden="true">←</span>
 							</button>

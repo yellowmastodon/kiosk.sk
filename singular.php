@@ -5,6 +5,11 @@ $additional_classes = "";
 if (isset($args['additional_classes'])) {
 	$additional_classes = $args['additional_classes'];
 }
+$en_text = get_field('english');
+$en_title = get_field('english_title');
+$en_secondary_title = get_field('english_secondary_title');
+$has_en_translation = ($en_title && $en_title !== "") || check_nonempty_tinymce_field($en_text) ? true : false;
+$is_news_article = is_single() && has_category('news');
 ?>
 <main id="main" <?= $additional_classes !== "" ? 'class="' . $additional_classes . '"' : '' ?>>
 	<article>
@@ -17,13 +22,22 @@ if (isset($args['additional_classes'])) {
 			<?php endif; ?>
 
 			<header class="title_wrap stefan-simple">
-				<?php if (is_single() && has_category('news')) {
-					$publish_date = get_the_date('d. m. Y.');
-					echo '<p class="publish_date"><svg class="inline-icon" viewBox="0 0 18.62 17.04"><use xlink:href="#icon-calendar"></use></svg>' . get_the_date('j. n. Y') . '</p>';
-				} ?>
+				<?php 
+				if ($has_en_translation || $is_news_article):?>
+					<div class="above-title-wrapper">
+					<?php if (is_single() && has_category('news')) {
+						$publish_date = get_the_date('d. m. Y.');
+						echo '<p class="publish_date"><svg class="inline-icon" viewBox="0 0 18.62 17.04"><use xlink:href="#icon-calendar"></use></svg>' . get_the_date('j. n. Y') . '</p>';
+					}
+					if ($has_en_translation){
+						echo '<a lang="en" aria-label="Jump to translation" class="english-link" href="#kiosk-english">English</a>';
+					}?>
+					</div>
+				<?php endif;?>
+				
 				<h1><?php echo auto_nbsp(get_the_title()); ?></h1>
 				<?php if ($secondary_title && $secondary_title !== "") {
-					echo '<p class="secondary-title h2">' . $secondary_title . '</p>';
+					echo '<p class="secondary-title h2">' . auto_nbsp($secondary_title) . '</p>';
 				} ?>
 			</header>
 
@@ -45,8 +59,22 @@ if (isset($args['additional_classes'])) {
 				<?php endif; ?>
 			</div>
 		</section>
-
 		<?php
+		if ($has_en_translation):?>
+		<hr class="kiosk-english-separator section-separator">
+		<section aria-label="English translation" lang="en" class="wrap_inner article-detail kiosk-english" id="kiosk-english">
+		<header class="title_wrap stefan-simple">
+				<h1><?php echo auto_nbsp($en_title); ?></h1>
+				<?php if ($en_secondary_title && $en_secondary_title !== "") {
+					echo '<p class="secondary-title h2">' . auto_nbsp($en_secondary_title) . '</p>';
+				} ?>
+			</header>
+			<div class="text_wrap">
+				<div class="text"><?= $en_text?></div>
+			</div>
+		</section>
+		<?php endif;
+
 		$gallery = get_field('gallery');
 
 		if ($gallery) :

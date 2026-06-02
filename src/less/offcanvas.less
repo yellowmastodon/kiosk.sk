@@ -1,0 +1,52 @@
+.offcanvas {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 500px;
+  max-width: 100%;
+  height: 100%;
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform .3s ease;
+  z-index: 1010;
+  border: none !important;
+  &, & .offcanvas-content{
+    &:focus{
+      outline: none;
+    }
+  }
+
+}
+body.has-offcanvas{
+  .offcanvas-backdrop{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    content: "";
+    background: white;
+    opacity: 0;
+    z-index: 1000;
+    visibility: hidden;
+    transition: opacity .2s ease;
+  }
+  .offcanvas-backdrop.offcanvas-open{
+    visibility: visible;
+    opacity: .5;
+  }
+  &.offcanvas-open .offcanvas-backdrop{
+    transition: opacity .2s ease, visibility .2s;
+  }
+}
+.offcanvas.open {
+  transform: translateX(0);
+}
+
+.offcanvas-content{
+  overflow-y: scroll;
+  padding: @spacer * 2;
+}
+
+.offcanvas-toggle{
+    z-index: 1020;
+}

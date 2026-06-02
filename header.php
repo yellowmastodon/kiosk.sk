@@ -5,12 +5,11 @@
 	<meta charset="<?php bloginfo('charset') ?>">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=1.0">
-	<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/style.min.css?' . filemtime(get_template_directory() . '/style.min.css') ?>" type="text/css" media="screen" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri() . '/style.min.css?mod=' . filemtime(get_template_directory() . '/style.min.css') ?>" type="text/css" media="screen" />
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="theme-color" content="#ffffff">
 	<?php wp_head() ?>
 
-	<script type="text/javascript" src="<?php echo get_template_directory_uri() . '/js/main.js?' . filemtime(get_template_directory() . '/js/main.js'); ?>" defer></script>
 </head>
 
 
@@ -60,7 +59,7 @@ if (get_post_type(get_the_ID()) == 'archive_detail') {
 				<span class="sr-only">Zobraziť hlavné menu</span>
 			</button>
 			</div>
-		<div role="dialog" id="main_menu_wrap" class="offcanvas" aria-modal="true" aria-label="Bočné menu - dialóg" tabindex="-1" aria-hidden="true">
+		<div role="dialog" id="main_menu_wrap" class="offcanvas rounded" aria-modal="true" aria-label="Bočné menu - dialóg" tabindex="-1" aria-hidden="true">
 			<nav class="main-menu offcanvas-content" aria-label="Hlavné menu">
 				<?php
 				wp_nav_menu(
@@ -69,7 +68,7 @@ if (get_post_type(get_the_ID()) == 'archive_detail') {
 						'menu'	=> 'header_menu',
 						'container'   => '',
 						'depth'	=> 1,
-						'items_wrap'  => '<ul class="main_menu list-none stefan-simple" role="list">%3$s</ul>',
+						'items_wrap'  => '<ul class="main_menu list-none" role="list">%3$s</ul>',
 						'fallback_cb' => false,
 					)
 				);

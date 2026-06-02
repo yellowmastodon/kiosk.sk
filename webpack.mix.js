@@ -4,8 +4,8 @@ mix.webpackConfig({
         children: true
     }
 });
-mix.js('src/main.js', 'js/main.js');
-mix.less('style.less', 'style.min.css',
+mix.js('src/js/main.js', 'js/main.js');
+mix.less('src/less/style.less', 'style.min.css',
     {
         lessOptions: {
             strictMath: false,
@@ -14,18 +14,19 @@ mix.less('style.less', 'style.min.css',
     .options({
         processCssUrls: false,
         autoprefixer: {
-            browserlist: ['>0.5%', "last 4 versions", "IE 10"]
+            browserlist: ['>0.5%', "last 5 versions"]
         }
     });
 
 mix.browserSync({
     https: true,
     ui: false,
-    proxy: { target: 'https://localhost/kiosk24/' },
-    host: 'https://localhost/kiosk24',
+    proxy: { target: 'kiosk.test' },
+    host: 'kiosk.test',
+    open: 'external',
     files: [
-        "style.min.css",
-        "js/main.js",
+        "./style.min.css",
+        "./js/main.js",
         "**/*.php"
     ]
 }

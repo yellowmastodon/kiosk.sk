@@ -129,7 +129,7 @@ add_action('admin_head', 'kiosk_secondary_title_admin_post_css');
  * @param $excerpt post excerpt
  * @param $excerpt_word_count   minimum number of words
  */
-function kapital_wp_trim_excerpt($excerpt, $excerpt_word_count = 50)
+function kapital_wp_trim_excerpt($excerpt, $excerpt_word_count = 40)
 {
 	global $post;
 	if ('' == $excerpt) {
@@ -138,10 +138,12 @@ function kapital_wp_trim_excerpt($excerpt, $excerpt_word_count = 50)
 	$excerpt = strip_shortcodes($excerpt);
 	$excerpt = apply_filters('the_content', $excerpt);
 	$excerpt = str_replace(']]>', ']]&gt;', $excerpt);
-	$excerpt = strip_tags($excerpt, ['<p>', '<h1>', '<h2>', '<h3>', '<h4>', '<h5>', '<h6>']); /*IF you need to allow just certain tags. Delete if all tags are allowed */
+	$excerpt = strip_tags($excerpt, ['<br>', '<p>', '<h1>', '<h2>', '<h3>', '<h4>', '<h5>', '<h6>']); /*IF you need to allow just certain tags. Delete if all tags are allowed */
 	$excerpt = str_replace(['h1>', 'h2>', 'h3>', 'h4>', 'h5>', 'h6>'], 'p>', $excerpt);
 	$excerpt = str_replace(['<h1', '<h2', '<h3', '<h4', '<h5', '<h6'], '<p', $excerpt);
 	$excerpt = preg_replace('/class=".*?"/', '', $excerpt); //fix excerpt classes - first paragraph is perex
+	//trim empty paragraphs (if e.g. image removed)
+	$excerpt = preg_replace('/<p>(\s|&nbsp;|\xC2\xA0)*<\/p>+/', '', $excerpt);
 
 	//Set the excerpt word count and only break after sentence is complete.
 	$excerpt_length = apply_filters('excerpt_length', $excerpt_word_count);
@@ -153,9 +155,9 @@ function kapital_wp_trim_excerpt($excerpt, $excerpt_word_count = 50)
 	preg_match_all('/(<[^>]+>|[^<>\s]+)\s*/u', $excerpt, $tokens);
 
 	foreach ($tokens[0] as $key => $token) {
-		if ($count >= $excerpt_length && (preg_match('/[\,\;\?\.\!\<\/p>]\s*$/uS', $token) || $key > 20)) {
+		if ($count >= $excerpt_length && (preg_match('/[\,\;\?\.\!\<\/p>]\s*$/uS', $token) || $key > 50)) {
 			// Limit reached, continue until , ; ? . or ! occur at the end
-			$excerptOutput .= preg_replace('/<\/p>$/', '', trim($token, " \n\r\t\v\x00,.?!")) . '...';
+			$excerptOutput .= preg_replace('/<\/p>$/', '', trim($token, " \n\r\t\v\x00,.?!"));
 			break;
 		}
 
@@ -166,6 +168,11 @@ function kapital_wp_trim_excerpt($excerpt, $excerpt_word_count = 50)
 		$excerptOutput .= $token;
 	}
 
+	//sometimes opening '<p>' left at the end
+	$excerptOutput = preg_replace('/<p\b[^>]*>(\s|&nbsp;|\xC2\xA0)*$/i', '', $excerptOutput);
+	//trim colon and br character at the end as we append '...'
+	$excerptOutput = preg_replace('/((\.*<br\s*\/?>|\.*\s*\.*<\/p>)\s*)+$/i', '', $excerptOutput); 
+	$excerptOutput .= '...';
 	$excerpt = trim(force_balance_tags($excerptOutput));
 
 	return $excerpt;
@@ -174,3 +181,14 @@ function kapital_wp_trim_excerpt($excerpt, $excerpt_word_count = 50)
 }
 remove_filter('get_the_excerpt', 'wp_trim_excerpt');
 add_filter('get_the_excerpt', 'kapital_wp_trim_excerpt');
+
+/**
+ * check if empty, disregard whitespace and empty tags
+ */
+function check_nonempty_tinymce_field($data)
+{   if ($data === "" || $data === null){
+    return false;
+    } else {
+        return preg_match('/\S/', str_replace("\xc2\xa0", ' ', strip_tags($data)));
+    }
+}

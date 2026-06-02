@@ -101,8 +101,11 @@ function kioskclear_menu_item_id($id, $item, $args) {
  * Handle menu class
  */
 add_filter('nav_menu_css_class', 'kioskhandle_menu_item_class', 10, 3);
+
 function kioskhandle_menu_item_class($classes, $item, $args) {
 	$arr = [];
+
+
 
 	foreach ($classes as $value) {
 		if ($value == 'menu-item-has-children') {
@@ -111,8 +114,16 @@ function kioskhandle_menu_item_class($classes, $item, $args) {
 
 		if ($value == 'current_page_item') {
 			$arr[] = 'active';
+
+			//keep custom classes
+		} else if(!str_starts_with($value, 'menu-item')) {
+
+			$arr[] = $value;
+			
 		}
 	}
+
+	
 
     return $arr;
 }
@@ -121,6 +132,7 @@ function kioskhandle_menu_item_class($classes, $item, $args) {
  * Options page
  */
 add_action('acf/init', 'kioskacf_op_init');
+
 function kioskacf_op_init() {
 
     // Check function exists.
@@ -139,6 +151,7 @@ function kioskacf_op_init() {
  * Create Image annotation
  */
 add_action( 'init', 'create_posttype_img_annotation' );
+
 function create_posttype_img_annotation() {  
     register_post_type( 'img_annotation',
         array(
@@ -208,3 +221,49 @@ require_once $template_directory . '/includes/render_functions.php';
 require_once $template_directory . '/includes/custom_taxonomies.php';
 require_once $template_directory . '/includes/acf_fields.php';
 
+/**
+ * include spacer in main menu
+ */
+add_filter('nav_menu_css_class', function($classes, $item) {
+
+    if ($item->url === '#spacer') {
+        $classes[] = 'menu-spacer';
+    }
+
+    return $classes;
+
+}, 10, 2);
+
+add_filter('wp_nav_menu_objects', function($items) {
+
+    $add_spacing = false;
+
+    foreach ($items as $item) {
+
+        if ($add_spacing) {
+            $item->classes[] = 'after-menu-spacer';
+            $add_spacing = false;
+        }
+
+        if ($item->url === '#spacer') {
+            $add_spacing = true;
+        }
+    }
+
+    return $items;
+});
+
+
+add_action( 'wp_nav_menu_item_custom_fields', function( $item_id, $item ) {
+    ?>
+    <p>
+        <label>
+            <input type="checkbox"
+                   name="menu-item-spacer[<?php echo $item_id; ?>]"
+                   value="1"
+                   <?php checked( get_post_meta( $item_id, '_menu_spacer', true ) ); ?>>
+            Spacer before next item
+        </label>
+    </p>
+    <?php
+}, 10, 2 );
