@@ -42,14 +42,14 @@ $f_base = get_template_directory_uri() . '/images/main-video/holuby'
         </button>
         <div class="main-video__jump">
         <button class="main-video__jump-back btn-reset">
-            <span class="sr-only">30 sekúnd dozadu</span>
+            <span class="sr-only">15 sekúnd dozadu</span>
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="51.5 35.7 75 122.3">
                 <polygon class="play" points="51.5 79 126.5 35.7 126.5 122.3 51.5 79"/>
             </svg>
         </button>
         <span aria-hidden="true">Move</span>
         <button class="main-video__jump-forward btn-reset">
-            <span class="sr-only">30 sekúnd dopredu</span>
+            <span class="sr-only">15 sekúnd dopredu</span>
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="51.5 35.7 75 122.3">
                     <polygon class="play" points="126.5 79 51.5 35.7 51.5 122.3 126.5 79"/>
                 </svg>

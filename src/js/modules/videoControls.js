@@ -11,6 +11,7 @@ export default function initMainVideo() {
     const hasTimeline = range && track;
 
     let isScrubbing = false;
+    let wasPlayingBeforeHidden = false;
 
     const formatTime = (s) => {
         if (!isFinite(s)) return '0:00';
@@ -40,7 +41,7 @@ export default function initMainVideo() {
     };
 
     const skipBy = (seconds) => {
-        if (!video.duration) return;
+        if (video.readyState < HTMLMediaElement.HAVE_METADATA) return;
         video.currentTime = Math.max(0, Math.min(video.duration, video.currentTime + seconds));
         updateFromVideo();
     };
@@ -77,7 +78,6 @@ export default function initMainVideo() {
     if (jumpForward) jumpForward.addEventListener('click', () => skipBy(15));
 
     // LOADER EVENTS
-    // only playing/canplay clear the loader — not play, which fires before buffering
     video.addEventListener('waiting', () => setLoading(true));
     video.addEventListener('playing', () => setLoading(false));
     video.addEventListener('canplay', () => setLoading(false));
@@ -89,7 +89,6 @@ export default function initMainVideo() {
 
     // TIMELINE EVENTS
     if (hasTimeline) {
-        // Arrow keys: 5s back/forward
         range.addEventListener('keydown', (e) => {
             if (!video.duration) return;
             if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
@@ -101,7 +100,6 @@ export default function initMainVideo() {
             }
         });
 
-        // SCRUBBING STATE
         range.addEventListener('pointerdown', () => { isScrubbing = true; });
 
         range.addEventListener('pointerup', () => {
@@ -114,13 +112,33 @@ export default function initMainVideo() {
             updateFromVideo();
         });
 
-        // LIVE SEEK
         range.addEventListener('input', seek);
 
-        // VIDEO → UI SYNC
         video.addEventListener('timeupdate', updateFromVideo);
         video.addEventListener('loadedmetadata', updateFromVideo);
         video.addEventListener('play', updateFromVideo);
         video.addEventListener('pause', updateFromVideo);
     }
+
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        wasPlayingBeforeHidden = !video.paused;
+        if (!video.paused) video.pause();
+    } else {
+        video.load();
+        video.addEventListener('canplay', () => {
+            if (wasPlayingBeforeHidden) {
+                video.play().catch(() => {
+                    setLoading(false);
+                    setPlaying(false);
+                });
+            }
+        }, { once: true });
+    }
+});
+
+    video.addEventListener('play', () => {
+        root.classList.add('is-started');
+        setPlaying(true);
+    });
 }
