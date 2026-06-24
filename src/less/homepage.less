@@ -21,14 +21,19 @@
 	left: var(--kiosk-wrap-padding);
 	filter: drop-shadow(8px 0px 20px rgba(0, 0, 0, .4));
 	color: @color_2;
-	font-size: clamp(2.5rem, 13vw, 4rem);
+	font-size: clamp(3rem, 13vw, 4rem);
 	line-height: .9;
-	max-width: calc(100% - 9rem);
+	max-width: calc(100% - 7.5rem);
 	.event_name, .event_date_place{
 		display: block;
 	}
 }
 
+@media (max-width: 600px){
+	.page_homepage .dates-wrap{
+		top: @spacer * .6;
+	}
+}
 
 
 // program_button

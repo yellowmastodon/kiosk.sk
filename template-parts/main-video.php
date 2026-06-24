@@ -15,7 +15,7 @@ $f_base = get_template_directory_uri() . '/images/main-video/holuby'
 
 ?>
 <div class="main-video">
-    <video class="main-video__video" id="main-video__video" poster="<?= $f_base . '1x1-poster.webp' ?>">
+    <video class="main-video__video" id="main-video__video" poster="<?= $f_base . '1x1-poster.webp' ?>" playsinline webkit-playsinline disablepictureinpicture controlslist="nofullscreen" muted preload="auto" tabindex="-1">
         <source src="<?= $f_base . '-vp9-1920x1080.webm' ?>" type="video/webm" media="(min-aspect-ratio: 16/10) and (min-width: 980px)" data-poster="<?= $f_base . '-1920x1080-poster.webp' ?>">
         <source src="<?= $f_base . '-h264-1920x1080.mp4' ?>" type="video/mp4" media="(min-aspect-ratio: 16/10) and (min-width: 980px)">
         <source src="<?= $f_base . '-vp9-1280x720.webm' ?>" type="video/webm" media="(min-aspect-ratio: 16/10)" data-poster="<?= $f_base . '-1280x720-poster.webp' ?>">
