@@ -1,53 +1,43 @@
 .btn-reset {
 	background: transparent;
-	border: none;
+	border: 0;
 	padding: 0;
+
+	appearance: none;
+	-webkit-appearance: none;
+
+	font: inherit;
+	color: inherit;
+
+	cursor: pointer;
+	outline: none;
 }
 
 .btn {
-	background: transparent;
+	background: @color_1;
+	font-size: 1.5rem;
 	position: relative;
 	border: none;
 	padding: .5rem .75rem;
-	color: @color_3;
-	font-family: @heading-font;
+	color: @color_2;
+	font-family: inherit;
 	text-decoration: none !important;
 	display: inline-block; //safari on macOs is wrapping inline-block for unkown reason
 	position: relative;
-	line-height: 1;
-	span{
-			position: absolute;
-		top: 0;
-		left: 0;
-				height: 100%;
-		width: 100%;
-		z-index: -1;
-
-		svg{
-			height: 100%;
-			width: 100%;
-		fill: @color_1;
-		display: block;
-
-		overflow: visible;
-	}
-	}
+	line-height: .9;
+	border-radius: .2em;
+	
 	
 	&:hover,
 	&:focus-visible {
-		color: @color_3;
-		svg{
-			fill: @color_4;
-		}
+		background: @color_4;
+		color: @color_2;
 
 	}
 	&:focus{
 		outline: none;
 	}
 	&:active {
-		svg {
-			fill: @color_5;
-
-		}
+		background: @color_3;
 	}
 }

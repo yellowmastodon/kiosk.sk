@@ -1,0 +1,196 @@
+.hero {
+    position: relative;
+}
+
+.main-video {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.main-video__video {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.main-video__spinner {
+
+    position: absolute;
+    width: 3.5rem;
+    height: 3.5rem;
+    left: 50%;
+    top: 50%;
+    fill: @color_2;
+    translate: -50% -50%;
+    z-index: 5;
+}
+
+.main-video__jump{
+	margin-right: -.15em;
+}
+.main-video__controls {
+    z-index: 5;
+    font-size: 3rem;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: @spacer;
+    left: var(--kiosk-wrap-padding);
+    right: var(--kiosk-wrap-padding);
+    filter: drop-shadow(8px 8px 20px rgba(0, 0, 0, .4));
+    font-family: "Signal Compressed";
+    color: @color_2;
+    text-transform: uppercase;
+
+        line-height: .9;
+
+    button {
+        text-transform: uppercase;
+
+        top: unset;
+        color: @color_2;
+
+
+        &:hover,
+        &:focus-visible {
+            color: @color_4;
+        }
+
+        svg {
+            width: .87em;
+            height: .87em;
+            fill: currentColor;
+            vertical-align: -.2em;
+
+        }
+    }
+
+}
+
+
+
+
+.main-video.is-playing {
+    .main-video__play .play {
+        display: none;
+    }
+
+}
+
+
+.main-video:not(.is-playing) {
+    .main-video__play .pause {
+        display: none;
+    }
+}
+
+
+.main-video__spinner {
+    display: none;
+    animation: main-video__spinner 1.2s infinite;
+
+}
+
+.main-video__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    background: rgba(0, 0, 0, .3);
+    transition: opacity .1s ease;
+    pointer-events: none;
+
+}
+
+.main-video.is-loading {
+    .main-video__spinner {
+        display: inline-block;
+    }
+
+    .main-video__overlay {
+        opacity: 1;
+    }
+}
+
+
+
+@keyframes main-video__spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.main-video__play {
+    fill: @color_2;
+
+    circle {
+        fill: @color_1;
+    }
+
+    &:hover,
+    &:focus-visible {
+        circle {
+            fill: @color_4;
+        }
+    }
+}
+
+/* 
+.main-video__timeline-track{
+    left: calc(var(--kiosk-wrap-padding)) !important;
+    //margin-left: 0 !important;
+    margin-right: 1.5rem !important;
+    right: var(--kiosk-wrap-padding) !important;
+    z-index: 5;
+    position: absolute;
+    bottom: @spacer * .7;
+    //width: 100%;
+    &::after{
+        content: "";
+        height: 4px;
+        background: white;
+        //background: url('./images/hr-arrows-white.svg') 0 .3rem / 50rem 2rem repeat-x;
+        //width: 150%;
+        //height: 2rem;
+        top: 1rem;
+        position: absolute;
+        left: -1rem;
+        right: -1rem;
+        z-index: -1;
+        border-radius: 9999px;
+    }
+
+}
+
+
+.main-video__timeline-range {
+    position: absolute;
+    left: 0;
+    padding-left: 1.5rem;
+    height: 3rem;
+    padding-right: 1.5rem;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.main-video__timeline-thumb {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    //margin-left: -1.5rem !important;
+    left: var(--video-progress, 0%);
+    background: url('./images/holub_sprite.gif');
+    pointer-events: none;
+}
+ */

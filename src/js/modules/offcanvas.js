@@ -25,6 +25,13 @@ export function initOffcanvas(offcanvas, toggleBtn) {
         }
     });
 
+    const closeButton = offcanvas.querySelector('.offcanvas-close');
+    if (closeButton){
+        closeButton.addEventListener('click', ()=>{
+            closeOffcanvas();
+        })
+    }
+
     function openOffcanvas() {
         offcanvas.style.visibility = 'visible';
         offcanvas.setAttribute('aria-hidden', 'false');

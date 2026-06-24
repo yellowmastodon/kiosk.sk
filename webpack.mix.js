@@ -5,6 +5,8 @@ mix.webpackConfig({
     }
 });
 mix.js('src/js/main.js', 'js/main.js');
+mix.js('src/js/inlineOnload-poster.js', 'js/inlineOnload-poster.js');
+
 mix.less('src/less/style.less', 'style.min.css',
     {
         lessOptions: {

@@ -9,8 +9,9 @@
 	z-index: 900;
 	line-height: 0;
 	svg{
-		height: 4.95rem;
-		width: 7rem;
+		height: 2.35rem;
+		width: 10rem;
+		fill: @color_1;
 	}
 }
 
@@ -22,20 +23,36 @@
 	right: calc(var(--kiosk-wrap-padding) - .3rem);
 	top: @spacer * .7;
 	svg{
-		width: 2.5rem;
-		height: 2.5rem;
+		circle{
+			fill: @color_1;
+		}
+		path{
+			fill: @color_2;
+		}
+		width: 3rem;
+		height: 3rem;
+	}
+	&:hover, &:focus-visible{
+		svg circle{
+			fill: @color_4;
+		}
 	}
 }
 
-#main_menu_switch[aria-expanded="false"]{
-	svg .hamburger-close{
-		display: none;
+#main_menu_close{
+  position: absolute;
+  top: (@spacer / 2);
+  right: (@spacer / 2);
+  width: 1.8rem;
+  height: 1.8rem;
+  svg{
+	fill: @color_2;
+  }
+  &:hover, &:focus-visible{
+	svg{
+		fill: @color_4 !important;
 	}
-}
-#main_menu_switch[aria-expanded="true"]{
-	svg .hamburger-open{
-		display: none;
-	}
+  }
 }
 
 // main menu
@@ -58,6 +75,7 @@
 	}
 
 	a{	
+		display: inline-block;
 		text-decoration: none;
 	}
 	.main-menu{

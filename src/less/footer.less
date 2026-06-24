@@ -1,4 +1,5 @@
 .main_footer {
+	font-size: 80%;
 	border-radius: @border_radius @border_radius 0 0;
 	position: relative;
 	background: @color_3;
@@ -7,7 +8,7 @@
 
 	.wrap_inner {
 		overflow: visible;
-		padding-bottom: var(--kiosk-wrap-padding);
+		padding-bottom: @spacer;
 		padding-top: var(--kiosk-wrap-padding);
 	}
 
@@ -33,20 +34,17 @@
 			margin-right: var(--kiosk-wrap-padding);
 		}
 		.designer{
+			text-align: right;
 			flex-grow: 0;
 			margin-left: auto;
-			display: flex;
 			p{
+				text-align: left;
 				margin-bottom: 0;
 			}
 			align-items: end;
 			svg{
-				display: inline-block;
-				width: 3rem;
-				vertical-align: bottom;
-				position: relative;
-				top: .6rem;
-				right: -.6rem;
+				width: 5rem;
+				margin-bottom: (@spacer / 2);
 			}
 		}
 	}

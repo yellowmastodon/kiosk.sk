@@ -1,36 +1,66 @@
 @import "~overlayscrollbars/styles/overlayscrollbars.css";
 
+@keyframes holub-sprite {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: -18rem 0;
+    }
+}
+
+
+.articles .os-scrollbar-handle,
+.main-video__timeline-thumb {
+    margin-left: -1.1rem !important;
+    animation: holub-sprite .5s steps(6) infinite;
+    animation-play-state: running;
+    width: 3rem;
+    height: 3rem !important;
+    cursor: pointer;
+    background-size: 18rem 3rem !important;
+    /* 6 frames */
+    background-position: 0 0;
+    transition: filter .1s ease;
+
+}
+
+.articles .os-scrollbar-handle:hover,
+.articles .os-scrollbar-handle:hover:focus-visible,
+.main-video__timeline-track:focus-within .main-video__timeline-thumb,
+.main-video__timeline-track:hover .main-video__timeline-thumb{
+        filter: sepia(98%) saturate(500%) hue-rotate(-20deg) brightness(90%) contrast(101%);
+        animation-play-state: paused;
+
+}
+
+.articles .os-scrollbar-track,
+.main-video__timeline-track {
+    height: 2.5rem;
+    margin-left: 1.1rem !important;
+}
+
+
+
+
 .articles {
     overflow: hidden;
     margin-bottom: var(--kiosk-wrap-padding);
 
     .os-scrollbar {
-        height: 2.5rem;
-        top: 1.5rem;
+        height: 2rem;
+        top: 1rem;
         padding-left: var(--kiosk-wrap-padding);
-        --os-track-bg: url('./images/scrollbar_track.svg') 0 1rem / 33.5rem .6rem repeat-x;
-        --os-track-bg-active: url('./images/scrollbar_track.svg') 0 1rem /  33.5rem .6rem repeat-x;
-        --os-track-bg-hover: url('./images/scrollbar_track.svg') 0 1rem /  33.5rem .6rem repeat-x;
-        --os-handle-bg: transparent;
-        --os-handle-bg-hover: transparent;
-        --os-handle-bg-active: transparent;
+        --os-track-bg: url('./images/hr-arrows.svg') 0 .3rem / 50rem 2rem repeat-x;
+        --os-track-bg-active: url('./images/hr-arrows.svg') 0 .3rem / 50rem 2rem repeat-x;
+        --os-track-bg-hover: url('./images/hr-arrows.svg') 0 .3rem / 50rem 2rem repeat-x;
+        --os-handle-bg: url('./images/holub_sprite.gif');
+        --os-handle-bg-hover: url('./images/holub_sprite.gif');
+        --os-handle-bg-active: url('./images/holub_sprite.gif');
         --os-handle-min-size: 0px;
-
-        .os-scrollbar-handle {
-            width: 3rem;
-            .bright-red-hover();
-            cursor: pointer;
-
-            svg {
-                height: 2.5rem;
-                width: 2.72rem;
-            }
-        }
     }
 
-    .os-scrollbar-track {
-        height: 3rem;
-    }
 
     .articles_list {
         padding-top: @spacer * 1.5; //separate overflow x and y not working reliably, so this allows rotated emelents to be visible
@@ -39,12 +69,13 @@
         overflow-y: visible;
         flex-wrap: nowrap;
     }
-    .custom-scrollbar-wrapper *[data-overlayscrollbars-viewport] .articles_list{
-        padding-top: 2.5rem + @spacer * 2.5;
-    } 
+
+    .custom-scrollbar-wrapper *[data-overlayscrollbars-viewport] .articles_list {
+        padding-top: 3.5rem + @spacer;
+    }
 
 
-  
+
 
     .custom-scrollbar-wrapper {
         .dragging * {
@@ -68,32 +99,30 @@
         &:first-child {
             margin-left: 0;
         }
+
         //custom scrollbar needs this fuckery to have padding after last element
-        &:last-child{
+        &:last-child {
             width: calc(var(--kiosk-article-wrap-width) + var(--kiosk-wrap-padding));
             padding-right: var(--kiosk-wrap-padding)
         }
+
         &,
         article {
             transition: all 0.2s ease-in-out;
 
         }
 
-        @media (min-width: 901px) {
 
-            &:hover,
-            &:focus-visible {
-                article {
-
-                    transform: rotate(3deg);
-                }
-
-                .bright-red-hover();
+        &:hover,
+        &:focus-visible {
+            article {
+                transform: rotate(3deg);
             }
 
-            &:focus {
-                outline: none;
-            }
+        }
+
+        &:focus {
+            outline: none;
         }
 
         .img_wrap {
@@ -120,31 +149,38 @@
         .title {
             overflow: hidden;
             margin-bottom: @spacer * .5;
-            font-size: 4rem;
-            line-height: 1;
+            font-size: 3rem;
+            line-height: .9;
         }
-        .publish_date, .text{
+
+        .publish_date,
+        .text {
             font-size: 1rem;
         }
+
         .text,
         .publish_date+.title {
             margin-top: 0;
         }
-        .text > *:not(:last-child){
+
+        .text>*:not(:last-child) {
             margin-bottom: @spacer * .5;
         }
-        &:nth-child(3n + 1){
-            .img_wrap.placeholder{
+
+        &:nth-child(3n + 1) {
+            .img_wrap.placeholder {
                 background-color: #00FFFF;
             }
         }
-        &:nth-child(3n + 2){
-            .img_wrap.placeholder{
+
+        &:nth-child(3n + 2) {
+            .img_wrap.placeholder {
                 background-color: #F7EC13;
             }
         }
-        &:nth-child(3n + 3){
-            .img_wrap.placeholder{
+
+        &:nth-child(3n + 3) {
+            .img_wrap.placeholder {
                 background-color: #FF4F12;
             }
         }
@@ -180,28 +216,52 @@
     }
 }
 
-  @main_title_fs: 7.5vw;
-    .articles .main_title {
-        font-size: @main_title_fs;
-        margin-bottom: 0;
-        display: flex;
-        padding-right: 0 ;
+@main_title_fs: clamp(0px, 8vw, 20rem);
+@main_title_fs_fallback: 7.5vw;
 
-        &::after{
-            content: "";
-            height: @main_title_fs;
-            margin-left: .2em;
-            background-image: url(./images/hr-arrows.svg);
-            background-repeat: repeat-x;
-            background-position: left calc(50% + .08em);
-            background-size: auto 1em;
-            width: 100%;
-        }
+.articles .main_title {
+    font-size: @main_title_fs_fallback;
+    font-size: @main_title_fs;
+    margin-bottom: -.1em;
+    /*    display: flex;
+    padding-right: 0;
+ 
+    &::after {
+        content: "";
+        height: @main_title_fs;
+        margin-left: .2em;
+        background-image: url(./images/hr-arrows.svg);
+        background-repeat: repeat-x;
+        background-position: left calc(50% + .08em);
+        background-size: auto 1em;
+        width: 100%;
+    } */
 
+}
+
+.articles:nth-child(2n) .main_title {
+    &::after {
+        background-position: 8.6em calc(50% + .08em);
+    }
+}
+
+.article_wrap .img_wrap {
+
+    &::before,
+    &::after {
+        position: absolute;
+        content: "";
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+        opacity: 1;
+        transition: opacity .2s ease;
     }
 
-    .articles:nth-child(2n) .main_title{
-        &::after{
-            background-position: 8.6em calc(50% + .08em);
-        }
+    &::after {
+        mix-blend-mode: color;
     }
+
+}

@@ -23,9 +23,6 @@ export function initializeCustomScrollbars(scrollingElement) {
   const osRoot = osInstance.elements().host;
   const handles = osRoot.querySelectorAll('.os-scrollbar-handle');
   const dragScrollElement = osRoot.querySelector('*[data-overlayscrollbars-viewport]');
-  handles.forEach(handle => {
-    handle.innerHTML = '<svg><use xlink:href="#scroll-eyes"></use></svg>';
-  });
   enableDragToScroll(dragScrollElement);
 }
 

@@ -71,7 +71,7 @@
 }
 
 .secondary-title {
-	margin-top: @spacer;
+	margin-top: (@spacer / 2);
 }
 
 .above-title-wrapper {
@@ -95,23 +95,29 @@
 
 .kiosk-english-separator{
 	border: none;
-	height: 1.5rem;
+	height: 2rem;
 	background-image: url(./images/hr-arrows.svg);
 	background-repeat: repeat-x;
-	background-position: -.5rem;
+	background-position: 50%;
 	background-size: auto 2rem;
 	width: 100%;
 	position: relative;
 	overflow: visible;
+	margin-top: @double_padding;
+	margin-bottom: @double_padding;
+
 	&::after{
 		line-height: 1;
+		color: @color_5;
 		font-family: @heading_font_stack_alt;
 		font-size: 1.7rem;
+		padding: .23em;
+		padding-left: .26em;
+		margin-left: -0.15em;
+		margin-top: -0.1em;
 		background-color: #fff;
 		content: "EN";
 		left: 50%;
-
-
 		position: absolute;
 		text-align: center;
 		top: -.1rem;

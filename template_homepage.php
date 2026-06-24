@@ -13,27 +13,9 @@ global $current_image_sequence;
 ?>
 
 <main id="main">
-	<section class="big_top wrap distorted">
-		<?php
-		$dancing_letter_classes = ['letters-pos-1', 'letters-pos-2', 'letters-pos-3']; ?>
-		<div class="big_top_overflow" data-letter-pos-classes="<?= htmlspecialchars(json_encode($dancing_letter_classes)) ?>">
-			<?php get_template_part('template-parts/kiosk-dancing-letters');
-			?> <div class="big_top_animation_wrapper ">
+	<section class="hero wrap">
 
-				<img alt="" id="bg_animation" class="big_top_bg" <?php
-															$template_dir = get_template_directory_uri();
-															echo ' src="' . $template_dir  . '/images/metronome_bkg.jpg' . '"';
-															echo ' srcset="' . $template_dir . '/images/metronome_bkg_2560.jpg 2560w,'
-																. $template_dir . '/images/metronome_bkg_2000.jpg 2000w,'
-																. $template_dir . '/images/metronome_bkg_1800.jpg 1800w,'
-																. $template_dir . '/images/metronome_bkg_1400.jpg 1400w,'
-																. $template_dir . '/images/metronome_bkg_1280.jpg 1280w'
-																. '"';
-															//sizes quite arbitrary, no way to know, and also the smallest picture should be ok enought
-															echo ' sizes="(max-width: 576px) 850px, (max-width: 1000px) 1395px, (max-width: 1280px) 1650px, 100vw"';
-
-															?>>
-
+			<?php get_template_part('template-parts/main-video')?>
 			</div>
 			<div class="dates-wrap">
 				<p class="dates stefan-simple">
@@ -56,15 +38,7 @@ global $current_image_sequence;
 	?>
 		<section class="program_button wrap">
 			<div class="wrap_inner">
-				<?php
-				 if ($schedule_button) :
-					get_template_part('template-parts/link-button', null, array(
-						'target_blank' => false,
-						'url' =>  $schedule_button['url'],
-						'text' => $schedule_button['title']
-					));
-				endif;
-				?>
+				<a class="btn" href="<?= $schedule_button['url'] ?>"><?= $schedule_button['title']?></a>
 			</div>
 		</section>
 	<?php endif;

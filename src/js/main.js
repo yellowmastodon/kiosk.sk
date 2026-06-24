@@ -5,6 +5,7 @@ import { initializeCustomScrollbars } from './modules/overlayScrollbars.js';
 //not working
 import { initOffcanvas } from './modules/offcanvas.js';
 import { Splide } from '@splidejs/splide';
+import initMainVideo from './modules/videoControls.js'
 
 
 let scheduleSplide = document.querySelector('.splide.schedules_splide');
@@ -19,11 +20,12 @@ let splide = new Splide( scheduleSplide, {
 splide.mount()
 }
 
-
     
 const body = document.body;
 vh_mobile_fix();
 kiosk_schedule_hover_img();
+initMainVideo();
+
 // kiosk_program_mcsutomscrollbar();
 //kiosk_program_slick();
 //kiosk_new_articles_mcsutomscrollbar();
